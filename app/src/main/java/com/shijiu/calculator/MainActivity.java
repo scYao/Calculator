@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case 5:
                 Util.forwardActivity(MainActivity.this, AreaActivity.class);
                 break;
-            
+
         }
     }
 }
