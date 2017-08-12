@@ -9,4 +9,5 @@
     <color name="colorTitle">#008CEE</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBackground">#F0F0F0</color>
+    <color name="colorLightGrey">#d9d4d4</color>
 </resources>
