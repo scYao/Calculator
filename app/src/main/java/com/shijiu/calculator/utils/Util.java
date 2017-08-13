@@ -2,6 +2,7 @@ package com.shijiu.calculator.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -22,5 +23,24 @@ public class Util {
         }else {
             return true;
         }
+    }
+
+    public static boolean isNull(EditText textView){
+        String s = textView.getText().toString().trim();
+        if (s.equals("")){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    public static String getValue(TextView textView){
+        String s = textView.getText().toString().trim();
+        return s;
+    }
+
+    public static String getValue(EditText textView){
+        String s = textView.getText().toString().trim();
+        return s;
     }
 }
