@@ -1,9 +1,207 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.shijiu.calculator.calculator.CalculatorActivity">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10px"
+    android:columnCount="5"
+    android:rowCount="6"
+    android:id="@+id/gly"
+    tools:context=".MainActivity" >
 
-</android.support.constraint.ConstraintLayout>
+    <EditText
+        android:id="@+id/print"
+        android:layout_width="match_parent"
+        android:layout_height="60px"
+        android:layout_columnSpan="5"
+        android:layout_marginLeft="2px"
+        android:layout_marginRight="2px"
+        android:layout_row="0"
+        android:textColor="#ff0000"
+        android:textSize="55px"
+        android:gravity="right"
+        android:background="#eee"/>
+
+    <Button
+        android:id="@+id/cleargo"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="0"
+        android:layout_gravity="top"
+        android:layout_row="1"
+        android:text="《--" />
+
+    <Button
+        android:id="@+id/clear"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="3"
+        android:layout_columnSpan="2"
+        android:layout_row="1"
+        android:layout_gravity="fill_horizontal"
+        android:text="清屏" />
+
+    <Button
+        android:id="@+id/chars"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="1"
+        android:layout_row="1"
+        android:text="-/+" />
+
+    <Button
+        android:id="@+id/charx"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="2"
+        android:layout_row="1"
+        android:text="1/x" />
+
+    <Button
+        android:id="@+id/txt7"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="0"
+        android:layout_row="2"
+        android:text="7" />
+
+    <Button
+        android:id="@+id/txt8"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="1"
+        android:layout_row="2"
+        android:text="8" />
+
+    <Button
+        android:id="@+id/txt9"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="2"
+        android:layout_row="2"
+        android:text="9" />
+
+    <Button
+        android:id="@+id/txtdivide"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="3"
+        android:layout_row="2"
+        android:text="÷" />
+
+    <Button
+        android:id="@+id/txtb"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="4"
+        android:layout_row="2"
+        android:text="%" />
+
+    <Button
+        android:id="@+id/txt4"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="0"
+        android:layout_row="3"
+        android:text="4" />
+
+    <Button
+        android:id="@+id/txt5"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="1"
+        android:layout_row="3"
+        android:text="5" />
+
+    <Button
+        android:id="@+id/txt6"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="2"
+        android:layout_row="3"
+        android:text="6" />
+
+    <Button
+        android:id="@+id/txtx"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="3"
+        android:layout_row="3"
+        android:text="X" />
+
+    <Button
+        android:id="@+id/txtv"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="4"
+        android:layout_row="3"
+        android:text="√" />
+
+    <Button
+        android:id="@+id/txt1"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="0"
+        android:layout_row="4"
+        android:text="1" />
+
+    <Button
+        android:id="@+id/txt2"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="1"
+        android:layout_row="4"
+        android:text="2" />
+
+    <Button
+        android:id="@+id/txt3"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="2"
+        android:layout_row="4"
+        android:text="3" />
+
+    <Button
+        android:id="@+id/txtmin"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="3"
+        android:layout_row="4"
+        android:text="-" />
+
+    <Button
+        android:id="@+id/txteq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="4"
+        android:layout_gravity="fill_vertical"
+        android:layout_row="4"
+        android:layout_rowSpan="2"
+        android:text="=" />
+
+    <Button
+        android:id="@+id/txt0"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="0"
+        android:layout_columnSpan="2"
+        android:layout_gravity="fill_horizontal"
+        android:layout_row="5"
+        android:text="0" />
+
+    <Button
+        android:id="@+id/txtspl"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="2"
+        android:layout_row="5"
+        android:text="." />
+
+    <Button
+        android:id="@+id/txttakesum"
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:layout_column="3"
+        android:layout_row="5"
+        android:text="+" />
+
+</GridLayout>
