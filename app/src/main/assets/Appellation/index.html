@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scaleble=no" />
+		<!--<title>中国家庭称谓计算器</title>-->
+		<meta name="keywords" content="过年走亲访友,拜年神器,亲戚关系计算器,称呼计算器,关系算法">
+		<meta name="description" content="一款最全面的中国亲戚关系计算器，走亲访友，逢年过节必备神器，避免叫错、不会叫亲戚的尴尬，人人必备亲戚关系工具。">
+		<link rel="stylesheet" href="index.css">
+		<style type="text/css">
+
+		</style>
+	</head>
+	<script>
+		function setRem() {
+			//获取到HTML文档
+			var oHtml = document.querySelector('html');
+			//getBoundingClientRect返回一个对象,取当前设备的屏幕大小
+			var width = oHtml.getBoundingClientRect().width;
+			//限制最大宽度到680;
+			if(width > 680) width = 680;
+			oHtml.style.fontSize = width / 16 + 'px';
+		}
+		window.onload = function() {
+			setRem();
+		}
+		//23.4375px等于1rem;
+	</script>
+
+	<body>
+		<div class="wrapper" style="height: 50%;">
+			<div class="container">
+				<div class="content">
+					<div class="mod-panel">
+
+						<div class="hd">
+							<!--<img src="image/返回 (2).png" class="chehui"/>-->
+							<h3 class="title">中国家庭称谓计算器</h3>
+							<div id="title-underline"></div>
+						</div>
+						<div class="bd" style="overflow: hidden;">
+							<div class="group" style="">
+								<p id="callyou">
+								</p>
+							</div>
+							<div id="postion">
+								<p>
+	<!--<div style="width: 100%; height: 100px;filter:aphla(opacity=50); background:#fff; background:rgba(255,255,255,0.5); important! ">
+									</div>-->
+<div class="box-1" style="width: 100%; 
+	height:200px;filter:aphla(opacity=0); 
+	background:#fff; background:rgba(255,255,255,0); 
+	important! height: 200px; position: absolute; bottom: 350px; ">
+	</div>
+									<!--<button style="width: 100%; height: 200px; z-index: 999; position: relative;">-->
+									<textarea id="input" placeholder="" readonly></textarea>
+								</p>
+								<p>
+									<textarea id="reslut" readonly>
+								</textarea>
+								
+								
+								</p>
+								<p class="full">
+									<br/>
+									<p class="sexline">
+										<span id="man">女</span>
+										<input id="male" type="checkbox" name="sex" value="1">
+										<label for="male" id="lable1"></label>
+										<span>男</span>
+										<span style="float: right; padding-right: 5px;">
+									<span>Ta称呼我</span>
+										<input id="call" type="checkbox" name="reverse" value="0" checked>
+										<label for="call" id="foryou">
+									</label>
+										<span>我称呼Ta</span>
+									</p>
+									</span>
+									<div id="height"></div>
+									<span>
+									<button class="btn" data-value="爸爸">父</button>
+									<button class="btn" data-value="妈妈">母</button>
+								</span>
+								<span>
+									<button class="btn" data-value="老公">夫</button>
+									<button class="btn" data-value="老婆">妻</button>
+								</span>
+									<span>
+									<button class="btn" data-value="儿子">子</button>
+									<button class="btn" data-value="女儿">女</button>
+								</span>
+									<span>
+									<button class="btn" data-value="哥哥">兄</button>
+									<button class="btn" data-value="弟弟">弟</button>
+								</span>
+									<span>
+									<button class="btn" data-value="姐姐" style="border-bottom: none;">姐</button>
+									<button class="btn" data-value="妹妹" style="border-bottom: none;">妹</button>
+								</span>
+									<span>
+									<button class="input-button"><img src="计算器-21.png" class="fanhui"></button>
+									<button class="input-button" style="color:#FFAA33">C</button>
+								
+									<label id="lable2" for="default" onclick="show2()">
+											<a href="select_1.html" class="relationship">关系</a>
+											<input id="default" type="checkbox" name="type" value="default" checked="checked">
+							</label>
+								<button id="select" class="input-button">=</button>
+							</span>
+							</div>
+							<p id="change">
+							</p>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<script src="common.js"></script>
+		<script src="relationship.js"></script>
+		<script>
+			var lable2=document.getElementById("lable2");
+			function show2(){
+				window.location.href="select_1.html";
+			}
+			var foryou = document.getElementById('foryou');
+			var callyou = document.getElementById('callyou');
+			var input = document.getElementById('input');
+			var call = document.getElementById('call');
+			var callspan = callyou.getElementsByTagName('span');
+			var mine = document.getElementById('mine');
+			var your = document.getElementById('your');
+			
+			(function() {
+				var $type = document.getElementsByName('type');
+				var $sex = document.getElementsByName('sex');
+				var $reverse = document.getElementsByName('reverse');
+				var $radio = document.getElementsByTagName('INPUT');
+				var $textarea = document.getElementsByTagName('TEXTAREA');
+				var $group = DOMUtil.getElementsByClassName('group')[0];
+				var $btns = DOMUtil.getElementsByClassName('btn');
+				var $buttons = DOMUtil.getElementsByClassName('input-button');
+				console.log($btns[2])
+				console.log($btns[3])
+				var toggle = function(sex) {
+					if(sex) { //男女判断
+						$btns[2].disabled = true;
+						$btns[2].style.color="grey";
+						$btns[3].disabled = false;
+						$btns[3].style.color="#333333";
+					} else {
+						$btns[2].disabled = false;
+						$btns[3].disabled = true;
+						$btns[3].style.color="grey";
+						$btns[2].style.color="#333333";
+					}
+				}
+				var count = function() {
+					var value = $textarea[0].value.trim();
+					if(value) {
+						var sex = $sex[0].checked ? 1 : 0;
+						var type = $type[0].checked ? 'default' : 'chain';
+						var reverse = !$reverse[0].checked;
+						var result = relationship({ text: value, sex: sex, reverse: reverse, type: type });
+						$textarea[1].value = '';
+						if(result.length) {
+							$textarea[1].value = result.join('\n');
+						} else {
+							$textarea[1].value = '貌似他/她跟你不是很熟哦!';
+						}
+					} else {
+						$textarea[1].value = '';
+					}
+				}
+
+				for(var i = 0; i < $btns.length; i++) {
+					$btns[i].onclick = function() {
+						var value = $textarea[0].value.trim();
+						var name = this.getAttribute('data-value');
+						if(value) {
+							$textarea[0].value = value + '的' + name;
+							$textarea[1].value = " ";
+						} else {
+							$textarea[0].value = name;
+						}
+						toggle('爸爸,老公,儿子,哥哥,弟弟'.indexOf(name) > -1);
+					}
+				}
+				for(var i = 0; i < $radio.length; i++) {
+					$radio[i].onchange = function() {
+						toggle($sex[0].checked);
+						//						$group.style.display = $type[0].checked?'block':'none';
+						if($textarea[1].value) {
+							count();
+							//							$textarea[1].value=' ';
+						}
+					}
+				}
+				$buttons[0].onclick = function() {
+					var value = $textarea[0].value.trim();
+					var index = value.lastIndexOf('的');
+					index = Math.max(0, index);
+					var search = value.substr(0, index);
+					$textarea[0].value = search;
+					$textarea[1].value = '';
+					var name = search.split('的').pop();
+					if(!name) {
+						toggle($sex[0].checked);
+					} else {
+						toggle('爸爸,老公,儿子,哥哥,弟弟'.indexOf(name) > -1);
+					}
+				}
+//				console.log($buttons[2]);
+//				console.log($textarea[1]);
+				$buttons[1].onclick = function() {
+					$textarea[1].value = $textarea[0].value = '';
+					//					$textarea[1].value=" ";
+					toggle($sex[0].checked);
+				}
+				$buttons[2].onclick = count;
+
+				toggle($sex[0].checked);
+			})();
+			
+			/*这段代码是固定的，必须要放到js中*/
+    function setupWebViewJavascriptBridge(callback) {
+        if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+        if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+        window.WVJBCallbacks = [callback];
+        var WVJBIframe = document.createElement('iframe');
+        WVJBIframe.style.display = 'none';
+        WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+        document.documentElement.appendChild(WVJBIframe);
+        setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+    }
+    /*与OC交互的所有JS方法都要放在此处注册，才能调用通过JS调用OC或者让OC调用这里的JS*/
+    setupWebViewJavascriptBridge(function(bridge) {
+		var uniqueId = 1
+		function log(message, data) {
+			var log = document.getElementById('log')
+			var el = document.createElement('div')
+			el.className = 'logLine'
+			el.innerHTML = uniqueId++ + '. ' + message + ':<br/>' + JSON.stringify(data)
+			if (log.children.length) { log.insertBefore(el, log.children[0]) }
+			else { log.appendChild(el) }
+		}
+       // JS 接收到 OC 的调用, JS 处理结束后, 返回给 OC 一个数据
+		bridge.registerHandler('testJavascriptHandler', function(data, responseCallback) {
+			log('JS 获取到了 OC 的数据:', data)
+			var responseData = { 'state':'OK' }
+			log('JS传回来的数据', responseData)
+			responseCallback(responseData)
+		})
+		document.body.appendChild(document.createElement('br'))
+
+// JS 调用 OC 的方法, 
+//		var input = document.getElementById('input')
+//		callbackButton.innerHTML = 'JS的按钮'
+		input.onfocus = function(e) {
+			alert(1);
+			e.preventDefault()
+            log('JS要传给 OC 的数据', {'name':'JayChou'})
+			bridge.callHandler('testObjcCallback', {'name':'JayChou' }, function(response) {
+				log('OC 传回来给 JS', response)
+			})
+		}
+	})
+		</script>
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+	</body>
+
+</html>

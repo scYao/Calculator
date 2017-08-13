@@ -21,7 +21,8 @@
         <activity android:name=".area.AreaActivity" />
         <activity android:name=".calculator.CalculatorActivity" />
         <activity android:name=".capital.CapitalActivity" />
-        <activity android:name=".length.LengthActivity"></activity>
+        <activity android:name=".length.LengthActivity" />
+        <activity android:name=".mortgage.CalculateResultActivity"></activity>
     </application>
 
 </manifest>

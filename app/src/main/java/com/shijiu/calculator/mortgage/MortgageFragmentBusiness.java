@@ -1,5 +1,6 @@
 package com.shijiu.calculator.mortgage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,8 +15,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shijiu.calculator.R;
+import com.shijiu.calculator.bean.MortgageBean;
 import com.shijiu.calculator.utils.Util;
 
 import java.util.Calendar;
@@ -55,6 +58,10 @@ public class MortgageFragmentBusiness extends Fragment {
     private TextView interest_rate3;
 
     private TextView current_rate;
+
+    //开始计算
+    private TextView start_calculate;
+    private MortgageBean bean = new MortgageBean();
 
 
     @Nullable
@@ -148,6 +155,7 @@ public class MortgageFragmentBusiness extends Fragment {
                     double rs =price -result;
                     need_loan.setText(rs+"元");
                     loan_edit.setText(rs/10000+"");
+                    bean.setTotal_mortgage(rs+"");
                 }else {
                     Log.e(TAG, "onTextChanged: sssssssssssssssss" );
                 }
@@ -179,6 +187,7 @@ public class MortgageFragmentBusiness extends Fragment {
                 String years = i+ "年";
                 String months =i*12+ "个月";
                 mortgage_years.setText(years+"("+months+")");
+                bean.setTotal_years(i+"");
 
             }
 
@@ -207,6 +216,7 @@ public class MortgageFragmentBusiness extends Fragment {
                     double result = d1*d2;
                     interest_rate3.setText(result+"%");
                     current_rate.setText("当前年限基准利率：商业"+result+"%");
+                    bean.setRate(result+"");
                 }
             }
 
@@ -238,6 +248,29 @@ public class MortgageFragmentBusiness extends Fragment {
 
             }
         });
+
+        start_calculate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e(TAG, "onClick: "+bean.toString() );
+                if (bean.getRate().equals("")){
+                    Toast.makeText(getActivity(), "请填写利率", Toast.LENGTH_SHORT).show();
+                    return;
+                }else if (bean.getTotal_mortgage().equals("")){
+                    Toast.makeText(getActivity(), "没有贷款总额", Toast.LENGTH_SHORT).show();
+                    return;
+                }else if (bean.getTotal_years().equals("")){
+                    Toast.makeText(getActivity(), "请设置还款年限", Toast.LENGTH_SHORT).show();
+                    return;
+                }else {
+//                    Util.forwardActivity(getActivity(), CalculateResultActivity.class,bean);
+                    Intent intent = new Intent();
+                    intent.setClass(getActivity(),CalculateResultActivity.class);
+                    intent.putExtra("bean",bean);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
 
@@ -264,6 +297,8 @@ public class MortgageFragmentBusiness extends Fragment {
         interest_rate3 = view.findViewById(R.id.id_interest_rate3);
 
         current_rate = view.findViewById(R.id.id_current_rate);
+
+        start_calculate = view.findViewById(R.id.id_start_calculate);
 
     }
 

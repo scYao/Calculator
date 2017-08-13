@@ -24,6 +24,14 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
+    <style name="valueTextStyle">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:gravity">center_vertical|right</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
     <style name="valueEditStyle">
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textSize">14sp</item>

@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.shijiu.calculator.bean.MortgageBean;
+
+import java.io.Serializable;
+
 /**
  * Created by yao on 2017/8/9.
  */
@@ -13,6 +17,13 @@ public class Util {
     public static void forwardActivity(Context context, Class clas){
         Intent intent = new Intent();
         intent.setClass(context,clas);
+        context.startActivity(intent);
+    }
+
+    public static void forwardActivity(Context context, Class clas,MortgageBean o){
+        Intent intent = new Intent();
+        intent.setClass(context,clas);
+        intent.putExtra("bean", o);
         context.startActivity(intent);
     }
 

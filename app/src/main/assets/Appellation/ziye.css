@@ -1,0 +1,232 @@
+html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h3,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h3,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;*font-size:100%}legend{color:#000}
+html{
+    height:100%;
+}
+body{
+    height: 100%;
+    font-size: 14px;
+    font-family: Arial,Helvetica,"Microsoft Yahei";
+    background: #fdfdfd;
+    color:#757575;
+}
+button, input {
+    font-family: Arial,Helvetica,"Microsoft Yahei";
+}
+img{
+    vertical-align: middle;
+}
+a{
+    text-decoration: none;
+    color: #757575;
+}
+textarea{
+	border: none;
+}
+.btn-1{
+	width: 50%;
+	border: none;
+	background:none;
+	background-color: #FFAA33;
+	line-height: 63px;
+	color: white;
+	/*border-top: 1px solid #FAFAFA;*/
+}
+.btn-2{
+	width: 50%;
+	border: none;
+	background: none;
+	border: ;
+	float: left;
+	height: 64px;
+	line-height: 64px;
+	color:#757575;
+	border-top: 1px solid gainsboro;
+	/*border-right: 1px solid gainsboro;*/
+	outline: none;
+	/*border: 5px red solid;*/
+}
+
+.foot-btn-box button{
+	font-family: "微软雅黑";
+	font-size: 24px;
+	margin: 0;
+	padding: 0;
+}
+.show{
+	margin-left: 15px;line-height: 80px;margin-top: 20px;
+}
+.group{
+	display: block;
+}
+.box-1{
+	width: 100%; height:200px;filter:aphla(opacity=0); background:#fff; background:rgba(255,255,255,0); important! height: 200px; position: absolute; bottom: 350px; 
+}
+.foot-btn-box{
+	width: 100%;
+	overflow: hidden;
+	position: absolute;
+	bottom: 0;
+}
+#fugai{
+	width: 100%; height:80px;filter:aphla(opacity=0); background:#fff; background:rgba(255,255,255,0);
+	 important! height: 200px; position: absolute; top: 150px;
+}
+#fanhui{
+	display: inline-block;
+	width: 90%;
+	line-height: 40px;
+	text-align: center;
+	background-color: #FFAA33;
+	font-family: "微软雅黑";
+	font-size: 16px;
+	color: white;
+	border-radius: 5px;
+	/*margin: auto;*/
+	margin-right: 5%;
+	margin-left: 5%;
+}
+#input{
+	width: 70%;
+	line-height: 30px;
+	/*border-bottom: 1px solid red;*/
+	/*height: 10px;*/
+	float: left;
+	
+}
+#search{
+	width: 80%;
+	margin:0 auto;
+	line-height: 40px;
+	/*border-bottom: 1px solid red;*/
+	/*height: 10px;*/
+	float: left;
+	border: 1px solid #BDBDBD;
+	/*margin-left: 15px;*/
+	padding-left: 5px;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	outline: none;
+}
+#btn-select{
+	color: white;
+    font-size: 30px;
+	width: 50%;
+	height: 64px;
+    /*height: 66px;*/
+    /*line-height: 64px;*/
+    /*border-top: 1px solid #FAFAFA;*/
+    outline: none;
+	float: right;
+	position: absolute;
+	right: 0;
+	margin: 0;
+	background-color: #FFAA33;
+}
+#reslut{
+	margin-left: 15px;
+	border: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+.btn{
+	background:none;
+}
+.mod-panel {
+    width: 100%;
+    /*max-width: 740px;*/
+    margin: 0 auto 30px;
+    /*_width: 740px;*/
+}
+.mod-panel .hd{
+	padding-top: 25px;
+	margin-bottom: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+.mod-panel .hd h1{
+	font-size: 24px;
+	color:#212121;
+}
+.mod-panel .bd{
+	width: 100%;
+	
+	margin:0 auto 20px;
+}
+.mod-panel .bd p{
+	line-height: 30px;
+}
+.mod-panel .input-text{
+    width: 60px;
+    height: 20px;
+    margin-right:20px;
+    border: 1px solid #ebebeb;
+    padding: 4px 8px;
+    line-height: 20px;
+    outline: none;
+}
+.mod-panel .input-button {
+    height: 30px;
+    width: 80px;
+    margin: 15px  10px 0 0;
+    background: #4bae4f;
+    border: medium none;
+    line-height: 30px;
+    vertical-align: middle;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+}
+.mod-panel label,.mod-panel p span{
+    margin-right:10px;
+}
+.mod-panel .btn{
+    width: 36px;
+    cursor: pointer;
+}
+.mod-panel textarea{
+    display: block;
+	/*width: 50%;*/
+	height: 30px;
+	padding:5px 10px;
+	border: 1px solid #ebebeb;
+	resize: none;
+	outline: none;
+}
+.mod-panel .ft{
+    padding-top: 20px;
+    border-top:1px dotted #e0e0e0;
+}
+.mod-panel .about{
+	padding: 0 20px;
+    margin-bottom: 20px;
+}
+.mod-panel .about p{
+	line-height: 24px;
+	text-indent: 2em;
+}
+.mod-panel .copy{
+    padding: 0 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.mod-panel .copy p{
+    line-height: 24px;
+}
+
+.mod-qrcode{
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    text-align: center;
+}
+.mod-qrcode .box{
+    width: 150px;
+    height: 148px;
+    overflow: hidden;
+}
+.mod-qrcode p{
+    line-height: 30px;
+}

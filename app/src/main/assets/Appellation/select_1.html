@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scaleble=no" />
+		<title>中国家庭称谓计算器</title>
+		<meta name="keywords" content="过年走亲访友,拜年神器,亲戚关系计算器,称呼计算器,关系算法">
+		<meta name="description" content="一款最全面的中国亲戚关系计算器，走亲访友，逢年过节必备神器，避免叫错、不会叫亲戚的尴尬，人人必备亲戚关系工具。">
+		<link rel="stylesheet" href="ziye.css">
+		<style type="text/css">
+
+</style>
+	</head>
+	<script>
+		function setRem() {
+			//获取到HTML文档
+			var oHtml = document.querySelector('html');
+			//getBoundingClientRect返回一个对象,取当前设备的屏幕大小
+			var width = oHtml.getBoundingClientRect().width;
+			//限制最大宽度到680;
+			if(width > 680) width = 680;
+			oHtml.style.fontSize = width / 16 + 'px';
+		}
+		window.onload = function() {
+			setRem();
+		}
+		//23.4375px等于1rem;
+	</script>
+	<body>
+		<div class="wrapper">
+			<div class="container">
+				<div class="content">
+					<div class="mod-panel">
+						<div class="hd">
+							<!--<h1>中国家庭称谓计算器</h1>-->
+						</div>
+						<div class="bd">
+							<p style="display: none;">计算类型：
+								<label for="default" style="display: none;"><input id="default" type="radio" name="type" value="default" checked>找称呼</label>
+								<label for="chain" style="display: none;"><input id="chain" type="radio" name="type" value="chain" checked="checked">找关系</label>
+							</p>
+							<div class="group" style="display: none;">
+								<p>我的性别：
+									<label for="male"><input id="male" type="radio" name="sex" value="1" checked>男</label>
+									<label for="female"><input id="female" type="radio" name="sex" value="0">女</label>
+								</p>
+								<p>称呼方式：
+									<label for="call"><input id="call" type="radio" name="reverse" value="0" checked>我称呼对方</label>
+									<label for="called"><input id="called" type="radio" name="reverse" value="1">对方称呼我</label>
+								</p>
+							</div>
+							
+							<p style="display: none;">
+								<span>快速选择：</span><br/>
+								<span>
+									<button class="btn" data-value="爸爸">父</button>
+									<button class="btn" data-value="妈妈">母</button>
+								</span>
+								<span>
+									<button class="btn" data-value="老公">夫</button>
+									<button class="btn" data-value="老婆">妻</button>
+								</span>
+								<span>
+									<button class="btn" data-value="儿子">子</button>
+									<button class="btn" data-value="女儿">女</button>
+								</span>
+								<span>
+									<button class="btn" data-value="哥哥">兄</button>
+									<button class="btn" data-value="弟弟">弟</button>
+								</span>
+								<span>
+									<button class="btn" data-value="姐姐">姐</button>
+									<button class="btn" data-value="妹妹">妹</button>
+								</span>
+							</p>
+							<p>
+								<button class="input-button" style="display: none;">回退</button>
+								<button class="input-button" style="display: none;">清空</button>
+							<p>
+							<p>
+								<textarea id="input" placeholder="对方的称谓" style="display: none;"></textarea>
+								<input type="text" 
+									id="search"placeholder="对方的称谓" style="width: 80%;margin: auto; position: relative;left: 10%;" />
+								
+							</p>
+							<!--<div style="clear: both;"></div>-->
+								<!--<button >查找</button>-->
+								<div style="clear: both;"></div>
+							</p>
+							<!--<div></div>-->
+							<p class="show">关系</p>
+							<div id="fugai" style="width: 100%; height:80px;filter:aphla(opacity=0); background:#fff; background:rgba(255,255,255,0);
+	 important! height: 200px; position: absolute; top: 110px; ">
+							</div>
+							<p>
+								<textarea id="reslut" readonly></textarea>
+								<!--<a href="index_1.html" id="fanhui" style="" >返回</a>-->
+							</p>
+								</p>
+							<div class="foot-btn-box">
+								<button class="btn-1 input-button" id="btn-select">=</button>
+								<button class="btn-2" id="btn-2" onclick="show()">称谓</button>
+							</div>
+						</div>
+						<!--<div class="ft">
+							<div class="copy">
+								<p>
+									<a class="github-button" href="https://github.com/mumuy" data-style="mega" data-count-href="/mumuy/followers" data-count-api="/users/mumuy#followers" data-count-aria-label="# followers on GitHub" aria-label="Follow @mumuy on GitHub">Follow @mumuy</a>
+									<a class="github-button" href="https://github.com/mumuy/relationship" data-style="mega" data-count-href="/mumuy/relationship/stargazers" data-count-api="/repos/mumuy/relationship#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star mumuy/relationship on GitHub">Star</a>
+								</p>
+								<p>android版下载：
+									<a href="http://passer-by.com/relationship/app.html" target="_blank">三姑六婆计算器</a>
+								</p>
+								<p>&copy;
+									<a href="http://passer-by.com">passer-by.com</a>
+								</p>
+							</div>
+						</div>-->
+					<!--</div>
+					<div class="mod-qrcode">
+						<div class="box"><img src="image/qrcode.jpg" width="150" /></div>
+						<p>微信扫一扫，使用小程序</p>
+					</div>
+				</div>
+			</div>-->
+		</div>
+		<script src="common.js"></script>
+		<script src="relationship.js"></script>
+		<script>
+			var chengwei=document.getElementById("btn-2");
+			function show(){
+				window.location.href="index_1.html";
+			}
+			(function() {
+				//找称呼还是找关系
+				var $type = document.getElementsByName('type');
+//				console.log($type);
+				//获取我所输入的性别是男还是女
+				var $sex = document.getElementsByName('sex');
+				//需要知道我称呼对方什么，还是对方称呼我什么
+				var $reverse = document.getElementsByName('reverse');
+				//获取所有的单选按钮
+				var $radio = document.getElementsByTagName('INPUT');
+//				console.log($radio)
+				//获取文本输入域标签
+				var $textarea = document.getElementsByTagName('TEXTAREA');
+				var $input=document.getElementById('input');
+				var $group = DOMUtil.getElementsByClassName('group')[0];
+				console.log($group);
+				var $btns = DOMUtil.getElementsByClassName('btn');
+//				console.log($btns[2]);
+//				console.log($btns[3]);
+//				console.log($btns);
+				var $buttons = DOMUtil.getElementsByClassName('input-button');
+				console.log($buttons)
+				var toggle = function(sex) {
+					if(sex) { //男女判断
+						$btns[2].disabled = true;
+						$btns[3].disabled = false;
+					} else {
+						$btns[2].disabled = false;
+						$btns[3].disabled = true;
+					}
+				}
+				var count = function() {
+					var search=document.getElementById('search');
+					var value = search.value.trim();
+					if(value) {
+						var sex = $sex[0].checked ? 1 : 0;
+						var type = $type[0].checked ? 'default' : 'chain';
+						var reverse = !$reverse[0].checked;
+						var result = relationship({ text: value, sex: sex, reverse: reverse, type: type });
+						$textarea[1].value = '';
+						if(result.length) {
+							$textarea[1].value = result.join('\n');
+						} else {
+							$textarea[1].value = '貌似他/她跟你不是很熟哦!';
+						}
+					} else {
+						$textarea[1].value = '';
+					}
+				}
+				
+				for(var i = 0; i < $btns.length; i++) {
+					$btns[i].onclick = function() {
+						var value = $textarea[0].value.trim();
+						var name = this.getAttribute('data-value');
+						if(value) {
+							$textarea[0].value = value + '的' + name;
+						} else {
+							$textarea[0].value = name;
+						}
+						toggle('爸爸,老公,儿子,哥哥,弟弟'.indexOf(name) > -1);
+					}
+				}
+				for(var i = 0; i < $radio.length; i++) {
+					$radio[i].onchange = function() {
+						toggle($sex[0].checked);
+						$group.style.display = $type[0].checked ? 'block' : 'none';
+						if($textarea[1].value) {
+							count();
+						}
+					}
+				}
+				$buttons[0].onclick = function() {
+					var value = $textarea[0].value.trim();
+					var index = value.lastIndexOf('的');
+					index = Math.max(0, index);
+					var search = value.substr(0, index);
+					$textarea[0].value = search;
+					$textarea[1].value = '';
+					var name = search.split('的').pop();
+					if(!name) {
+						toggle($sex[0].checked);
+					} else {
+						toggle('爸爸,老公,儿子,哥哥,弟弟'.indexOf(name) > -1);
+					}
+				}
+				$buttons[1].onclick = function() {
+					$textarea[1].value = $textarea[0].value = '';
+					toggle($sex[0].checked);
+				}
+				$buttons[2].onclick = count;
+				toggle($sex[0].checked);
+			})();
+		</script>
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
+		<div style="display: none;">
+			<script src="http://s95.cnzz.com/z_stat.php?id=1258310068&web_id=1258310068"></script>
+		</div>
+	</body>
+</html>
