@@ -41,6 +41,7 @@
         <item name="android:background">@drawable/edit_shape</item>
         <item name="android:layout_marginLeft">20dp</item>
         <item name="android:layout_marginRight">20dp</item>
+        <item name="android:paddingLeft">2dp</item>
     </style>
 
     <style name="keyTextStyle1">
@@ -68,6 +69,18 @@
         <item name="android:background">@drawable/edit_shape</item>
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
+        <item name="android:paddingLeft">2dp</item>
     </style>
 
+    <style name="lineHorizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/colorLightGrey</item>
+    </style>
+
+
+    <style name="take_photo_anim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/pop_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/pop_exit_anim</item>
+    </style>
 </resources>

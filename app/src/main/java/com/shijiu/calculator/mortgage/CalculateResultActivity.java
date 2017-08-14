@@ -2,6 +2,7 @@ package com.shijiu.calculator.mortgage;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.shijiu.calculator.R;
@@ -14,6 +15,7 @@ public class CalculateResultActivity extends Activity {
     private TextView total_years;
 
     private TextView month_repay;
+    private static final String TAG = "CalculateResultActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,7 @@ public class CalculateResultActivity extends Activity {
         setContentView(R.layout.activity_calculate_result);
         MortgageBean bean = (MortgageBean) this.getIntent().getSerializableExtra("bean");
 
+        Log.e(TAG, "onCreate: "+bean.toString() );
         initView();
 
         initData(bean);

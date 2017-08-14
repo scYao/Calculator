@@ -61,13 +61,15 @@ public class MortgageFragmentBusiness extends Fragment {
 
     //开始计算
     private TextView start_calculate;
-    private MortgageBean bean = new MortgageBean();
+    private MortgageBean bean;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mortgage_business, container, false);
+
+        bean = new MortgageBean();
         initView(view);
         initListener();
         initData();
@@ -253,17 +255,18 @@ public class MortgageFragmentBusiness extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.e(TAG, "onClick: "+bean.toString() );
-                if (bean.getRate().equals("")){
+                if (bean.getRate() ==null){
                     Toast.makeText(getActivity(), "请填写利率", Toast.LENGTH_SHORT).show();
                     return;
-                }else if (bean.getTotal_mortgage().equals("")){
+                }else if (bean.getTotal_mortgage()==null){
                     Toast.makeText(getActivity(), "没有贷款总额", Toast.LENGTH_SHORT).show();
                     return;
-                }else if (bean.getTotal_years().equals("")){
+                }else if (bean.getTotal_years() ==null){
                     Toast.makeText(getActivity(), "请设置还款年限", Toast.LENGTH_SHORT).show();
                     return;
                 }else {
 //                    Util.forwardActivity(getActivity(), CalculateResultActivity.class,bean);
+                Log.e(TAG, "onClick: "+bean.toString() );
                     Intent intent = new Intent();
                     intent.setClass(getActivity(),CalculateResultActivity.class);
                     intent.putExtra("bean",bean);

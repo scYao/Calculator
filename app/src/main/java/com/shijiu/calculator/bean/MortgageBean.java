@@ -34,4 +34,13 @@ public class MortgageBean implements Serializable{
     public void setRate(String rate) {
         this.rate = rate;
     }
+
+    @Override
+    public String toString() {
+        return "MortgageBean{" +
+                "total_mortgage='" + total_mortgage + '\'' +
+                ", total_years='" + total_years + '\'' +
+                ", rate='" + rate + '\'' +
+                '}';
+    }
 }

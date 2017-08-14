@@ -8,8 +8,10 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
 
+import com.shijiu.calculator.adapter.GridAdapter;
 import com.shijiu.calculator.appellation.AppellationActivity;
 import com.shijiu.calculator.area.AreaActivity;
+import com.shijiu.calculator.bean.GridBean;
 import com.shijiu.calculator.calculator.CalculatorActivity;
 import com.shijiu.calculator.capital.CapitalActivity;
 import com.shijiu.calculator.length.LengthActivity;
@@ -24,10 +26,10 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private GridView gridView;
     private List<Map<String, Object>> dataList = new ArrayList<>();
-    private SimpleAdapter simpleAdapter;
+//    private SimpleAdapter simpleAdapter;
 
     //图片数组
-    private int[] imageList = {
+    private Integer[] imageList = {
             R.mipmap.mortgage, R.mipmap.appellation,
             R.mipmap.length, R.mipmap.capital,
             R.mipmap.calculator, R.mipmap.area
@@ -38,6 +40,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             "大写转换", "计算器", "面积转换"
     };
 
+
+    private String[] contentList ={
+            "合理分配购房资金","三姑六婆不再搞错",
+            "大写数字无需百度","各种长度互相转换",
+            "快捷计算器","各种面积互相转换"
+    };
+
+    private List<GridBean> beanList = new ArrayList<>();
+    private GridAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,20 +58,29 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         initData();
         initView();
 
-        String[] dataFrom = {"image","text"};
-        int[] dataTo ={R.id.id_grid_image, R.id.id_grid_text};
-        simpleAdapter = new SimpleAdapter(this,dataList,R.layout.gird_item,dataFrom, dataTo);
-        gridView.setAdapter(simpleAdapter);
+//        String[] dataFrom = {"image","text"};
+//        int[] dataTo ={R.id.id_grid_image, R.id.id_grid_text};
+//        simpleAdapter = new SimpleAdapter(this,dataList,R.layout.gird_item,dataFrom, dataTo);
+        adapter = new GridAdapter(this,beanList);
+
+        gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(this);
 
     }
 
     private void initData() {
         for (int i = 0; i < imageList.length; i++) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("image", imageList[i]);
-            map.put("text", nameList[i]);
-            dataList.add(map);
+//            Map<String, Object> map = new HashMap<>();
+//            map.put("image", imageList[i]);
+//            map.put("text", nameList[i]);
+//            dataList.add(map);
+
+            GridBean bean = new GridBean();
+            bean.setImage(imageList[i]);
+            bean.setName(nameList[i]);
+            bean.setContent(contentList[i]);
+
+            beanList.add(bean);
         }
     }
 
