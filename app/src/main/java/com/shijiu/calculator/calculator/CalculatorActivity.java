@@ -41,7 +41,7 @@ public class CalculatorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_calculator);
         gly=(GridLayout)findViewById(R.id.gly);
         print = (EditText) findViewById(R.id.print);
         print.setText("0");
@@ -188,6 +188,6 @@ public class CalculatorActivity extends AppCompatActivity {
 
     }
 
-   
+
 
 }

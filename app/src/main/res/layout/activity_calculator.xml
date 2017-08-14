@@ -6,7 +6,7 @@
     android:columnCount="5"
     android:rowCount="6"
     android:id="@+id/gly"
-    tools:context=".MainActivity" >
+    tools:context=".calculator.CalculatorActivity" >
 
     <EditText
         android:id="@+id/print"

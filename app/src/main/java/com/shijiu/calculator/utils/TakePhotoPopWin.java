@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.shijiu.calculator.R;
 import com.shijiu.calculator.adapter.PopAdapter;
 import com.shijiu.calculator.bean.UnitBean;
+import com.shijiu.calculator.length.LengthActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class TakePhotoPopWin extends PopupWindow {
 
 
     public TakePhotoPopWin(Context mContext) {
-
+        this.mContext =mContext;
         view = LayoutInflater.from(mContext).inflate(R.layout.pop_window, null);
         initData();
 
@@ -47,10 +48,12 @@ public class TakePhotoPopWin extends PopupWindow {
         adapter.setOnItemClickListener(new PopAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                
+                beanList.get(position).setImgae(R.mipmap.tick);
+                adapter.notifyDataSetChanged();
+                dismiss();
             }
         });
-//        adapter.notifyDataSetChanged();
+
 
         // 取消按钮
         btn_cancel.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +115,5 @@ public class TakePhotoPopWin extends PopupWindow {
        beanList.add(new UnitBean("纳米 nm"));
        beanList.add(new UnitBean("皮米 pm"));
        beanList.add(new UnitBean("海里 nmi"));
-
     }
 }

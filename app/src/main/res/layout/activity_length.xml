@@ -30,9 +30,12 @@
             android:drawableRight="@mipmap/arrow_right"/>
 
         <EditText
+            android:id="@+id/id_input"
             android:layout_marginRight="20dp"
             android:layout_width="0dp"
             android:layout_weight="3"
+            android:editable="false"
+            android:text=""
             android:background="@drawable/edit_shape"
             android:layout_height="40dp" />
 
@@ -59,9 +62,11 @@
             android:drawableRight="@mipmap/arrow_right"/>
 
         <EditText
+            android:id="@+id/id_result"
             android:layout_marginRight="20dp"
             android:layout_width="0dp"
             android:layout_weight="3"
+            android:editable="false"
             android:background="@drawable/edit_shape"
             android:layout_height="40dp" />
 

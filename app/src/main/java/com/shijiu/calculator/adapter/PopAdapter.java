@@ -60,10 +60,11 @@ public class PopAdapter  extends RecyclerView.Adapter<PopAdapter.ViewHolder> imp
     public void onBindViewHolder(ViewHolder holder, int position) {
         UnitBean bean = beanList.get(position);
         holder.unit.setText(bean.getUnit());
+        if (bean.getImgae() != null){
+            holder.imageView.setImageResource(bean.getImgae());
+        }
         //将position保存在itemView的Tag中，以便点击时进行获取
         holder.itemView.setTag(position);
-//        holder.imageView.setImageResource(R.mipmap.tick);
-
 
     }
 
