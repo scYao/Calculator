@@ -20,6 +20,7 @@
 
 
         <EditText
+            android:editable="false"
             android:layout_marginLeft="20dp"
             android:id="@+id/id_number"
             android:layout_marginRight="20dp"

@@ -184,10 +184,12 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btn_del:
                 if (in != null && !in.equals("")) {
                     input.setText(in.substring(0, in.length() - 1));
+                    result.setText(in.substring(0, in.length() - 1));
                 }
                 break;
             case R.id.btn_equal:
-
+                input.setText("");
+                result.setText("");
                 break;
 
         }
@@ -197,12 +199,13 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
     private void getResult(int i1, int i2) {
         double re = Double.parseDouble(input.getText().toString());
         int abs = Math.abs(i1 - i2);
-        if ((i1 - i2) > 0) {
+        Log.e(TAG, "getResult: "+i1+i2+ abs );
+        if ((i1 - i2) < 0) {
             double rs = re*abs*10;
             result.setText(rs+"");
         }
 
-        if ((i1 - i2) < 0) {
+        if ((i1 - i2) > 0) {
             double rs = re/(abs*10);
             result.setText(rs+"");
         }
@@ -316,7 +319,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             beanList.add(new UnitBean("微米 um"));
             beanList.add(new UnitBean("纳米 nm"));
             beanList.add(new UnitBean("皮米 pm"));
-            beanList.add(new UnitBean("海里 nmi"));
+//            beanList.add(new UnitBean("海里 nmi"));
         }
     }
 
