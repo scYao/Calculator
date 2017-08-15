@@ -31,7 +31,7 @@ public class CalculateResultActivity extends Activity {
 
     private void initData(MortgageBean bean) {
         double total_mortgage = Double.parseDouble(bean.getTotal_mortgage());
-        double rate = Double.parseDouble(bean.getRate());
+        double rate = Double.parseDouble(bean.getRate())/12/100;
         double years = Double.parseDouble(bean.getTotal_years());
         mortgage_total.setText(total_mortgage/10000+"万");
         total_years.setText(years+"年"+"("+years*12+"月）");
@@ -39,7 +39,7 @@ public class CalculateResultActivity extends Activity {
         double d1 = Math.pow((1+rate),years*12);
         double d2 = Math.pow((1+rate),years*12) -1;
         double month_money = (total_mortgage*rate*d1)/d2;
-        month_repay.setText(month_money+"");
+        month_repay.setText(month_money+"元");
         repay_total.setText(month_money*years*12+"");
         double d3 = month_money*years*12 -total_mortgage;
         rate_total.setText(d3+"");

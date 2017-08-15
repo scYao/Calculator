@@ -197,11 +197,37 @@
                     android:text="还款方式" />
 
                 <TextView
+                    android:id="@+id/id_check_text"
                     style="@style/keyTextStyle1"
                     android:layout_width="match_parent"
                     android:gravity="right|center_vertical"
                     android:text="等额本金（每月递减还款）"
                     android:textColor="@color/colorSelectText" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/dropDownList">
+
+              <RadioGroup
+                  android:id="@+id/id_radioGroup"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:gravity="right"
+                  android:orientation="horizontal">
+
+                  <RadioButton
+                      android:id="@+id/id_radioButton1"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:checked="true"
+                      android:text="等额本息"/>
+
+                  <RadioButton
+                      android:id="@+id/id_radioButton2"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="等额本金"/>
+
+              </RadioGroup>
             </LinearLayout>
 
 
@@ -217,7 +243,7 @@
                     style="@style/keyTextStyle1"
                     android:layout_width="match_parent"
                     android:gravity="right|center_vertical"
-                    android:text="10年(120个月)"
+                    android:text="0年(0个月)"
                     android:textColor="@color/colorBlack" />
             </LinearLayout>
 
@@ -233,7 +259,7 @@
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:max="30"
-                    android:progress="10" />
+                    android:progress="0" />
 
                 <TextView
                     style="@style/keyTextStyle1"
@@ -270,8 +296,7 @@
                     android:id="@+id/id_interest_rate1"
                     style="@style/valueEditStyle1"
                     android:layout_width="40dp"
-                    android:inputType="numberDecimal"
-                    android:hint="4.9" />
+                    android:inputType="numberDecimal" />
 
                 <TextView
                     style="@style/valueTextStyle1"
@@ -283,8 +308,7 @@
                     android:id="@+id/id_interest_rate2"
                     style="@style/valueEditStyle1"
                     android:layout_width="40dp"
-                    android:inputType="numberDecimal"
-                    android:hint="1.0" />
+                    android:inputType="numberDecimal" />
 
                 <TextView
                     style="@style/valueTextStyle1"
@@ -295,8 +319,8 @@
                 <TextView
                     android:id="@+id/id_interest_rate3"
                     style="@style/valueTextStyle1"
-                    android:layout_width="40dp"
-                    android:text="4.9%" />
+                    android:layout_width="50dp"
+                    android:text="0%" />
             </LinearLayout>
 
             <TextView
@@ -304,7 +328,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:gravity="center"
-                android:text="当前年限基准利率：商业4.9%"
+                android:text="当前年限基准利率：商业0%"
                 android:textColor="@color/colorLightGrey"
                 android:textSize="14sp" />
 

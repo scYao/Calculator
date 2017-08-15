@@ -22,7 +22,11 @@
         <activity android:name=".calculator.CalculatorActivity" />
         <activity android:name=".capital.CapitalActivity" />
         <activity android:name=".length.LengthActivity" />
-        <activity android:name=".mortgage.CalculateResultActivity"></activity>
+        <activity android:name=".mortgage.CalculateResultActivity" />
+        <activity android:name=".mortgage.HelpActivity" />
+        <activity android:name=".mortgage.CalculateDetailActivity" />
+        <activity android:name=".mortgage.CombinationResultActivity" />
+        <activity android:name=".mortgage.CombinationDetailActivity"></activity>
     </application>
 
 </manifest>

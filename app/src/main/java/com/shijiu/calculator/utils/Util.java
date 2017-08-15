@@ -54,4 +54,14 @@ public class Util {
         String s = textView.getText().toString().trim();
         return s;
     }
+
+    public static boolean isEmpty(EditText editText){
+        String s = editText.getText().toString().trim();
+
+        if (s.equals("")){
+            return false;
+        }else {
+            return true;
+        }
+    }
 }

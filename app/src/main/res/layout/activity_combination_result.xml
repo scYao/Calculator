@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorBackground"
+    tools:context="com.shijiu.calculator.mortgage.CombinationResultActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/colorWhite"
+        android:layout_height="80dp">
+
+        <TextView
+            android:textSize="16sp"
+            android:text="每月还款金额"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"/>
+
+
+        <TextView
+            android:id="@+id/id_month_repay"
+            android:textSize="18sp"
+            android:textColor="@color/colorSelectText"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
+            android:gravity="center_vertical|right"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:background="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            style="@style/dropDownList">
+            <TextView
+                style="@style/keyTextStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="贷款总额" />
+
+            <TextView
+                android:id="@+id/id_mortgage_total"
+                style="@style/keyTextStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/dropDownList">
+            <TextView
+                style="@style/keyTextStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="支付利息总额" />
+
+            <TextView
+                android:id="@+id/id_rate_total"
+                style="@style/keyTextStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/dropDownList">
+            <TextView
+                style="@style/keyTextStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="还款总额" />
+
+            <TextView
+                android:id="@+id/id_repay_total"
+                style="@style/keyTextStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/dropDownList">
+            <TextView
+                style="@style/keyTextStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="按揭年数" />
+
+            <TextView
+                android:id="@+id/id_total_years"
+                style="@style/keyTextStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

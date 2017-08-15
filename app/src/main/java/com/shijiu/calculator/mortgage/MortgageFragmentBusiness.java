@@ -2,6 +2,7 @@ package com.shijiu.calculator.mortgage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -13,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +66,11 @@ public class MortgageFragmentBusiness extends Fragment {
     private TextView start_calculate;
     private MortgageBean bean;
 
+    private RadioGroup radioGroup;
+    private RadioButton radioButton1;
+    private RadioButton radioButton2;
+    private TextView check_text;
+
 
     @Nullable
     @Override
@@ -70,6 +78,7 @@ public class MortgageFragmentBusiness extends Fragment {
         View view = inflater.inflate(R.layout.fragment_mortgage_business, container, false);
 
         bean = new MortgageBean();
+        bean.setTag("0");
         initView(view);
         initListener();
         initData();
@@ -86,6 +95,20 @@ public class MortgageFragmentBusiness extends Fragment {
     }
 
     private void initListener() {
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                if (i == radioButton1.getId()){
+                    check_text.setText("等额本息（每月递减还款）");
+                    bean.setFlag("0");
+                }
+
+                if (i == radioButton2.getId()){
+                    check_text.setText("等额本金（每月递减还款）");
+                    bean.setFlag("1");
+                }
+            }
+        });
         unit_price.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -96,15 +119,18 @@ public class MortgageFragmentBusiness extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 double d1;
                 double d2;
-                d1 = Double.parseDouble(unit_price.getText().toString().trim());
-                if (!area.getText().toString().trim().equals("")){
-                    d2 = Double.parseDouble(area.getText().toString().trim());
+                if (Util.isEmpty(unit_price)){
+                    d1 = Double.parseDouble(unit_price.getText().toString().trim());
+                    if (!area.getText().toString().trim().equals("")){
+                        d2 = Double.parseDouble(area.getText().toString().trim());
 
-                    if (d1> 0 && d2 >0){
-                        double result = d1*d2;
-                        total_price.setText(result+"元");
+                        if (d1> 0 && d2 >0){
+                            double result = d1*d2;
+                            total_price.setText(result+"元");
+                        }
                     }
                 }
+
 
 
             }
@@ -124,15 +150,21 @@ public class MortgageFragmentBusiness extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 double d1;
                 double d2;
-                d2 = Double.parseDouble(unit_price.getText().toString().trim());
-                if (!area.getText().toString().trim().equals("")){
-                    d1 = Double.parseDouble(area.getText().toString().trim());
 
-                    if (d1> 0 && d2 >0){
-                        double result = d1*d2;
-                        total_price.setText(result+"");
+                if (Util.isEmpty(unit_price)){
+                    d2 = Double.parseDouble(unit_price.getText().toString().trim());
+
+
+                    if (!area.getText().toString().trim().equals("")){
+                        d1 = Double.parseDouble(area.getText().toString().trim());
+
+                        if (d1> 0 && d2 >0){
+                            double result = d1*d2;
+                            total_price.setText(result+"");
+                        }
                     }
                 }
+
             }
 
             @Override
@@ -152,12 +184,18 @@ public class MortgageFragmentBusiness extends Fragment {
                 if (Util.isNull(total_price)){
                     double price = Double.parseDouble(total_price.getText().toString().trim());
                     Log.e(TAG, "onTextChanged: "+price );
-                    double result = Double.parseDouble(charSequence.toString())*price/100;
-                    down_payments_value.setText(result+"");
-                    double rs =price -result;
-                    need_loan.setText(rs+"元");
-                    loan_edit.setText(rs/10000+"");
-                    bean.setTotal_mortgage(rs+"");
+                    if (!charSequence.toString().equals("")){
+                        double result = Double.parseDouble(charSequence.toString())*price/100;
+                        down_payments_value.setText(result+"");
+                        double rs =price -result;
+                        need_loan.setText(rs+"元");
+                        loan_edit.setText(rs/10000+"");
+                        if (rs>0){
+                            bean.setTotal_mortgage(rs+"");
+                        }
+                    }
+
+
                 }else {
                     Log.e(TAG, "onTextChanged: sssssssssssssssss" );
                 }
@@ -189,7 +227,10 @@ public class MortgageFragmentBusiness extends Fragment {
                 String years = i+ "年";
                 String months =i*12+ "个月";
                 mortgage_years.setText(years+"("+months+")");
-                bean.setTotal_years(i+"");
+                if (i> 0){
+                    bean.setTotal_years(i+"");
+                }
+
 
             }
 
@@ -218,7 +259,12 @@ public class MortgageFragmentBusiness extends Fragment {
                     double result = d1*d2;
                     interest_rate3.setText(result+"%");
                     current_rate.setText("当前年限基准利率：商业"+result+"%");
-                    bean.setRate(result+"");
+                    if(result> 0){
+
+                        bean.setRate(result+"");
+                        Log.e(TAG, "onTextChanged: "+bean.toString() );
+                    }
+
                 }
             }
 
@@ -242,6 +288,12 @@ public class MortgageFragmentBusiness extends Fragment {
                     double result = d1*d2;
                     interest_rate3.setText(result+"%");
                     current_rate.setText("当前年限基准利率：商业"+result+"%");
+
+                    if(result> 0){
+
+                        bean.setRate(result+"");
+                        Log.e(TAG, "onTextChanged: "+bean.toString() );
+                    }
                 }
             }
 
@@ -265,12 +317,18 @@ public class MortgageFragmentBusiness extends Fragment {
                     Toast.makeText(getActivity(), "请设置还款年限", Toast.LENGTH_SHORT).show();
                     return;
                 }else {
-//                    Util.forwardActivity(getActivity(), CalculateResultActivity.class,bean);
-                Log.e(TAG, "onClick: "+bean.toString() );
-                    Intent intent = new Intent();
-                    intent.setClass(getActivity(),CalculateResultActivity.class);
-                    intent.putExtra("bean",bean);
-                    startActivity(intent);
+                    if (bean.getFlag().equals("0")){
+                        Log.e(TAG, "onClick: "+bean.toString() );
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(),CalculateResultActivity.class);
+                        intent.putExtra("bean",bean);
+                        startActivity(intent);
+                    }else {
+                        Intent intent = new Intent(getActivity(),CalculateDetailActivity.class);
+                        intent.putExtra("bean",bean);
+                        startActivity(intent);
+                    }
+
                 }
             }
         });
@@ -302,6 +360,12 @@ public class MortgageFragmentBusiness extends Fragment {
         current_rate = view.findViewById(R.id.id_current_rate);
 
         start_calculate = view.findViewById(R.id.id_start_calculate);
+
+        radioGroup = view.findViewById(R.id.id_radioGroup);
+
+        radioButton1 = view.findViewById(R.id.id_radioButton1);
+        radioButton2 = view.findViewById(R.id.id_radioButton2);
+        check_text = view.findViewById(R.id.id_check_text);
 
     }
 
