@@ -2,192 +2,185 @@ package com.shijiu.calculator.calculator;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.TextView;
 
 import com.shijiu.calculator.R;
 
 import java.math.BigDecimal;
 import java.util.regex.Pattern;
 
-public class CalculatorActivity extends AppCompatActivity {
+public class CalculatorActivity extends AppCompatActivity implements OnClickListener {
 
-    private EditText print;
+    private TextView btn_0;
+    private TextView btn_1;
+    private TextView btn_2;
+    private TextView btn_3;
+    private TextView btn_4;
+    private TextView btn_5;
+    private TextView btn_6;
+    private TextView btn_7;
+    private TextView btn_8;
+    private TextView btn_9;
 
-    private static String fistNumber = "0";// 第一次输入的值
-    private static String secondNumber = "0";// 第二次输入的值
-    private static String num = "0";// 显示的结果
-    private static int flg = 0;// 结果累加一次
-    public Counts take = null;
+    private TextView btn_equal;
+    private TextView btn_del;
+    private TextView btn_point;
+    private TextView btn_clear;
+    private TextView btn_pluse_minus;
+    private TextView btn_divide;
+    private TextView btn_multiply;
+    private TextView btn_minus;
+    private TextView btn_pluse;
+    private TextView btn_complementation;
 
-    private int[] btidTake = { R.id.txtdivide, R.id.txtx, R.id.txtmin,
-            R.id.txttakesum };
-
-    private Button[] buttonTake = new Button[btidTake.length];
-
-    private int[] btidNum = { R.id.txt0, R.id.txt1, R.id.txt2, R.id.txt3,
-            R.id.txt4, R.id.txt5, R.id.txt6, R.id.txt7, R.id.txt8, R.id.txt9,
-            R.id.txtspl };
-    private Button[] buttons = new Button[btidNum.length];
-
-    private int[] btcl = { R.id.chars, R.id.charx, R.id.txtb, R.id.txtv };
-    private Button[] btcls = new Button[btcl.length];
-    private GridLayout gly;
+    private TextView id_input_edit;
+    private TextView id_result_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
-        gly=(GridLayout)findViewById(R.id.gly);
-        print = (EditText) findViewById(R.id.print);
-        print.setText("0");
-        print.setEnabled(false);
-        GetNumber get = new GetNumber();
-        for (int i = 0; i < btidNum.length; i++) {
-            buttons[i] = (Button) findViewById(btidNum[i]);
-            buttons[i].setOnClickListener(get);
-        }
-        Compute cm = new Compute();
-        for (int i = 0; i < btidTake.length; i++) {
-            buttonTake[i] = (Button) findViewById(btidTake[i]);
-            buttonTake[i].setOnClickListener(cm);
-        }
 
-        Button eq = (Button) findViewById(R.id.txteq);
+        initView();
 
-        eq.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (flg == 0) {
-                    secondNumber = print.getText().toString();
-                    if (take == Counts.DIVIDE && secondNumber.equals("0")) {
-                        print.setText("0不能为被除数");
-                    } else {
-                        num = take.Values(fistNumber, secondNumber);
-                        fistNumber = num;
-                        secondNumber = "0";
-                        print.setText(num);
-                        flg = 1;
-                        gly.setBackgroundResource(R.drawable.jz);
-                    }
+    }
+
+    private void initView() {
+
+        btn_0 = (TextView) findViewById(R.id.btn_0);
+        btn_1 = (TextView) findViewById(R.id.btn_1);
+        btn_2 = (TextView) findViewById(R.id.btn_2);
+        btn_3 = (TextView) findViewById(R.id.btn_3);
+        btn_4 = (TextView) findViewById(R.id.btn_4);
+        btn_5 = (TextView) findViewById(R.id.btn_5);
+        btn_6 = (TextView) findViewById(R.id.btn_6);
+        btn_7 = (TextView) findViewById(R.id.btn_7);
+        btn_8 = (TextView) findViewById(R.id.btn_8);
+        btn_9 = (TextView) findViewById(R.id.btn_9);
+
+        btn_equal = (TextView) findViewById(R.id.btn_equal);
+        btn_del = (TextView) findViewById(R.id.btn_del);
+        btn_point = (TextView) findViewById(R.id.btn_point);
+        btn_clear = (TextView) findViewById(R.id.btn_clear);
+        btn_pluse_minus = (TextView) findViewById(R.id.btn_pluse_minus);
+        btn_divide = (TextView) findViewById(R.id.btn_divide);
+        btn_multiply = (TextView) findViewById(R.id.btn_multiply);
+        btn_minus = (TextView) findViewById(R.id.btn_minus);
+        btn_pluse = (TextView) findViewById(R.id.btn_pluse);
+        btn_complementation = (TextView) findViewById(R.id.btn_complementation);
+
+        id_input_edit = (TextView) findViewById(R.id.id_input_edit);
+        id_result_text = (TextView) findViewById(R.id.id_result_text);
+
+
+        btn_0.setOnClickListener(this);
+        btn_1.setOnClickListener(this);
+        btn_2.setOnClickListener(this);
+        btn_3.setOnClickListener(this);
+        btn_4.setOnClickListener(this);
+        btn_5.setOnClickListener(this);
+        btn_6.setOnClickListener(this);
+        btn_7.setOnClickListener(this);
+        btn_8.setOnClickListener(this);
+        btn_9.setOnClickListener(this);
+
+        btn_equal.setOnClickListener(this);
+        btn_del.setOnClickListener(this);
+        btn_point.setOnClickListener(this);
+        btn_clear.setOnClickListener(this);
+        btn_pluse_minus.setOnClickListener(this);
+        btn_divide.setOnClickListener(this);
+        btn_multiply.setOnClickListener(this);
+        btn_minus.setOnClickListener(this);
+        btn_pluse.setOnClickListener(this);
+        btn_complementation.setOnClickListener(this);
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        String str = id_input_edit.getText().toString();
+
+        switch (view.getId()) {
+
+            case R.id.btn_0:
+            case R.id.btn_1:
+            case R.id.btn_2:
+            case R.id.btn_3:
+            case R.id.btn_4:
+            case R.id.btn_5:
+            case R.id.btn_6:
+            case R.id.btn_7:
+            case R.id.btn_8:
+            case R.id.btn_9:
+            case R.id.btn_point:
+                id_input_edit.setText(str + ((TextView) view).getText() + "");
+                break;
+
+            case R.id.btn_del:
+                if (str != null && !str.equals("")) {
+                    id_input_edit.setText(str.substring(0, str.length() - 1));
+
                 }
-            }
-        });
-        Button cleargo = (Button) findViewById(R.id.cleargo);
-        cleargo.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                if (num.length() > 1) {
-                    num = num.substring(0, num.length() - 1);
-                } else {
-                    num = "0";
-                }
-                print.setText(num);
-            }
-        });
-        Button clear = (Button) findViewById(R.id.clear);
-        clear.setOnClickListener(new OnClickListener() {
+                break;
+            case R.id.btn_clear:
+                id_input_edit.setText("");
+                id_result_text.setText("");
+                break;
+            case R.id.btn_pluse:
+            case R.id.btn_minus:
+            case R.id.btn_multiply:
+            case R.id.btn_divide:
+                id_input_edit.setText(str +" "+((TextView) view).getText()+" ");
+                break;
 
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                num = "0";
-                fistNumber = secondNumber = num;
-                print.setText(num);
-                flg = 0;
-            }
-        });
-        for (int i = 0; i < btcl.length; i++) {
-            btcls[i] = (Button) findViewById(btcl[i]);
-            btcls[i].setOnClickListener(new OnTake());
+            case R.id.btn_equal:
+                getResult();
+                break;
+
         }
     }
 
-    // 给 EditText赋值
-    class GetNumber implements OnClickListener {
-
-        @Override
-        public void onClick(View v) {
-            // TODO Auto-generated method stub
-            if (flg == 1)
-                num = "0";
-            if (num.equals("0")) {
-                print.setText("");
-                num = v.getId() == R.id.txtspl ? "0" : "";
+    /**
+     * 获取计算结果
+     */
+    private void getResult() {
+        String exp = id_input_edit.getText().toString();
+        double r = 0;
+        int space = exp.indexOf(' ');//用于搜索空格位置
+        String s1 = exp.substring(0, space);//s1用于保存第一个运算数
+        String op = exp.substring(space + 1, space + 2);//op用于保存运算符
+        String s2 = exp.substring(space + 3);//s2用于保存第二个运算数
+        double arg1 = Double.parseDouble(s1);//将运算数从string转换为Single
+        double arg2 = Double.parseDouble(s2);
+        if(op.equals("＋")){
+            r = arg1 + arg2;
+        }else if(op.equals("－")){
+            r = arg1 - arg2;
+        }else if(op.equals("×")){
+            r = arg1 * arg2;
+        }else if(op.equals("÷")){
+            if (arg2 == 0)
+            {
+                r=0;
             }
-            String txt = ((Button) v).getText().toString();
-            boolean s = Pattern.matches("-*(\\d+).?(\\d)*", num + txt);
-            num = s ? (num + txt) : num;
-            gly.setBackgroundResource(R.drawable.js);
-            print.setText(num);
+            else
+            {
+                r = arg1 / arg2;
+            }
+        }
+        if(!s1.contains(".")&&!s2.contains(".")){
+            int result = (int)r;
+            id_result_text.setText(result+"");
+        }else{
+            id_result_text.setText(r+"");
         }
     }
-
-    // 根据条件计算
-    class Compute implements OnClickListener {
-
-        @Override
-        public void onClick(View arg0) {
-
-            fistNumber = print.getText().toString();
-            // TODO Auto-generated method stub
-            switch (arg0.getId()) {
-                case R.id.txttakesum:
-                    take = Counts.ADD;
-                    break;
-                case R.id.txtmin:
-                    take = Counts.MINUS;
-                    break;
-                case R.id.txtx:
-                    take = Counts.MULTIPLY;
-                    break;
-                case R.id.txtdivide:
-                    take = Counts.DIVIDE;
-                    break;
-            }
-            num = "0";
-            flg = 0;
-            gly.setBackgroundResource(R.drawable.js);
-        }
-
-    }
-
-    class OnTake implements OnClickListener {
-
-        @Override
-        public void onClick(View v) {
-            // TODO Auto-generated method stub
-            switch (v.getId()) {
-                case R.id.chars:
-                    num = "-" + num;
-                    break;
-                case R.id.charx:
-                    if(!num.equals("0"))
-                        num = BigDecimal.valueOf(1).divide(new BigDecimal(num),12,BigDecimal.ROUND_UP).stripTrailingZeros()
-                                .toString();
-                    break;
-                case R.id.txtb:
-                    num = new BigDecimal(num).divide(BigDecimal.valueOf(100),12,BigDecimal.ROUND_UP).stripTrailingZeros()
-                            .toString();
-                    break;
-                case R.id.txtv:
-                    Double numss = Math.sqrt(new BigDecimal(num).doubleValue());
-                    int stratindex=numss.toString().contains(".")?numss.toString().indexOf("."):0;
-                    num = numss.toString().length()>13?numss.toString().substring(0, 12+stratindex):numss.toString();
-            }
-            print.setText(num);
-            flg=0;
-            num = "0";
-
-        }
-
-    }
-
-
-
 }
