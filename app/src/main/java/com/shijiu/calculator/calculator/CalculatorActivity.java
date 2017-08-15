@@ -43,6 +43,8 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
     private TextView id_input_edit;
     private TextView id_result_text;
 
+    boolean needclear;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,6 +123,11 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
             case R.id.btn_8:
             case R.id.btn_9:
             case R.id.btn_point:
+                if (needclear){
+                    str = "";
+                    id_input_edit.setText("");
+                    id_result_text.setText("");
+                }
                 id_input_edit.setText(str + ((TextView) view).getText() + "");
                 break;
 
@@ -138,6 +145,10 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
             case R.id.btn_minus:
             case R.id.btn_multiply:
             case R.id.btn_divide:
+                if(needclear){
+                    id_input_edit.setText("");
+                    id_result_text.setText("");
+                }
                 id_input_edit.setText(str +" "+((TextView) view).getText()+" ");
                 break;
 
@@ -152,6 +163,7 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
      * 获取计算结果
      */
     private void getResult() {
+        needclear= true;
         String exp = id_input_edit.getText().toString();
         double r = 0;
         int space = exp.indexOf(' ');//用于搜索空格位置
