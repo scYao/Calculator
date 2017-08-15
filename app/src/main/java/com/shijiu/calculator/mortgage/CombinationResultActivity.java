@@ -1,5 +1,6 @@
 package com.shijiu.calculator.mortgage;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,7 +10,7 @@ import com.shijiu.calculator.R;
 import com.shijiu.calculator.bean.CombinationBean;
 import com.shijiu.calculator.bean.MortgageBean;
 
-public class CombinationResultActivity extends AppCompatActivity {
+public class CombinationResultActivity extends Activity {
     private TextView mortgage_total;
     private TextView rate_total;
     private TextView repay_total;
@@ -24,7 +25,7 @@ public class CombinationResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_combination_result);
         CombinationBean bean = (CombinationBean) this.getIntent().getSerializableExtra("bean");
-
+        Log.e(TAG, "onCreate: " +bean.toString());
         initView();
 
         initData(bean);

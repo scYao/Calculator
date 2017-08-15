@@ -11,7 +11,6 @@ public class MortgageBean implements Serializable{
     private String total_years;
     private String rate;
     private String flag;//0等额本息,1等额本金,3二者都有
-    private String tag;//0商业贷款,1公积金贷款,3二者组合
 
 
 
@@ -47,13 +46,6 @@ public class MortgageBean implements Serializable{
         this.flag = flag;
     }
 
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
 
     @Override
     public String toString() {

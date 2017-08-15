@@ -78,7 +78,7 @@ public class MortgageFragmentFund extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mortgage_fund,container, false);
         bean = new MortgageBean();
-        bean.setTag("1");
+        bean.setFlag("0");
         initView(view);
         initListener();
         initData();

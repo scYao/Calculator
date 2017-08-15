@@ -16,7 +16,6 @@ public class CombinationBean implements Serializable{
 
     private String total_years;
     private String flag;//0等额本息,1等额本金
-    private String tag;
 
     public String getMortgage_business() {
         return mortgage_business;
@@ -66,11 +65,5 @@ public class CombinationBean implements Serializable{
         this.flag = flag;
     }
 
-    public String getTag() {
-        return tag;
-    }
 
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
 }

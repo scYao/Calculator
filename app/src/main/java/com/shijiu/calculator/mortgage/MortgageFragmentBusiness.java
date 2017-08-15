@@ -78,7 +78,7 @@ public class MortgageFragmentBusiness extends Fragment {
         View view = inflater.inflate(R.layout.fragment_mortgage_business, container, false);
 
         bean = new MortgageBean();
-        bean.setTag("0");
+        bean.setFlag("0");
         initView(view);
         initListener();
         initData();
@@ -317,17 +317,21 @@ public class MortgageFragmentBusiness extends Fragment {
                     Toast.makeText(getActivity(), "请设置还款年限", Toast.LENGTH_SHORT).show();
                     return;
                 }else {
-                    if (bean.getFlag().equals("0")){
-                        Log.e(TAG, "onClick: "+bean.toString() );
-                        Intent intent = new Intent();
-                        intent.setClass(getActivity(),CalculateResultActivity.class);
-                        intent.putExtra("bean",bean);
-                        startActivity(intent);
-                    }else {
-                        Intent intent = new Intent(getActivity(),CalculateDetailActivity.class);
-                        intent.putExtra("bean",bean);
-                        startActivity(intent);
+
+                    if (bean.getFlag() != null){
+                        if (bean.getFlag().equals("0")){
+                            Log.e(TAG, "onClick: "+bean.toString() );
+                            Intent intent = new Intent();
+                            intent.setClass(getActivity(),CalculateResultActivity.class);
+                            intent.putExtra("bean",bean);
+                            startActivity(intent);
+                        }else {
+                            Intent intent = new Intent(getActivity(),CalculateDetailActivity.class);
+                            intent.putExtra("bean",bean);
+                            startActivity(intent);
+                        }
                     }
+
 
                 }
             }
