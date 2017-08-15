@@ -25,6 +25,7 @@ import com.shijiu.calculator.R;
 import com.shijiu.calculator.adapter.PopAdapter;
 import com.shijiu.calculator.bean.UnitBean;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,8 +60,8 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
     private TextView btn_point;
 
     private static final String TAG = "LengthActivity";
-    private static int unit1;
-    private static int unit2;
+    private static int unit1=1;
+    private static int unit2=1;
 
 
     @Override
@@ -197,24 +198,84 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void getResult(int i1, int i2) {
+
         double re = Double.parseDouble(input.getText().toString());
-        int abs = Math.abs(i1 - i2);
-        Log.e(TAG, "getResult: "+i1+i2+ abs );
-        if ((i1 - i2) < 0) {
-            double rs = re*abs*10;
-            result.setText(rs+"");
+
+        switch (i1) {
+            case 0:
+                double re0 = re / 1000;
+                toMeter(i2, re0);
+                break;
+            case 1:
+                double re1 = re;
+                toMeter(i2, re1);
+                break;
+            case 2:
+                double re2 = re * 10;
+                toMeter(i2, re2);
+                break;
+            case 3:
+                double re3 = re * 100;
+                toMeter(i2, re3);
+                break;
+            case 4:
+                double re4 = re * 1000;
+                toMeter(i2, re4);
+                break;
+            case 5:
+                double re5 = re * 10000;
+                toMeter(i2, re5);
+                break;
+            case 6:
+                double re6 = re * 100000;
+                toMeter(i2, re6);
+                break;
+            case 7:
+                double re7 = re * 1000000;
+                toMeter(i2, re7);
+                break;
         }
 
-        if ((i1 - i2) > 0) {
-            double rs = re/(abs*10);
-            result.setText(rs+"");
-        }
+    }
 
-        if ((i1 - i2) == 0) {
-            ;
-            result.setText(re+"");
+    private void toMeter(int i, double d) {
+
+        switch (i) {
+            case 0:
+                double d0 = d / 1000;
+                result.setText(d0 + "");
+                break;
+            case 1:
+                double d1 = d;
+                result.setText(d1 + "");
+                break;
+            case 2:
+                double d2 = d * 10;
+                result.setText(d2 + "");
+                break;
+            case 3:
+                double d3 = d * 100;
+                result.setText(d3 + "");
+                break;
+            case 4:
+                double d4 = d * 1000;
+                result.setText(d4 + "");
+                break;
+            case 5:
+                double d5 = d * 10000;
+                result.setText(d5 + "");
+                break;
+            case 6:
+                double d6 = d * 100000;
+                result.setText(d6 + "");
+                break;
+            case 7:
+                double d7 = d * 100000;
+                result.setText(d7 + "");
+                break;
         }
     }
+
 
     public class TakePhotoPopWin extends PopupWindow {
 

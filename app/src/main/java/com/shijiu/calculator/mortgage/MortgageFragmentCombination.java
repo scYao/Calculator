@@ -395,8 +395,9 @@ public class MortgageFragmentCombination extends Fragment {
                         intent.putExtra("bean", bean);
                         startActivity(intent);
                     } else {
+                        Log.e(TAG, "onClick: "+bean.toString() );
                         Intent intent = new Intent(getActivity(), CombinationDetailActivity.class);
-                        intent.putExtra("bean1", bean);
+                        intent.putExtra("bean", bean);
                         startActivity(intent);
                     }
 

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.shijiu.calculator.R;
 import com.shijiu.calculator.adapter.CalculatorAdapter;
 import com.shijiu.calculator.bean.CalculateBean;
+import com.shijiu.calculator.bean.CombinationBean;
 import com.shijiu.calculator.bean.MortgageBean;
 import com.shijiu.calculator.utils.AverageCapitalUtils;
 
@@ -26,6 +27,8 @@ public class CombinationDetailActivity extends AppCompatActivity {
     private ImageView back;
     private TextView title;
     private List<CalculateBean> beanList = new ArrayList<>();
+    private List<CalculateBean> beanList1 = new ArrayList<>();
+    private List<CalculateBean> beanList2 = new ArrayList<>();
     private CalculatorAdapter adapter;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -40,10 +43,10 @@ public class CombinationDetailActivity extends AppCompatActivity {
 
         initView();
 
-        MortgageBean bean = (MortgageBean) this.getIntent().getSerializableExtra("bean");
+        CombinationBean bean = (CombinationBean) this.getIntent().getSerializableExtra("bean");
+        Log.e(TAG, "onCreate: "+bean.toString());
 
         initData(bean);
-
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,12 +57,16 @@ public class CombinationDetailActivity extends AppCompatActivity {
         title.setText("还款明细");
     }
 
-    private void initData(MortgageBean bean) {
-        double total_mortgage = Double.parseDouble(bean.getTotal_mortgage());
-        double rate = Double.parseDouble(bean.getRate()) / 100;
+    private void initData(CombinationBean bean) {
+        double mortgage_business = Double.parseDouble(bean.getMortgage_business())*10000;
+        double mortgage_fund = Double.parseDouble(bean.getMortgage_fund())*10000;
+
+        double rate_business = Double.parseDouble(bean.getRate_business()) / 100;
+        double rate_fund = Double.parseDouble(bean.getRate_fund()) / 100;
+
         int months = (int) (Double.parseDouble(bean.getTotal_years()) * 12);
 
-        Map<Integer, Double> maps = AverageCapitalUtils.getPerMonthPrincipalInterest(total_mortgage, rate, months);
+        Map<Integer, Double> maps = AverageCapitalUtils.getPerMonthPrincipalInterest(mortgage_business, rate_business, months);
 
         Calendar calendar = Calendar.getInstance();
         for (Map.Entry<Integer, Double> entry : maps.entrySet()) {
@@ -72,7 +79,7 @@ public class CombinationDetailActivity extends AppCompatActivity {
             calendar.add(Calendar.MONTH, -1);
             double value = entry.getValue();
             bean1.setTotal(value+"");
-            double invest = AverageCapitalUtils.getPerMonthPrincipal(total_mortgage, months);
+            double invest = AverageCapitalUtils.getPerMonthPrincipal(mortgage_business, months);
             bean1.setInvest(invest+"");
 
             BigDecimal principalBigDecimal = new BigDecimal(invest);
@@ -82,10 +89,50 @@ public class CombinationDetailActivity extends AppCompatActivity {
 
             bean1.setRate(interestBigDecimal.doubleValue()+"");
 
-            beanList.add(bean1);
+            beanList1.add(bean1);
         }
 
-        Log.e(TAG, "initData: "+beanList );
+        Map<Integer, Double> maps1 = AverageCapitalUtils.getPerMonthPrincipalInterest(mortgage_fund, rate_fund, months);
+
+        Calendar calendar1 = Calendar.getInstance();
+        for (Map.Entry<Integer, Double> entry : maps1.entrySet()) {
+            CalculateBean bean2 = new CalculateBean();
+
+            int month = calendar1.get(Calendar.MONTH);
+            int year = calendar1.get(Calendar.YEAR);
+            bean2.setOrder_number(year+"."+month);
+
+            calendar.add(Calendar.MONTH, -1);
+            double value = entry.getValue();
+            bean2.setTotal(value+"");
+            double invest = AverageCapitalUtils.getPerMonthPrincipal(mortgage_fund, months);
+            bean2.setInvest(invest+"");
+
+            BigDecimal principalBigDecimal = new BigDecimal(invest);
+            BigDecimal principalInterestBigDecimal = new BigDecimal(entry.getValue());
+            BigDecimal interestBigDecimal = principalInterestBigDecimal.subtract(principalBigDecimal);
+            interestBigDecimal = interestBigDecimal.setScale(2, BigDecimal.ROUND_DOWN);
+
+            bean2.setRate(interestBigDecimal.doubleValue()+"");
+
+            beanList2.add(bean2);
+        }
+
+        for (int i = 0; i < beanList1.size(); i++) {
+            CalculateBean bean3 = new CalculateBean();
+            bean3.setOrder_number(beanList1.get(i).getOrder_number());
+
+            double total = Double.parseDouble(beanList1.get(i).getTotal())+ Double.parseDouble(beanList2.get(i).getTotal());
+            bean3.setTotal(total+"");
+
+            double invest =Double.parseDouble(beanList1.get(i).getInvest())+ Double.parseDouble(beanList2.get(i).getInvest());
+            bean3.setInvest(invest+"");
+
+            double rate =Double.parseDouble(beanList1.get(i).getRate())+ Double.parseDouble(beanList2.get(i).getRate());
+
+            bean3.setRate(rate+"");
+            beanList.add(bean3);
+        }
 
     }
 
