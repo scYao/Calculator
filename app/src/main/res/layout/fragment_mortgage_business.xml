@@ -13,7 +13,9 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="50dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
 
             <TextView
                 android:id="@+id/id_loan_amount"
@@ -53,9 +55,9 @@
                 android:layout_height="24dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:paddingRight="20dp"
                 android:paddingBottom="4dp"
                 android:paddingLeft="30dp"
+                android:paddingRight="20dp"
                 android:paddingTop="4dp"
                 android:src="@mipmap/arrow_right" />
         </RelativeLayout>
@@ -207,27 +209,27 @@
 
             <LinearLayout style="@style/dropDownList">
 
-              <RadioGroup
-                  android:id="@+id/id_radioGroup"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:gravity="right"
-                  android:orientation="horizontal">
+                <RadioGroup
+                    android:id="@+id/id_radioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:orientation="horizontal">
 
-                  <RadioButton
-                      android:id="@+id/id_radioButton1"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:checked="true"
-                      android:text="等额本息"/>
+                    <RadioButton
+                        android:id="@+id/id_radioButton1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="等额本息" />
 
-                  <RadioButton
-                      android:id="@+id/id_radioButton2"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="等额本金"/>
+                    <RadioButton
+                        android:id="@+id/id_radioButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="等额本金" />
 
-              </RadioGroup>
+                </RadioGroup>
             </LinearLayout>
 
 
@@ -285,7 +287,10 @@
                     android:textColor="@color/colorBlack" />
             </LinearLayout>
 
-            <LinearLayout style="@style/dropDownList">
+            <LinearLayout
+                style="@style/dropDownList"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
                 <TextView
                     style="@style/keyTextStyle1"

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -75,6 +76,7 @@ public class MortgageFragmentBusiness extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_mortgage_business, container, false);
 
         bean = new MortgageBean();
@@ -200,6 +202,26 @@ public class MortgageFragmentBusiness extends Fragment {
                     Log.e(TAG, "onTextChanged: sssssssssssssssss" );
                 }
 
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        loan_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (!charSequence.toString().equals("")){
+                    double result = Double.parseDouble(charSequence.toString());
+                    bean.setTotal_mortgage(result*10000+"");
+                }
             }
 
             @Override

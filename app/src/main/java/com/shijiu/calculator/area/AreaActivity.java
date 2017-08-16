@@ -26,6 +26,7 @@ import com.shijiu.calculator.adapter.PopAdapter;
 import com.shijiu.calculator.bean.UnitBean;
 import com.shijiu.calculator.length.LengthActivity;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -200,7 +201,7 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
         double re = Double.parseDouble(input.getText().toString());
         switch (i1) {
             case 0:
-                double re0 = re / 1000000;
+                double re0 = re * 1000000;
                 toMeter(i2, re0);
                 break;
             case 1:
@@ -208,15 +209,15 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
                 toMeter(i2, re1);
                 break;
             case 2:
-                double re2 = re * 100;
+                double re2 = re / 100;
                 toMeter(i2, re2);
                 break;
             case 3:
-                double re3 = re * 10000;
+                double re3 = re / 10000;
                 toMeter(i2, re3);
                 break;
             case 4:
-                double re4 = re * 1000000;
+                double re4 = re / 1000000;
                 toMeter(i2, re4);
                 break;
 //            case 5:
@@ -239,24 +240,24 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (i) {
             case 0:
-                double d0 = d / 1000000;
-                result.setText(d0 + "");
+                double d0 = d * 1000000;
+                result.setText(new BigDecimal(d0) + "");
                 break;
             case 1:
                 double d1 = d;
-                result.setText(d1 + "");
+                result.setText(new BigDecimal(d1) + "");
                 break;
             case 2:
-                double d2 = d * 100;
-                result.setText(d2 + "");
+                double d2 = d / 100;
+                result.setText(new BigDecimal(d2) + "");
                 break;
             case 3:
-                double d3 = d * 10000;
-                result.setText(d3 + "");
+                double d3 = d / 10000;
+                result.setText(new BigDecimal(d3) + "");
                 break;
             case 4:
-                double d4 = d * 1000000;
-                result.setText(d4 + "");
+                double d4 = d / 1000000;
+                result.setText(new BigDecimal(d4) + "");
                 break;
 //            case 5:
 //                double d5 = d * 10000;
@@ -370,11 +371,11 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
         private void initData() {
 //            beanList.add(new UnitBean("公顷 ha"));
 //            beanList.add(new UnitBean("公亩 are"));
-            beanList.add(new UnitBean("平方千米 km2"));
-            beanList.add(new UnitBean("平方米 m2"));
-            beanList.add(new UnitBean("平方分米 dm2"));
-            beanList.add(new UnitBean("平方厘米 cm2"));
-            beanList.add(new UnitBean("平方毫米 mm2"));
+            beanList.add(new UnitBean("平方千米 k㎡"));
+            beanList.add(new UnitBean("平方米 ㎡"));
+            beanList.add(new UnitBean("平方分米 d㎡"));
+            beanList.add(new UnitBean("平方厘米 c㎡"));
+            beanList.add(new UnitBean("平方毫米 m㎡"));
 //            beanList.add(new UnitBean("平方微米 um2"));
 //            beanList.add(new UnitBean("平方纳米 nm2"));
 //            beanList.add(new UnitBean("平方皮米 pm2"));

@@ -42,7 +42,6 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
     private TextView btn_point;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,16 +68,17 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String s =number.getText().toString();
+                String s = number.getText().toString();
 
 
-                if (number != null && !s.equals("")){
+                if (number != null && !s.equals("")) {
                     double d = Double.parseDouble(s);
-                    Log.e(TAG, "onTextChanged: "+d );
+                    Log.e(TAG, "onTextChanged: " + d);
 
                     capital.setText(Tool.change(d));
-                }else {
-                    capital.setText("");
+                } else {
+//                    number.setHint("0");
+                    capital.setText("零元整");
                 }
 
             }
@@ -149,14 +149,20 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_8:
             case R.id.btn_9:
             case R.id.btn_point:
-                number.setText(in + ((TextView) view).getText() + "");
+                if (in.length() >=1 && in.substring(0,1).equals("0")){
+                    number.setText("");
+
+                }else {
+                    number.setText(in + ((TextView) view).getText() + "");
+                }
+
                 break;
 
             case R.id.btn_del:
                 if (in != null && !in.equals("")) {
                     number.setText(in.substring(0, in.length() - 1));
 
-                }else {
+                } else {
                     capital.setText("");
                 }
                 break;

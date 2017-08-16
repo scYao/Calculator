@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shijiu.calculator.R;
@@ -45,10 +46,24 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
 
     boolean needclear;
 
+    private ImageView back;
+    private TextView title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
+
+        back = (ImageView) findViewById(R.id.id_back);
+        title = (TextView) findViewById(R.id.id_title);
+        back.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        title.setText("计算器");
 
         initView();
 

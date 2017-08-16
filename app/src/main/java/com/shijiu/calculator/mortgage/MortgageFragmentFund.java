@@ -208,6 +208,27 @@ public class MortgageFragmentFund extends Fragment {
             }
         });
 
+        loan_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (!charSequence.toString().equals("")){
+                    double result = Double.parseDouble(charSequence.toString());
+                    bean.setTotal_mortgage(result*10000+"");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+
         hide_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -258,7 +279,7 @@ public class MortgageFragmentFund extends Fragment {
                     double d2 = Double.parseDouble(Util.getValue(interest_rate2));
                     double result = d1*d2;
                     interest_rate3.setText(result+"%");
-                    current_rate.setText("当前年限基准利率：商业"+result+"%");
+                    current_rate.setText("当前年限基准利率：公积金"+result+"%");
                     if(result> 0){
 
                         bean.setRate(result+"");

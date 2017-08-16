@@ -26,6 +26,11 @@
             android:layout_marginRight="20dp"
             android:layout_width="match_parent"
             android:inputType="numberDecimal"
+            android:textColor="@color/colorSelectText"
+            android:hint="0"
+            android:paddingRight="4dp"
+            android:textColorHint="@color/colorSelectText"
+            android:gravity="right|center_vertical"
             android:background="@drawable/edit_shape"
             android:layout_height="40dp" />
 
@@ -43,6 +48,9 @@
 
 
         <TextView
+            android:paddingRight="4dp"
+            android:text="零元整"
+            android:gravity="right|center_vertical"
             android:layout_marginLeft="20dp"
             android:id="@+id/id_capital"
             android:layout_marginRight="20dp"
