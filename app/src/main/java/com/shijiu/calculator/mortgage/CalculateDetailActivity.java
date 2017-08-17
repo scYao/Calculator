@@ -60,6 +60,7 @@ public class CalculateDetailActivity extends AppCompatActivity {
         Map<Integer, Double> maps = AverageCapitalUtils.getPerMonthPrincipalInterest(total_mortgage, rate, months);
 
         Calendar calendar = Calendar.getInstance();
+        calendar.set(bean.getYear(), bean.getMonth(), bean.getDay());
         for (Map.Entry<Integer, Double> entry : maps.entrySet()) {
             CalculateBean bean1 = new CalculateBean();
 
@@ -67,7 +68,7 @@ public class CalculateDetailActivity extends AppCompatActivity {
             int year = calendar.get(Calendar.YEAR);
             bean1.setOrder_number(year+"."+month);
 
-            calendar.add(Calendar.MONTH, -1);
+            calendar.add(Calendar.MONTH, 1);
             double value = entry.getValue();
             bean1.setTotal(value+"");
             double invest = AverageCapitalUtils.getPerMonthPrincipal(total_mortgage, months);

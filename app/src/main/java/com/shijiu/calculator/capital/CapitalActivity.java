@@ -163,12 +163,12 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
                     number.setText(in.substring(0, in.length() - 1));
 
                 } else {
-                    capital.setText("");
+                    capital.setText("零元整");
                 }
                 break;
             case R.id.btn_equal:
                 number.setText("");
-                capital.setText("");
+                capital.setText("零元整");
                 break;
 
         }

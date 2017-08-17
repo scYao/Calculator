@@ -27,6 +27,7 @@ import com.shijiu.calculator.bean.UnitBean;
 import com.shijiu.calculator.length.LengthActivity;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -237,27 +238,28 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void toMeter(int i, double d) {
+        DecimalFormat decimalFormat = new DecimalFormat();
 
         switch (i) {
             case 0:
-                double d0 = d * 1000000;
-                result.setText(new BigDecimal(d0) + "");
+                double d0 = d / 1000000;
+                result.setText(decimalFormat.format(d0));
                 break;
             case 1:
                 double d1 = d;
-                result.setText(new BigDecimal(d1) + "");
+                result.setText(decimalFormat.format(d1));
                 break;
             case 2:
-                double d2 = d / 100;
-                result.setText(new BigDecimal(d2) + "");
+                double d2 = d * 100;
+                result.setText(decimalFormat.format(d2));
                 break;
             case 3:
-                double d3 = d / 10000;
-                result.setText(new BigDecimal(d3) + "");
+                double d3 = d * 10000;
+                result.setText(decimalFormat.format(d3));
                 break;
             case 4:
-                double d4 = d / 1000000;
-                result.setText(new BigDecimal(d4) + "");
+                double d4 = d * 1000000;
+                result.setText(decimalFormat.format(d4));
                 break;
 //            case 5:
 //                double d5 = d * 10000;

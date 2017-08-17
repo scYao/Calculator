@@ -40,9 +40,9 @@ public class CalculatorAdapter extends RecyclerView.Adapter<CalculatorAdapter.Vi
        CalculateBean bean = beanList.get(position);
         if (bean != null) {
             holder.order_number.setText(bean.getOrder_number());
-            holder.total.setText(bean.getTotal());
-            holder.invest.setText(bean.getInvest());
-            holder.rate.setText(bean.getRate());
+            holder.total.setText(String.format("%.2f", Double.parseDouble(bean.getTotal())));
+            holder.invest.setText(String.format("%.2f", Double.parseDouble(bean.getInvest())));
+            holder.rate.setText(String.format("%.2f", Double.parseDouble(bean.getRate())));
         }
 
     }

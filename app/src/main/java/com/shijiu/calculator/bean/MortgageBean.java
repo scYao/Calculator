@@ -11,6 +11,10 @@ public class MortgageBean implements Serializable{
     private String total_years;
     private String rate;
     private String flag;//0等额本息,1等额本金,3二者都有
+    private String repay_date;
+    private int year;
+    private int month;
+    private int day;
 
 
 
@@ -46,6 +50,37 @@ public class MortgageBean implements Serializable{
         this.flag = flag;
     }
 
+    public String getRepay_date() {
+        return repay_date;
+    }
+
+    public void setRepay_date(String repay_date) {
+        this.repay_date = repay_date;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
 
     @Override
     public String toString() {

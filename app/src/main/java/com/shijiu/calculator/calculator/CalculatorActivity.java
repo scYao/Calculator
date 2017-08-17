@@ -49,6 +49,8 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
     private ImageView back;
     private TextView title;
 
+    private static final String TAG = "CalculatorActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,12 +140,12 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
             case R.id.btn_8:
             case R.id.btn_9:
             case R.id.btn_point:
-                if (needclear){
+                if (needclear) {
                     str = "";
                     id_input_edit.setText("");
                     id_result_text.setText("");
                 }
-                id_input_edit.setText(str + ((TextView) view).getText() + "");
+                id_input_edit.setText(str + ((TextView) view).getText());
                 break;
 
             case R.id.btn_del:
@@ -154,18 +156,22 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
                 break;
             case R.id.btn_clear:
                 id_input_edit.setText("");
-                id_result_text.setText("");
+                id_result_text.setText("0");
+                needclear = false;
                 break;
             case R.id.btn_pluse:
             case R.id.btn_minus:
             case R.id.btn_multiply:
             case R.id.btn_divide:
-                if(needclear){
+            case R.id.btn_complementation:
+                if (needclear) {
                     id_input_edit.setText("");
                     id_result_text.setText("");
+
                 }
-                id_input_edit.setText(str +" "+((TextView) view).getText()+" ");
+                id_input_edit.setText(str + " " + ((TextView) view).getText() + " ");
                 break;
+
 
             case R.id.btn_equal:
                 getResult();
@@ -178,36 +184,59 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
      * 获取计算结果
      */
     private void getResult() {
-        needclear= true;
+        Log.e(TAG, "getResult: wodddddddddddddddddddddddddd");
+        needclear = true;
         String exp = id_input_edit.getText().toString();
         double r = 0;
         int space = exp.indexOf(' ');//用于搜索空格位置
-        String s1 = exp.substring(0, space);//s1用于保存第一个运算数
-        String op = exp.substring(space + 1, space + 2);//op用于保存运算符
-        String s2 = exp.substring(space + 3);//s2用于保存第二个运算数
-        double arg1 = Double.parseDouble(s1);//将运算数从string转换为Single
-        double arg2 = Double.parseDouble(s2);
-        if(op.equals("＋")){
-            r = arg1 + arg2;
-        }else if(op.equals("－")){
-            r = arg1 - arg2;
-        }else if(op.equals("×")){
-            r = arg1 * arg2;
-        }else if(op.equals("÷")){
-            if (arg2 == 0)
-            {
-                r=0;
+
+        String s2 = null;
+        double arg2;
+        if (space == -1){
+            String s1 = exp.substring(0);
+            id_result_text.setText(s1);
+        }else {
+            String s1 = exp.substring(0, space);//s1用于保存第一个运算数
+            String op = exp.substring(space + 1, space + 2);//op用于保存运算符
+            double  arg1 = Double.parseDouble(s1);//将运算数从string转换为Single;
+             s2 = exp.substring(space + 3);//s2用于保存第二个运算数
+
+
+            if (s2.equals("")) {
+                arg2 = 0;
+            } else {
+                arg2 = Double.parseDouble(s2);
             }
-            else
-            {
-                r = arg1 / arg2;
+
+            if (op.equals("+")) {
+                r = arg1 + arg2;
+            } else if (op.equals("-")) {
+                r = arg1 - arg2;
+            } else if (op.equals("×")) {
+                r = arg1 * arg2;
+            } else if (op.equals("÷")) {
+                if (arg2 == 0) {
+                    r = 0;
+                } else {
+                    r = arg1 / arg2;
+                }
+            } else if (op.equals("%")) {
+                if (arg2 == 0) {
+                    r = 0;
+                } else {
+                    r = arg1 % arg2;
+                }
+            }
+
+            if (!s1.contains(".") && !s2.contains(".")) {
+                int result = (int) r;
+                id_result_text.setText(result + "");
+
+            } else {
+                id_result_text.setText(r + "");
             }
         }
-        if(!s1.contains(".")&&!s2.contains(".")){
-            int result = (int)r;
-            id_result_text.setText(result+"");
-        }else{
-            id_result_text.setText(r+"");
-        }
+
+
     }
 }

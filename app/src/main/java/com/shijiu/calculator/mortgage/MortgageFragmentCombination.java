@@ -1,5 +1,6 @@
 package com.shijiu.calculator.mortgage;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -86,6 +88,7 @@ public class MortgageFragmentCombination extends Fragment {
         View view = inflater.inflate(R.layout.fragment_mortgage_combination, container, false);
         bean = new CombinationBean();
         bean.setFlag("0");
+        bean.setTotal_years("1");
         initView(view);
         initListener();
         initData();
@@ -96,18 +99,40 @@ public class MortgageFragmentCombination extends Fragment {
     private void initData() {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
+        int month = calendar.get(Calendar.MONTH)+1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         current_date.setText(year + "年" + month + "月" + day + "日");
+        bean.setRepay_date(year+"年"+month+ "月"+ day+"日");
+        bean.setYear(year);
+        bean.setMonth(month);
+        bean.setDay(day);
     }
 
     private void initListener() {
+
+        current_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar calendar = Calendar.getInstance();
+                new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        current_date.setText(i+"年"+(i1+1)+"月"+i2+"日");
+                        bean.setRepay_date(i+"年"+(i1+1)+"月"+i2+"日");
+                        bean.setYear(i);
+                        bean.setMonth(i1+1);
+                        bean.setDay(i2);
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
                 if (i == radioButton1.getId()) {
-                    check_text.setText("等额本息（每月递减还款）");
+                    check_text.setText("等额本息（每月等额还款）");
                     bean.setFlag("0");
                 }
 
@@ -272,6 +297,9 @@ public class MortgageFragmentCombination extends Fragment {
                         Log.e(TAG, "onTextChanged: " + bean.toString());
                     }
 
+                }else {
+                    interest_rate3.setText(0+"%");
+                    current_rate.setText("当前年限基准利率：商业"+0+"%");
                 }
             }
 
@@ -301,6 +329,9 @@ public class MortgageFragmentCombination extends Fragment {
                         bean.setRate_business(result + "");
                         Log.e(TAG, "onTextChanged: " + bean.toString());
                     }
+                }else {
+                    interest_rate3.setText(0+"%");
+                    current_rate.setText("当前年限基准利率：商业"+0+"%");
                 }
             }
 
@@ -330,6 +361,9 @@ public class MortgageFragmentCombination extends Fragment {
                         Log.e(TAG, "onTextChanged: " + bean.toString());
                     }
 
+                }else {
+                    interest_rate6.setText(0 + "%");
+                    current_rate.setText("当前年限基准利率：商业" + 0 + "%");
                 }
             }
 
@@ -359,6 +393,9 @@ public class MortgageFragmentCombination extends Fragment {
                         bean.setRate_fund(result + "");
                         Log.e(TAG, "onTextChanged: " + bean.toString());
                     }
+                }else {
+                    interest_rate6.setText(0 + "%");
+                    current_rate.setText("当前年限基准利率：商业" + 0 + "%");
                 }
             }
 

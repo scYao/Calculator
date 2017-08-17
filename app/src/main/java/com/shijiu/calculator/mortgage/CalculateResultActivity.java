@@ -3,6 +3,8 @@ package com.shijiu.calculator.mortgage;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shijiu.calculator.R;
@@ -17,11 +19,26 @@ public class CalculateResultActivity extends Activity {
     private TextView month_repay;
     private static final String TAG = "CalculateResultActivity";
 
+    private ImageView back;
+    private TextView title;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculate_result);
         MortgageBean bean = (MortgageBean) this.getIntent().getSerializableExtra("bean");
+
+        back = findViewById(R.id.id_back);
+        title = findViewById(R.id.id_title);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        title.setText("计算结果");
 
         Log.e(TAG, "onCreate: " + bean.toString());
         initView();
@@ -34,15 +51,16 @@ public class CalculateResultActivity extends Activity {
         double rate = Double.parseDouble(bean.getRate()) / 12 / 100;
         double years = Double.parseDouble(bean.getTotal_years());
         mortgage_total.setText(total_mortgage / 10000 + "万");
-        total_years.setText(years + "年" + "(" + years * 12 + "月）");
+        total_years.setText((int) years+"年("+(int) years*12+"月)");
 
         double d1 = Math.pow((1 + rate), years * 12);
         double d2 = Math.pow((1 + rate), years * 12) - 1;
         double month_money = (total_mortgage * rate * d1) / d2;
-        month_repay.setText(month_money + "元");
-        repay_total.setText(month_money * years * 12 + "");
-        double d3 = month_money * years * 12 - total_mortgage;
-        rate_total.setText(d3 + "");
+        double round_month_money = Double.parseDouble(String.format("%.2f", month_money));
+        month_repay.setText(round_month_money + "元");
+        repay_total.setText(round_month_money * years * 12 + "");
+        double d3 = round_month_money * years * 12 - total_mortgage;
+        rate_total.setText(String.format("%.2f", d3) + "");
     }
 
     private void initView() {

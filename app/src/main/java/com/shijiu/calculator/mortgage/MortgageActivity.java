@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class MortgageActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_mortgage);
 
         initView();
@@ -50,6 +52,46 @@ public class MortgageActivity extends AppCompatActivity implements View.OnClickL
         viewPager = (ViewPager) findViewById(R.id.id_viewpager);
         fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), fragmentList);
         viewPager.setAdapter(fragmentAdapter);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+//                int currentItem = viewPager.getCurrentItem();
+                resetBackground();
+                switch (position){
+                    case 0:
+                        viewPager.setCurrentItem(0);
+                        business.setTextColor(ContextCompat.getColor(MortgageActivity.this,R.color.colorSelectText));
+                        business.setBackgroundResource(R.drawable.textview_select_shape);
+                        break;
+
+                    case 1:
+                        viewPager.setCurrentItem(1);
+                        fund.setTextColor(ContextCompat.getColor(MortgageActivity.this,R.color.colorSelectText));
+                        fund.setBackgroundResource(R.drawable.textview_select_shape);
+                        break;
+
+                    case 2:
+                        viewPager.setCurrentItem(2);
+                        combination.setTextColor(ContextCompat.getColor(MortgageActivity.this,R.color.colorSelectText));
+                        combination.setBackgroundResource(R.drawable.textview_select_shape);
+                        break;
+
+
+                }
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         business = (TextView) findViewById(R.id.id_business);
         fund = (TextView) findViewById(R.id.id_fund);

@@ -9,9 +9,10 @@ public class Tool {
     private static final String UNIT = "万千佰拾亿千佰拾万千佰拾元角分";
     private static final String DIGIT = "零壹贰叁肆伍陆柒捌玖";
     private static final double MAX_VALUE = 9999999999999.99D;
+//    private static final double MAX_VALUE = 999999999999999.9999D;
     public static String change(double v) {
         if (v < 0 || v > MAX_VALUE){
-            return "参数非法!";
+            return "数值过大";
         }
         long l = Math.round(v * 100);
         if (l == 0){

@@ -26,6 +26,8 @@ import com.shijiu.calculator.adapter.PopAdapter;
 import com.shijiu.calculator.bean.UnitBean;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -199,6 +201,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
 
     public void getResult(int i1, int i2) {
 
+
         double re = Double.parseDouble(input.getText().toString());
 
         switch (i1) {
@@ -211,7 +214,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 toMeter(i2, re1);
                 break;
             case 2:
-                double re2 = re / 10;
+                double re2 = re /10;
                 toMeter(i2, re2);
                 break;
             case 3:
@@ -239,41 +242,50 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void toMeter(int i, double d) {
+        DecimalFormat decimalFormat= new DecimalFormat();
 
         switch (i) {
             case 0:
-                double d0 = d * 1000;
-                result.setText(d0 + "");
+                double d0 = d / 1000;
+                result.setText(decimalFormat.format(d0));
                 break;
             case 1:
                 double d1 = d;
-                result.setText(d1 + "");
+                result.setText(decimalFormat.format(d1));
                 break;
             case 2:
-                double d2 = d / 10;
-                result.setText(d2 + "");
+                double d2 = d * 10;
+                result.setText(decimalFormat.format(d2));
                 break;
             case 3:
-                double d3 = d / 100;
-                result.setText(d3 + "");
+                double d3 = d * 100;
+                result.setText(decimalFormat.format(d3));
                 break;
             case 4:
-                double d4 = d / 1000;
-                result.setText(d4 + "");
+                double d4 = d * 1000;
+                result.setText(decimalFormat.format(d4));
                 break;
             case 5:
-                double d5 = d / 10000;
-                result.setText(d5 + "");
+                double d5 = d * 10000;
+                result.setText(decimalFormat.format(d5));
                 break;
             case 6:
-                double d6 = d / 100000;
-                result.setText(d6 + "");
+                double d6 = d * 100000;
+                result.setText(decimalFormat.format(d6));
                 break;
             case 7:
-                double d7 = d / 100000;
-                result.setText(d7 + "");
+                double d7 = d * 100000;
+                result.setText(decimalFormat.format(d7));
                 break;
         }
+    }
+
+    private static String big(double d) {
+        NumberFormat nf = NumberFormat.getInstance();
+        // 是否以逗号隔开, 默认true以逗号隔开,如[123,456,789.128]
+        nf.setGroupingUsed(false);
+        // 结果未做任何处理
+        return nf.format(d);
     }
 
 
@@ -376,7 +388,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             beanList.add(new UnitBean("米 m"));
             beanList.add(new UnitBean("分米 dm"));
             beanList.add(new UnitBean("厘米 cm"));
-            beanList.add(new UnitBean("毫米米 mm"));
+            beanList.add(new UnitBean("毫米 mm"));
             beanList.add(new UnitBean("微米 um"));
             beanList.add(new UnitBean("纳米 nm"));
             beanList.add(new UnitBean("皮米 pm"));

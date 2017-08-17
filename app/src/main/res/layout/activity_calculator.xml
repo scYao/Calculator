@@ -30,57 +30,57 @@
         android:layout_height="50dp" />
 
     <LinearLayout
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
-        android:layout_marginTop="2dp"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginTop="2dp"
         android:background="@color/colorWhite"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp">
 
         <TextView
             android:id="@+id/btn_clear"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="@drawable/edit_shape"
+            android:gravity="center"
             android:text="C"
-            android:textSize="16sp"
             android:textColor="@color/colorSelectText"
-            android:layout_height="match_parent" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/btn_pluse_minus"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="@drawable/edit_shape"
+            android:gravity="center"
             android:text="+/-"
-            android:textSize="16sp"
             android:textColor="@color/colorBlack"
-            android:layout_height="match_parent" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/btn_del"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="@drawable/edit_shape"
+            android:gravity="center"
             android:text="del"
-            android:textSize="16sp"
             android:textColor="@color/colorBlack"
-            android:layout_height="match_parent" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/btn_divide"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="@drawable/edit_shape"
+            android:gravity="center"
             android:text="÷"
-            android:textSize="16sp"
             android:textColor="@color/colorBlack"
-            android:layout_height="match_parent" />
+            android:textSize="16sp" />
 
 
     </LinearLayout>

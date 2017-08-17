@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:paddingBottom="20dp"
     android:layout_height="match_parent">
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -158,6 +156,7 @@
                 <TextView
                     android:id="@+id/id_down_payments_value"
                     style="@style/valueEditStyle"
+                    android:layout_marginLeft="10dp"
                     android:layout_width="60dp" />
 
                 <TextView
@@ -203,7 +202,7 @@
                     style="@style/keyTextStyle1"
                     android:layout_width="match_parent"
                     android:gravity="right|center_vertical"
-                    android:text="等额本金（每月递减还款）"
+                    android:text="等额本金（每月等额还款）"
                     android:textColor="@color/colorSelectText" />
             </LinearLayout>
 
@@ -245,7 +244,7 @@
                     style="@style/keyTextStyle1"
                     android:layout_width="match_parent"
                     android:gravity="right|center_vertical"
-                    android:text="0年(0个月)"
+                    android:text="1年(12个月)"
                     android:textColor="@color/colorBlack" />
             </LinearLayout>
 
@@ -258,15 +257,14 @@
 
                 <SeekBar
                     android:id="@+id/id_seekBar"
-                    android:layout_width="300dp"
+                    android:layout_width="270dp"
                     android:layout_height="wrap_content"
                     android:max="30"
-                    android:progress="0" />
+                    android:progress="1" />
 
                 <TextView
                     style="@style/keyTextStyle1"
-                    android:layout_width="20dp"
-                    android:gravity="right|center_vertical"
+                    android:layout_width="36dp"
                     android:text="30年"
                     android:textColor="@color/colorBlack" />
             </LinearLayout>
@@ -284,7 +282,10 @@
                     style="@style/valueTextStyle1"
                     android:layout_width="match_parent"
                     android:gravity="right|center_vertical"
-                    android:textColor="@color/colorBlack" />
+                    android:textColor="@color/colorBlack"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@mipmap/arrow_right"/>
+
             </LinearLayout>
 
             <LinearLayout
@@ -295,12 +296,13 @@
                 <TextView
                     style="@style/keyTextStyle1"
                     android:layout_width="100dp"
-                    android:text="房贷利率" />
+                    android:text="贷款利率" />
 
                 <EditText
                     android:id="@+id/id_interest_rate1"
                     style="@style/valueEditStyle1"
                     android:layout_width="40dp"
+                    android:maxLength="4"
                     android:inputType="numberDecimal" />
 
                 <TextView
@@ -313,6 +315,7 @@
                     android:id="@+id/id_interest_rate2"
                     style="@style/valueEditStyle1"
                     android:layout_width="40dp"
+                    android:maxLength="4"
                     android:inputType="numberDecimal" />
 
                 <TextView
@@ -324,7 +327,7 @@
                 <TextView
                     android:id="@+id/id_interest_rate3"
                     style="@style/valueTextStyle1"
-                    android:layout_width="50dp"
+                    android:layout_width="wrap_content"
                     android:text="0%" />
             </LinearLayout>
 

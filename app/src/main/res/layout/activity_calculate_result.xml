@@ -7,6 +7,8 @@
     android:background="@color/colorBackground"
     tools:context="com.shijiu.calculator.mortgage.CalculateResultActivity">
 
+    <include layout="@layout/title_layout"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:background="@color/colorWhite"
