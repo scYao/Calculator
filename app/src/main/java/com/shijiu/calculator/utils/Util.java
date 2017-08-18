@@ -4,10 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shijiu.calculator.bean.MortgageBean;
 
 import java.io.Serializable;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by yao on 2017/8/9.
@@ -63,5 +66,31 @@ public class Util {
         }else {
             return true;
         }
+    }
+
+
+    public static void showMyToast(final Toast toast, final int cnt) {
+        final Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                toast.show();
+            }
+        }, 0, 3500);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                toast.cancel();
+                timer.cancel();
+            }
+        }, cnt );
+    }
+
+
+    public static String doubleTrans(double d){
+        if(Math.round(d)-d==0){
+            return String.valueOf((long)d);
+        }
+        return String.valueOf(d);
     }
 }

@@ -25,7 +25,7 @@
             android:layout_weight="1"
             android:layout_height="40dp"
             android:gravity="center"
-            android:text="米"
+            android:text="米 m"
             android:paddingRight="10dp"
             android:drawableRight="@mipmap/arrow_right"/>
 
@@ -36,6 +36,7 @@
             android:layout_weight="3"
             android:editable="false"
             android:text=""
+            android:maxLength="20"
             android:background="@drawable/edit_shape"
             android:layout_height="40dp" />
 
@@ -57,7 +58,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="米"
+            android:text="米 m"
             android:paddingRight="10dp"
             android:drawableRight="@mipmap/arrow_right"/>
 

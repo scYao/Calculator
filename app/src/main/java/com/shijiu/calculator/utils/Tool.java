@@ -12,7 +12,7 @@ public class Tool {
 //    private static final double MAX_VALUE = 999999999999999.9999D;
     public static String change(double v) {
         if (v < 0 || v > MAX_VALUE){
-            return "数值过大";
+            return "输入值最大为9999999999999.99";
         }
         long l = Math.round(v * 100);
         if (l == 0){
@@ -41,7 +41,7 @@ public class Tool {
                 rs = rs + DIGIT.charAt(ch - '0') + UNIT.charAt(j);
             }
         }
-        if (!rs.endsWith("分")) {
+        if (!rs.endsWith("分") && !rs.endsWith("角")) {
             rs = rs + "整";
         }
         rs = rs.replaceAll("亿万", "亿");

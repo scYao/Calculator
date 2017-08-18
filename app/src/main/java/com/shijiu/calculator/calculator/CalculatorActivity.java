@@ -2,6 +2,8 @@ package com.shijiu.calculator.calculator;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -120,6 +122,25 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
         btn_minus.setOnClickListener(this);
         btn_pluse.setOnClickListener(this);
         btn_complementation.setOnClickListener(this);
+
+        id_input_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.toString().equals("")) {
+                    id_result_text.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
 
@@ -156,7 +177,7 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
                 break;
             case R.id.btn_clear:
                 id_input_edit.setText("");
-                id_result_text.setText("0");
+                id_result_text.setText("");
                 needclear = false;
                 break;
             case R.id.btn_pluse:
@@ -167,9 +188,21 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
                 if (needclear) {
                     id_input_edit.setText("");
                     id_result_text.setText("");
-
                 }
-                id_input_edit.setText(str + " " + ((TextView) view).getText() + " ");
+
+
+
+                if (!str.equals("")){
+                    id_input_edit.setText(str + " " + ((TextView) view).getText() + " ");
+                    String exp = id_input_edit.getText().toString();
+                    int space = exp.indexOf(' ');//用于搜索空格位置
+                    String s1 = exp.substring(0, space);//s1用于保存第一个运算数
+                    double arg1 = Double.parseDouble(s1);//将运算数从string转换为Single;
+                    double r = arg1 / 100;
+
+                    id_result_text.setText(r + "");
+                }
+
                 break;
 
 
@@ -192,14 +225,14 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
 
         String s2 = null;
         double arg2;
-        if (space == -1){
+        if (space == -1) {
             String s1 = exp.substring(0);
             id_result_text.setText(s1);
-        }else {
+        } else {
             String s1 = exp.substring(0, space);//s1用于保存第一个运算数
             String op = exp.substring(space + 1, space + 2);//op用于保存运算符
-            double  arg1 = Double.parseDouble(s1);//将运算数从string转换为Single;
-             s2 = exp.substring(space + 3);//s2用于保存第二个运算数
+            double arg1 = Double.parseDouble(s1);//将运算数从string转换为Single;
+            s2 = exp.substring(space + 3);//s2用于保存第二个运算数
 
 
             if (s2.equals("")) {

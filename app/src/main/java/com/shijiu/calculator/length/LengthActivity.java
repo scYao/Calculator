@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.shijiu.calculator.R;
 import com.shijiu.calculator.adapter.PopAdapter;
 import com.shijiu.calculator.bean.UnitBean;
+import com.shijiu.calculator.utils.Util;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -64,6 +65,10 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
     private static final String TAG = "LengthActivity";
     private static int unit1 = 1;
     private static int unit2 = 1;
+
+
+    private List<UnitBean> beanList1 = new ArrayList<>();
+    private List<UnitBean> beanList2 = new ArrayList<>();
 
 
     @Override
@@ -131,19 +136,19 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.id_spinner1:
-                    showPopFormBottom(1);
+                    showPopFormBottom(1,beanList1);
                     break;
 
                 case R.id.id_spinner2:
-                    showPopFormBottom(2);
+                    showPopFormBottom(2,beanList2);
                     break;
             }
         }
     };
 
 
-    public void showPopFormBottom(int i) {
-        TakePhotoPopWin takePhotoPopWin = new TakePhotoPopWin(this, i);
+    public void showPopFormBottom(int i,List<UnitBean> beanList) {
+        TakePhotoPopWin takePhotoPopWin = new TakePhotoPopWin(this, i,beanList);
 //        设置Popupwindow显示位置（从底部弹出）
         takePhotoPopWin.showAtLocation(findViewById(R.id.main_view), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
         params = getWindow().getAttributes();
@@ -179,9 +184,21 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btn_7:
             case R.id.btn_8:
             case R.id.btn_9:
-            case R.id.btn_point:
-                input.setText(in + ((TextView) view).getText() + "");
+                if (in.length() == 1 && in.equals("0")) {
+                    input.setText(((TextView) view).getText() + "");
+                } else {
+                    input.setText(in + ((TextView) view).getText() + "");
+                }
+
                 getResult(unit1, unit2);
+                break;
+            case R.id.btn_point:
+                if (!in.equals("")) {
+
+                    input.setText(in + ((TextView) view).getText() + "");
+                    getResult(unit1, unit2);
+                }
+
                 break;
 
             case R.id.btn_del:
@@ -214,7 +231,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 toMeter(i2, re1);
                 break;
             case 2:
-                double re2 = re /10;
+                double re2 = re / 10;
                 toMeter(i2, re2);
                 break;
             case 3:
@@ -242,7 +259,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void toMeter(int i, double d) {
-        DecimalFormat decimalFormat= new DecimalFormat();
+        DecimalFormat decimalFormat = new DecimalFormat();
 
         switch (i) {
             case 0:
@@ -293,16 +310,19 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
 
 
         private View view;
-        private List<UnitBean> beanList = new ArrayList<>();
+
         private PopAdapter adapter;
         private RecyclerView recylerView;
         private TextView btn_cancel;
         private RecyclerView.LayoutManager layoutManager;
 
 
-        public TakePhotoPopWin(Context mContext, final int i) {
+        public TakePhotoPopWin(Context mContext, final int i, final List<UnitBean> beanList) {
             view = LayoutInflater.from(mContext).inflate(R.layout.pop_window, null);
-            initData();
+
+            if (beanList.size() ==0){
+                initData();
+            }
 
 
             btn_cancel = view.findViewById(R.id.id_cancel);
@@ -311,21 +331,39 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             adapter = new PopAdapter(beanList, mContext);
             recylerView.setLayoutManager(layoutManager);
             recylerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
 
+            Log.e(TAG, "TakePhotoPopWin: "+beanList.toString() );
             adapter.setOnItemClickListener(new PopAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
                     if (i == 1) {
                         unit1 = position;
                         spinner1.setText(beanList.get(position).getUnit());
-                        beanList.get(position).setImgae(R.mipmap.tick);
-                        adapter.notifyDataSetChanged();
+                        for (int j = 0; j <beanList.size() ; j++) {
+                            if (j==position){
+                                beanList.get(j).setImgae(R.mipmap.tick);
+                                adapter.notifyItemChanged(position);
+                            }else {
+                                beanList.get(j).setImgae(null);
+                            }
+                        }
+
+                        Log.e(TAG, "onItemClick: "+beanList.toString() );
+
+
                         dismiss();
                     } else {
                         unit2 = position;
                         spinner2.setText(beanList.get(position).getUnit());
-                        beanList.get(position).setImgae(R.mipmap.tick);
-                        adapter.notifyDataSetChanged();
+                        for (int j = 0; j <beanList.size() ; j++) {
+                            if (j==position){
+                                beanList.get(j).setImgae(R.mipmap.tick);
+                                adapter.notifyItemChanged(position);
+                            }else {
+                                beanList.get(j).setImgae(null);
+                            }
+                        }
                         dismiss();
                     }
 
@@ -384,14 +422,23 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         private void initData() {
-            beanList.add(new UnitBean("千米 km"));
-            beanList.add(new UnitBean("米 m"));
-            beanList.add(new UnitBean("分米 dm"));
-            beanList.add(new UnitBean("厘米 cm"));
-            beanList.add(new UnitBean("毫米 mm"));
-            beanList.add(new UnitBean("微米 um"));
-            beanList.add(new UnitBean("纳米 nm"));
-            beanList.add(new UnitBean("皮米 pm"));
+            beanList1.add(new UnitBean("千米 km"));
+            beanList1.add(new UnitBean("米 m"));
+            beanList1.add(new UnitBean("分米 dm"));
+            beanList1.add(new UnitBean("厘米 cm"));
+            beanList1.add(new UnitBean("毫米 mm"));
+            beanList1.add(new UnitBean("微米 um"));
+            beanList1.add(new UnitBean("纳米 nm"));
+            beanList1.add(new UnitBean("皮米 pm"));
+
+            beanList2.add(new UnitBean("千米 km"));
+            beanList2.add(new UnitBean("米 m"));
+            beanList2.add(new UnitBean("分米 dm"));
+            beanList2.add(new UnitBean("厘米 cm"));
+            beanList2.add(new UnitBean("毫米 mm"));
+            beanList2.add(new UnitBean("微米 um"));
+            beanList2.add(new UnitBean("纳米 nm"));
+            beanList2.add(new UnitBean("皮米 pm"));
 //            beanList.add(new UnitBean("海里 nmi"));
         }
     }

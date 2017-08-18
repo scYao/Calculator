@@ -215,14 +215,14 @@ public class MortgageFragmentBusiness extends Fragment {
                         down_payments_value.setText((int) result + "");
                         double rs = price - result;
                         need_loan.setText(rs + "元");
-                        loan_edit.setText(rs / 10000 + "");
-                        if (rs > 0) {
-                            bean.setTotal_mortgage(rs + "");
-                        }
-                    }else {
+//                        loan_edit.setText(rs / 10000 + "");
+//                        if (rs > 0) {
+//                            bean.setTotal_mortgage(rs + "");
+//                        }
+                    } else {
                         down_payments_value.setText("");
                         need_loan.setText(0 + "元");
-                        loan_edit.setText("");
+//                        loan_edit.setText("");
                     }
 
 
@@ -364,28 +364,37 @@ public class MortgageFragmentBusiness extends Fragment {
             public void onClick(View view) {
                 Log.e(TAG, "onClick: " + bean.toString());
                 if (bean.getTotal_mortgage() == null) {
-                    Toast.makeText(getActivity(), "没有贷款总额", Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(getActivity(), "没有贷款总额", Toast.LENGTH_LONG);
+                    Util.showMyToast(toast, 1000);
                     return;
                 } else if (bean.getRate() == null) {
-                    Toast.makeText(getActivity(), "请填写利率", Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(getActivity(), "请填写利率", Toast.LENGTH_SHORT);
+                    Util.showMyToast(toast, 1000);
                     return;
                 } else if (bean.getTotal_years() == null) {
-                    Toast.makeText(getActivity(), "请设置还款年限", Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(getActivity(), "请设置还款年限", Toast.LENGTH_SHORT);
+                    Util.showMyToast(toast, 1000);
                     return;
                 } else {
 
                     if (bean.getFlag() != null) {
-                        if (bean.getFlag().equals("0")) {
-                            Log.e(TAG, "onClick: " + bean.toString());
-                            Intent intent = new Intent();
-                            intent.setClass(getActivity(), CalculateResultActivity.class);
-                            intent.putExtra("bean", bean);
-                            startActivity(intent);
-                        } else {
-                            Intent intent = new Intent(getActivity(), CalculateDetailActivity.class);
-                            intent.putExtra("bean", bean);
-                            startActivity(intent);
-                        }
+//                        if (bean.getFlag().equals("0")) {
+//                            Log.e(TAG, "onClick: " + bean.toString());
+//                            Intent intent = new Intent();
+//                            intent.setClass(getActivity(), CalculateResultActivity.class);
+//                            intent.putExtra("bean", bean);
+//                            startActivity(intent);
+//                        } else {
+//                            Intent intent = new Intent(getActivity(), CalculateDetailActivity.class);
+//                            intent.putExtra("bean", bean);
+//                            startActivity(intent);
+//                        }
+
+                        Log.e(TAG, "onClick: " + bean.toString());
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(), CalculateResultActivity.class);
+                        intent.putExtra("bean", bean);
+                        startActivity(intent);
                     }
 
 

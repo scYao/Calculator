@@ -2,6 +2,7 @@ package com.shijiu.calculator.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class PopAdapter  extends RecyclerView.Adapter<PopAdapter.ViewHolder> imp
     private LayoutInflater inflater;
 
     private OnItemClickListener mOnItemClickListener = null;
+    private static final String TAG = "PopAdapter";
 
     @Override
     public void onClick(View view) {
@@ -61,6 +63,7 @@ public class PopAdapter  extends RecyclerView.Adapter<PopAdapter.ViewHolder> imp
         UnitBean bean = beanList.get(position);
         holder.unit.setText(bean.getUnit());
         if (bean.getImgae() != null){
+            Log.e(TAG, "onBindViewHolder: "+bean.toString());
             holder.imageView.setImageResource(bean.getImgae());
         }
         //将position保存在itemView的Tag中，以便点击时进行获取

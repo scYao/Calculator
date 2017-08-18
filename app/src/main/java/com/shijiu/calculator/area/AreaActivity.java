@@ -25,6 +25,7 @@ import com.shijiu.calculator.R;
 import com.shijiu.calculator.adapter.PopAdapter;
 import com.shijiu.calculator.bean.UnitBean;
 import com.shijiu.calculator.length.LengthActivity;
+import com.shijiu.calculator.utils.Util;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -63,6 +64,8 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
     private static int unit2=1;
 
     private static final String TAG = "AreaActivity";
+    private List<UnitBean> beanList1 = new ArrayList<>();
+    private List<UnitBean> beanList2 = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,18 +134,18 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.id_spinner1:
-                    showPopFormBottom(1);
+                    showPopFormBottom(1,beanList1);
                     break;
 
                 case R.id.id_spinner2:
-                    showPopFormBottom(2);
+                    showPopFormBottom(2,beanList2);
                     break;
             }
         }
     };
 
-    public void showPopFormBottom(int i) {
-        AreaActivity.TakePhotoPopWin takePhotoPopWin = new AreaActivity.TakePhotoPopWin(this, i);
+    public void showPopFormBottom(int i,List<UnitBean> beanList) {
+        AreaActivity.TakePhotoPopWin takePhotoPopWin = new AreaActivity.TakePhotoPopWin(this, i,beanList);
 //        设置Popupwindow显示位置（从底部弹出）
         takePhotoPopWin.showAtLocation(findViewById(R.id.main_view1), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
         params = getWindow().getAttributes();
@@ -179,9 +182,20 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_7:
             case R.id.btn_8:
             case R.id.btn_9:
-            case R.id.btn_point:
-                input.setText(in + ((TextView) view).getText() + "");
+                if (in.length() == 1 && in.equals("0")) {
+                    input.setText(((TextView) view).getText() + "");
+                } else {
+                    input.setText(in + ((TextView) view).getText() + "");
+                }
                 getResult(unit1, unit2);
+                break;
+            case R.id.btn_point:
+                if (!in.equals("")) {
+
+                    input.setText(in + ((TextView) view).getText() + "");
+                    getResult(unit1, unit2);
+                }
+
                 break;
 
             case R.id.btn_del:
@@ -280,16 +294,18 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
 
 
         private View view;
-        private List<UnitBean> beanList = new ArrayList<>();
+
         private PopAdapter adapter;
         private RecyclerView recylerView;
         private TextView btn_cancel;
         private RecyclerView.LayoutManager layoutManager;
 
 
-        public TakePhotoPopWin(Context mContext, final int i) {
+        public TakePhotoPopWin(Context mContext, final int i,final List<UnitBean> beanList) {
             view = LayoutInflater.from(mContext).inflate(R.layout.pop_window, null);
-            initData();
+            if (beanList.size() ==0){
+                initData();
+            }
 
 
             btn_cancel = view.findViewById(R.id.id_cancel);
@@ -373,11 +389,17 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
         private void initData() {
 //            beanList.add(new UnitBean("公顷 ha"));
 //            beanList.add(new UnitBean("公亩 are"));
-            beanList.add(new UnitBean("平方千米 k㎡"));
-            beanList.add(new UnitBean("平方米 ㎡"));
-            beanList.add(new UnitBean("平方分米 d㎡"));
-            beanList.add(new UnitBean("平方厘米 c㎡"));
-            beanList.add(new UnitBean("平方毫米 m㎡"));
+            beanList1.add(new UnitBean("平方千米 km²"));
+            beanList1.add(new UnitBean("平方米 m²"));
+            beanList1.add(new UnitBean("平方分米 dm²"));
+            beanList1.add(new UnitBean("平方厘米 cm²"));
+            beanList1.add(new UnitBean("平方毫米 mm²"));
+
+            beanList2.add(new UnitBean("平方千米 km²"));
+            beanList2.add(new UnitBean("平方米 m²"));
+            beanList2.add(new UnitBean("平方分米 dm²"));
+            beanList2.add(new UnitBean("平方厘米 cm²"));
+            beanList2.add(new UnitBean("平方毫米 mm²"));
 //            beanList.add(new UnitBean("平方微米 um2"));
 //            beanList.add(new UnitBean("平方纳米 nm2"));
 //            beanList.add(new UnitBean("平方皮米 pm2"));

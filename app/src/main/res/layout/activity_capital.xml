@@ -26,6 +26,7 @@
             android:layout_marginRight="20dp"
             android:layout_width="match_parent"
             android:inputType="numberDecimal"
+            android:maxLength="13"
             android:textColor="@color/colorSelectText"
             android:hint="0"
             android:paddingRight="4dp"

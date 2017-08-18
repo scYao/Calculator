@@ -99,11 +99,11 @@ public class MortgageFragmentCombination extends Fragment {
     private void initData() {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH)+1;
+        int month = calendar.get(Calendar.MONTH) + 1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         current_date.setText(year + "年" + month + "月" + day + "日");
-        bean.setRepay_date(year+"年"+month+ "月"+ day+"日");
+        bean.setRepay_date(year + "年" + month + "月" + day + "日");
         bean.setYear(year);
         bean.setMonth(month);
         bean.setDay(day);
@@ -118,10 +118,10 @@ public class MortgageFragmentCombination extends Fragment {
                 new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        current_date.setText(i+"年"+(i1+1)+"月"+i2+"日");
-                        bean.setRepay_date(i+"年"+(i1+1)+"月"+i2+"日");
+                        current_date.setText(i + "年" + (i1 + 1) + "月" + i2 + "日");
+                        bean.setRepay_date(i + "年" + (i1 + 1) + "月" + i2 + "日");
                         bean.setYear(i);
-                        bean.setMonth(i1+1);
+                        bean.setMonth(i1 + 1);
                         bean.setDay(i2);
                     }
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -240,18 +240,18 @@ public class MortgageFragmentCombination extends Fragment {
             }
         });
 
-//        hide_list.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (isHidden){
-//                    drop_down_list.setVisibility(View.GONE);
-//                    isHidden = false;
-//                }else {
-//                    drop_down_list.setVisibility(View.VISIBLE);
-//                    isHidden = true;
-//                }
-//            }
-//        });
+        hide_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isHidden){
+                    drop_down_list.setVisibility(View.GONE);
+                    isHidden = false;
+                }else {
+                    drop_down_list.setVisibility(View.VISIBLE);
+                    isHidden = true;
+                }
+            }
+        });
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -297,9 +297,9 @@ public class MortgageFragmentCombination extends Fragment {
                         Log.e(TAG, "onTextChanged: " + bean.toString());
                     }
 
-                }else {
-                    interest_rate3.setText(0+"%");
-                    current_rate.setText("当前年限基准利率：商业"+0+"%");
+                } else {
+                    interest_rate3.setText(0 + "%");
+                    current_rate.setText("当前年限基准利率：商业" + 0 + "%");
                 }
             }
 
@@ -329,9 +329,9 @@ public class MortgageFragmentCombination extends Fragment {
                         bean.setRate_business(result + "");
                         Log.e(TAG, "onTextChanged: " + bean.toString());
                     }
-                }else {
-                    interest_rate3.setText(0+"%");
-                    current_rate.setText("当前年限基准利率：商业"+0+"%");
+                } else {
+                    interest_rate3.setText(0 + "%");
+                    current_rate.setText("当前年限基准利率：商业" + 0 + "%");
                 }
             }
 
@@ -361,7 +361,7 @@ public class MortgageFragmentCombination extends Fragment {
                         Log.e(TAG, "onTextChanged: " + bean.toString());
                     }
 
-                }else {
+                } else {
                     interest_rate6.setText(0 + "%");
                     current_rate.setText("当前年限基准利率：商业" + 0 + "%");
                 }
@@ -393,7 +393,7 @@ public class MortgageFragmentCombination extends Fragment {
                         bean.setRate_fund(result + "");
                         Log.e(TAG, "onTextChanged: " + bean.toString());
                     }
-                }else {
+                } else {
                     interest_rate6.setText(0 + "%");
                     current_rate.setText("当前年限基准利率：商业" + 0 + "%");
                 }
@@ -410,30 +410,30 @@ public class MortgageFragmentCombination extends Fragment {
             public void onClick(View view) {
                 Log.e(TAG, "onClick: " + bean.toString());
                 if (bean.getMortgage_business() == null) {
-                    Toast.makeText(getActivity(), "请填写商业贷款金额", Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(getActivity(), "请填写商业贷款金额", Toast.LENGTH_LONG);
+                    Util.showMyToast(toast, 1000);
                     return;
                 } else if (bean.getMortgage_fund() == null) {
-                    Toast.makeText(getActivity(), "请填写公积金贷款金额", Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(getActivity(), "请填写公积金贷款金额", Toast.LENGTH_LONG);
+                    Util.showMyToast(toast, 1000);
                     return;
                 } else if (bean.getTotal_years() == null) {
-                    Toast.makeText(getActivity(), "请设置还款年限", Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(getActivity(), "请设置还款年限", Toast.LENGTH_SHORT);
+                    Util.showMyToast(toast, 1000);
                     return;
                 } else if (bean.getRate_business() == null) {
-                    Toast.makeText(getActivity(), "请填写商业贷款利率", Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(getActivity(), "请填写商业贷款利率", Toast.LENGTH_SHORT);
+                    Util.showMyToast(toast, 1000);
                     return;
                 } else if (bean.getRate_fund() == null) {
-                    Toast.makeText(getActivity(), "请填写公积金贷款利率", Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(getActivity(), "请填写公积金贷款利率", Toast.LENGTH_SHORT);
+                    Util.showMyToast(toast, 1000);
                     return;
                 } else {
-                    if (bean.getFlag().equals("0")) {
+                    if (bean.getFlag()!= null) {
                         Log.e(TAG, "onClick: " + bean.toString());
                         Intent intent = new Intent();
                         intent.setClass(getActivity(), CombinationResultActivity.class);
-                        intent.putExtra("bean", bean);
-                        startActivity(intent);
-                    } else {
-                        Log.e(TAG, "onClick: "+bean.toString() );
-                        Intent intent = new Intent(getActivity(), CombinationDetailActivity.class);
                         intent.putExtra("bean", bean);
                         startActivity(intent);
                     }

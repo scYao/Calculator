@@ -13,11 +13,13 @@ import com.shijiu.calculator.R;
 import com.shijiu.calculator.adapter.CalculatorAdapter;
 import com.shijiu.calculator.bean.CalculateBean;
 import com.shijiu.calculator.bean.MortgageBean;
+import com.shijiu.calculator.utils.AverageCapitalPlusInterestUtils;
 import com.shijiu.calculator.utils.AverageCapitalUtils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,8 +41,13 @@ public class CalculateDetailActivity extends AppCompatActivity {
         initView();
 
         MortgageBean bean = (MortgageBean) this.getIntent().getSerializableExtra("bean");
+        if (bean.getFlag().equals("0")){
+            initData1(bean);
+        }else {
+            initData(bean);
+        }
 
-        initData(bean);
+
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +57,48 @@ public class CalculateDetailActivity extends AppCompatActivity {
             }
         });
         title.setText("还款明细");
+    }
+
+    private void initData1(MortgageBean bean) {
+        double total_mortgage = Double.parseDouble(bean.getTotal_mortgage());
+        double rate = Double.parseDouble(bean.getRate()) / 100;
+        int months = (int) (Double.parseDouble(bean.getTotal_years()) * 12);
+
+        //每月偿还本金和利息
+        double total = AverageCapitalPlusInterestUtils.getPerMonthPrincipalInterest(total_mortgage, rate, months);
+
+        //每月偿还利息
+        Map<Integer, BigDecimal> maps = AverageCapitalPlusInterestUtils.getPerMonthInterest(total_mortgage, rate, months);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(bean.getYear(), bean.getMonth(), bean.getDay());
+        for (Map.Entry<Integer, BigDecimal> entry : maps.entrySet()) {
+            CalculateBean bean1 = new CalculateBean();
+
+            int month = calendar.get(Calendar.MONTH);
+            int year = calendar.get(Calendar.YEAR);
+            if (month == 0) {
+                year = year - 1;
+                month = 12;
+            }
+            bean1.setOrder_number(year + "." + month);
+
+            bean1.setTotal(total+"");//总额
+
+            //每月偿还利息
+            calendar.add(Calendar.MONTH, 1);
+            BigDecimal value = entry.getValue();
+            bean1.setRate(value + "");
+
+            double monthRate = rate / 12;
+
+            BigDecimal monthIncome = new BigDecimal(total_mortgage)
+                    .multiply(new BigDecimal(monthRate * Math.pow(1 + monthRate, months)))
+                    .divide(new BigDecimal(Math.pow(1 + monthRate, months) - 1), 2, BigDecimal.ROUND_DOWN);
+            bean1.setInvest(monthIncome.subtract(entry.getValue())+"");//偿还本金
+
+            beanList.add(bean1);
+        }
     }
 
     private void initData(MortgageBean bean) {
@@ -66,6 +115,10 @@ public class CalculateDetailActivity extends AppCompatActivity {
 
             int month = calendar.get(Calendar.MONTH);
             int year = calendar.get(Calendar.YEAR);
+            if (month ==0){
+                year =year -1;
+                month = 12;
+            }
             bean1.setOrder_number(year+"."+month);
 
             calendar.add(Calendar.MONTH, 1);

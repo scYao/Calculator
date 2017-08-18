@@ -15,7 +15,9 @@
         android:textSize="18sp"
         android:textColor="@color/colorBlack"
         android:hint="0"
+        android:editable="false"
         android:paddingRight="4dp"
+        android:maxLength="15"
         android:gravity="right|center_vertical"
         android:background="@drawable/edit_shape"/>
 
@@ -24,7 +26,8 @@
         android:id="@+id/id_result_text"
         android:gravity="right|center_vertical"
         android:textColor="@color/colorSelectText"
-        android:text="0"
+        android:hint="0"
+        android:textColorHint="@color/colorSelectText"
         android:textSize="16sp"
         android:layout_width="match_parent"
         android:layout_height="50dp" />

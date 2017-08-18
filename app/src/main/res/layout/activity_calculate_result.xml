@@ -7,7 +7,7 @@
     android:background="@color/colorBackground"
     tools:context="com.shijiu.calculator.mortgage.CalculateResultActivity">
 
-    <include layout="@layout/title_layout"/>
+    <include layout="@layout/title"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,6 +15,7 @@
         android:layout_height="80dp">
 
         <TextView
+            android:id="@+id/id_first_month"
             android:textSize="16sp"
             android:text="每月还款金额"
             android:layout_width="0dp"

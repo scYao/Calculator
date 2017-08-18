@@ -27,4 +27,12 @@ public class UnitBean {
     public void setImgae(Integer imgae) {
         this.imgae = imgae;
     }
+
+    @Override
+    public String toString() {
+        return "UnitBean{" +
+                "unit='" + unit + '\'' +
+                ", imgae=" + imgae +
+                '}';
+    }
 }

@@ -136,6 +136,8 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
         String in = number.getText().toString();
 
         Log.e(TAG, "onClick: sssssssssssssssssss" + in);
+
+
         switch (view.getId()) {
 
             case R.id.btn_0:
@@ -148,13 +150,42 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_7:
             case R.id.btn_8:
             case R.id.btn_9:
-            case R.id.btn_point:
-                if (in.length() >=1 && in.substring(0,1).equals("0")){
-                    number.setText("");
+
+                if (in.contains(".")){
+                    int point = in.indexOf(".");
+                    String s = in.substring(point);
+                    if (s.length() >2){
+                        return;
+                    }
+                }
+
+                if (in.length() ==1 && in.substring(0,1).equals("0")){
+                    number.setText(((TextView) view).getText());
 
                 }else {
                     number.setText(in + ((TextView) view).getText() + "");
                 }
+
+                break;
+            case R.id.btn_point:
+
+                if (in.contains(".")){
+                    int point = in.indexOf(".");
+                    String s = in.substring(point);
+                    if (s.length() >2){
+                        return;
+                    }
+                }
+
+                if (in.length() >0){
+//                    if (in.length() ==1 && in.substring(0,1).equals("0")){
+//                        number.setText(((TextView) view).getText());
+//
+//                    }else {
+                        number.setText(in + ((TextView) view).getText() + "");
+//                    }
+                }
+
 
                 break;
 
