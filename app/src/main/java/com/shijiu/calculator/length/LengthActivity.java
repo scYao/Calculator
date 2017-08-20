@@ -136,19 +136,19 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.id_spinner1:
-                    showPopFormBottom(1,beanList1);
+                    showPopFormBottom(1, beanList1);
                     break;
 
                 case R.id.id_spinner2:
-                    showPopFormBottom(2,beanList2);
+                    showPopFormBottom(2, beanList2);
                     break;
             }
         }
     };
 
 
-    public void showPopFormBottom(int i,List<UnitBean> beanList) {
-        TakePhotoPopWin takePhotoPopWin = new TakePhotoPopWin(this, i,beanList);
+    public void showPopFormBottom(int i, List<UnitBean> beanList) {
+        TakePhotoPopWin takePhotoPopWin = new TakePhotoPopWin(this, i, beanList);
 //        设置Popupwindow显示位置（从底部弹出）
         takePhotoPopWin.showAtLocation(findViewById(R.id.main_view), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
         params = getWindow().getAttributes();
@@ -220,10 +220,12 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
 
 
         double re = Double.parseDouble(input.getText().toString());
+        Log.e(TAG, "getResult: " + re);
 
         switch (i1) {
             case 0:
                 double re0 = re * 1000;
+//                s re0 = Cac1(re, "1000");
                 toMeter(i2, re0);
                 break;
             case 1:
@@ -232,26 +234,34 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case 2:
                 double re2 = re / 10;
+//                double re2 = Cac2(re, "10");
                 toMeter(i2, re2);
                 break;
             case 3:
                 double re3 = re / 100;
+//                double re3 = Cac2(re, "100");
                 toMeter(i2, re3);
                 break;
             case 4:
                 double re4 = re / 1000;
+//                double re4 = Cac2(re, "1000");
                 toMeter(i2, re4);
                 break;
             case 5:
-                double re5 = re / 10000;
+                double re5 = re / 1000000;
+//                double re5 = Cac2(re, "1000000");
                 toMeter(i2, re5);
                 break;
             case 6:
-                double re6 = re / 100000;
+                double re6 = re / 1000000000;
+//                double re6 = Cac2(re, "1000000000");
                 toMeter(i2, re6);
                 break;
             case 7:
-                double re7 = re / 1000000;
+                BigDecimal bigDecimal1 = new BigDecimal(re);
+                BigDecimal bigDecimal2 = new BigDecimal("1000000000000");
+
+                double re7 = bigDecimal1.divide(bigDecimal2).doubleValue();
                 toMeter(i2, re7);
                 break;
         }
@@ -259,11 +269,11 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void toMeter(int i, double d) {
-        DecimalFormat decimalFormat = new DecimalFormat();
-
+        DecimalFormat decimalFormat = (DecimalFormat) DecimalFormat.getInstance();
         switch (i) {
             case 0:
-                double d0 = d / 1000;
+//                double d0 = d / 1000;
+                String d0 = Cac2(d, "1000");
                 result.setText(decimalFormat.format(d0));
                 break;
             case 1:
@@ -271,30 +281,57 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 result.setText(decimalFormat.format(d1));
                 break;
             case 2:
-                double d2 = d * 10;
-                result.setText(decimalFormat.format(d2));
+
+//                double d2 = d * 10;
+                String d2 = Cac1(d, "10");
+                Log.e(TAG, "toMeter: ," + d + d2);
+
+                result.setText(d2);
                 break;
             case 3:
-                double d3 = d * 100;
+//                double d3 = d * 100;
+                String d3 = Cac1(d, "100");
                 result.setText(decimalFormat.format(d3));
                 break;
             case 4:
-                double d4 = d * 1000;
+//                double d4 = d * 1000;
+                String d4 = Cac1(d, "1000");
                 result.setText(decimalFormat.format(d4));
                 break;
             case 5:
-                double d5 = d * 10000;
+//                double d5 = d * 1000000;
+                String d5 = Cac1(d, "1000000");
                 result.setText(decimalFormat.format(d5));
                 break;
             case 6:
-                double d6 = d * 100000;
+//                double d6 = d * 1000000000;
+                String d6 = Cac1(d, "1000000000");
                 result.setText(decimalFormat.format(d6));
                 break;
             case 7:
-                double d7 = d * 100000;
+                BigDecimal bigDecimal1 = new BigDecimal(d);
+                BigDecimal bigDecimal2 = new BigDecimal("1000000000000");
+
+                double d7 = bigDecimal1.multiply(bigDecimal2).doubleValue();
                 result.setText(decimalFormat.format(d7));
                 break;
         }
+    }
+
+    private String Cac1(double d, String s) {
+        BigDecimal bigDecimal1 = new BigDecimal(d);
+        BigDecimal bigDecimal2 = new BigDecimal(s);
+        Double d1 = bigDecimal1.multiply(bigDecimal2).doubleValue();
+        String str = new BigDecimal(d1.toString()).toString();
+        return str;
+    }
+
+    private String Cac2(double d, String s) {
+        BigDecimal bigDecimal1 = new BigDecimal(d);
+        BigDecimal bigDecimal2 = new BigDecimal(s);
+        Double d1 = bigDecimal1.divide(bigDecimal2).doubleValue();
+        String str = new BigDecimal(d1.toString()).toString();
+        return str;
     }
 
     private static String big(double d) {
@@ -320,7 +357,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
         public TakePhotoPopWin(Context mContext, final int i, final List<UnitBean> beanList) {
             view = LayoutInflater.from(mContext).inflate(R.layout.pop_window, null);
 
-            if (beanList.size() ==0){
+            if (beanList.size() == 0) {
                 initData();
             }
 
@@ -333,34 +370,34 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             recylerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
 
-            Log.e(TAG, "TakePhotoPopWin: "+beanList.toString() );
+            Log.e(TAG, "TakePhotoPopWin: " + beanList.toString());
             adapter.setOnItemClickListener(new PopAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
                     if (i == 1) {
                         unit1 = position;
                         spinner1.setText(beanList.get(position).getUnit());
-                        for (int j = 0; j <beanList.size() ; j++) {
-                            if (j==position){
+                        for (int j = 0; j < beanList.size(); j++) {
+                            if (j == position) {
                                 beanList.get(j).setImgae(R.mipmap.tick);
                                 adapter.notifyItemChanged(position);
-                            }else {
+                            } else {
                                 beanList.get(j).setImgae(null);
                             }
                         }
 
-                        Log.e(TAG, "onItemClick: "+beanList.toString() );
+                        Log.e(TAG, "onItemClick: " + beanList.toString());
 
 
                         dismiss();
                     } else {
                         unit2 = position;
                         spinner2.setText(beanList.get(position).getUnit());
-                        for (int j = 0; j <beanList.size() ; j++) {
-                            if (j==position){
+                        for (int j = 0; j < beanList.size(); j++) {
+                            if (j == position) {
                                 beanList.get(j).setImgae(R.mipmap.tick);
                                 adapter.notifyItemChanged(position);
-                            }else {
+                            } else {
                                 beanList.get(j).setImgae(null);
                             }
                         }

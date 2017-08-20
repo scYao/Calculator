@@ -27,6 +27,7 @@ import com.shijiu.calculator.bean.CombinationBean;
 import com.shijiu.calculator.bean.MortgageBean;
 import com.shijiu.calculator.utils.Util;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 
 /**
@@ -87,8 +88,10 @@ public class MortgageFragmentCombination extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mortgage_combination, container, false);
         bean = new CombinationBean();
-        bean.setFlag("0");
+        bean.setFlag("1");
         bean.setTotal_years("1");
+        bean.setRate_business("49");
+        bean.setRate_fund("32.5");
         initView(view);
         initListener();
         initData();
@@ -159,7 +162,9 @@ public class MortgageFragmentCombination extends Fragment {
 
                         if (d1 > 0 && d2 > 0) {
                             double result = d1 * d2;
-                            total_price.setText(result + "元");
+                            BigDecimal bigDecimal = new BigDecimal(result);
+                            String str = bigDecimal.toString();
+                            total_price.setText(str);
                         }
                     }
                 }
@@ -192,7 +197,9 @@ public class MortgageFragmentCombination extends Fragment {
 
                         if (d1 > 0 && d2 > 0) {
                             double result = d1 * d2;
-                            total_price.setText(result + "");
+                            BigDecimal bigDecimal = new BigDecimal(result);
+                            String str = bigDecimal.toString();
+                            total_price.setText(str);
                         }
                     }
                 }
@@ -243,10 +250,10 @@ public class MortgageFragmentCombination extends Fragment {
         hide_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isHidden){
+                if (isHidden) {
                     drop_down_list.setVisibility(View.GONE);
                     isHidden = false;
-                }else {
+                } else {
                     drop_down_list.setVisibility(View.VISIBLE);
                     isHidden = true;
                 }
@@ -301,6 +308,13 @@ public class MortgageFragmentCombination extends Fragment {
                     interest_rate3.setText(0 + "%");
                     current_rate.setText("当前年限基准利率：商业" + 0 + "%");
                 }
+
+                if (bean.getMortgage_business() == null || bean.getMortgage_fund() == null
+                        || bean.getRate_business() == null || bean.getRate_fund() == null) {
+                    start_calculate.setBackgroundResource(R.drawable.text_shape_un);
+                } else {
+                    start_calculate.setBackgroundResource(R.drawable.text_shape);
+                }
             }
 
             @Override
@@ -332,6 +346,13 @@ public class MortgageFragmentCombination extends Fragment {
                 } else {
                     interest_rate3.setText(0 + "%");
                     current_rate.setText("当前年限基准利率：商业" + 0 + "%");
+                }
+
+                if (bean.getMortgage_business() == null || bean.getMortgage_fund() == null
+                        || bean.getRate_business() == null || bean.getRate_fund() == null) {
+                    start_calculate.setBackgroundResource(R.drawable.text_shape_un);
+                } else {
+                    start_calculate.setBackgroundResource(R.drawable.text_shape);
                 }
             }
 
@@ -365,6 +386,13 @@ public class MortgageFragmentCombination extends Fragment {
                     interest_rate6.setText(0 + "%");
                     current_rate.setText("当前年限基准利率：商业" + 0 + "%");
                 }
+
+                if (bean.getMortgage_business() == null || bean.getMortgage_fund() == null
+                        || bean.getRate_business() == null || bean.getRate_fund() == null) {
+                    start_calculate.setBackgroundResource(R.drawable.text_shape_un);
+                } else {
+                    start_calculate.setBackgroundResource(R.drawable.text_shape);
+                }
             }
 
             @Override
@@ -396,6 +424,13 @@ public class MortgageFragmentCombination extends Fragment {
                 } else {
                     interest_rate6.setText(0 + "%");
                     current_rate.setText("当前年限基准利率：商业" + 0 + "%");
+                }
+
+                if (bean.getMortgage_business() == null || bean.getMortgage_fund() == null
+                        || bean.getRate_business() == null || bean.getRate_fund() == null) {
+                    start_calculate.setBackgroundResource(R.drawable.text_shape_un);
+                } else {
+                    start_calculate.setBackgroundResource(R.drawable.text_shape);
                 }
             }
 
@@ -430,7 +465,7 @@ public class MortgageFragmentCombination extends Fragment {
                     Util.showMyToast(toast, 1000);
                     return;
                 } else {
-                    if (bean.getFlag()!= null) {
+                    if (bean.getFlag() != null) {
                         Log.e(TAG, "onClick: " + bean.toString());
                         Intent intent = new Intent();
                         intent.setClass(getActivity(), CombinationResultActivity.class);
@@ -454,6 +489,13 @@ public class MortgageFragmentCombination extends Fragment {
                     bean.setMortgage_business(charSequence.toString());
                 }
 
+                if (bean.getMortgage_business() == null || bean.getMortgage_fund() == null
+                        || bean.getRate_business() == null || bean.getRate_fund() == null) {
+                    start_calculate.setBackgroundResource(R.drawable.text_shape_un);
+                } else {
+                    start_calculate.setBackgroundResource(R.drawable.text_shape);
+                }
+
             }
 
             @Override
@@ -472,6 +514,13 @@ public class MortgageFragmentCombination extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (!charSequence.toString().equals("")) {
                     bean.setMortgage_fund(charSequence.toString());
+                }
+
+                if (bean.getMortgage_business() == null || bean.getMortgage_fund() == null
+                        || bean.getRate_business() == null || bean.getRate_fund() == null) {
+                    start_calculate.setBackgroundResource(R.drawable.text_shape_un);
+                } else {
+                    start_calculate.setBackgroundResource(R.drawable.text_shape);
                 }
             }
 

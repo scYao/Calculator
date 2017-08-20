@@ -36,7 +36,7 @@
             android:layout_weight="3"
             android:editable="false"
             android:text=""
-            android:maxLength="20"
+            android:maxLength="16"
             android:background="@drawable/edit_shape"
             android:layout_height="40dp" />
 
@@ -67,6 +67,7 @@
             android:layout_marginRight="20dp"
             android:layout_width="0dp"
             android:layout_weight="3"
+            android:maxLength="24"
             android:editable="false"
             android:background="@drawable/edit_shape"
             android:layout_height="40dp" />

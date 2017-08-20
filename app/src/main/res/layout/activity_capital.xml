@@ -7,7 +7,7 @@
     android:background="@color/colorBackground"
     tools:context="com.shijiu.calculator.capital.CapitalActivity">
 
-    <include layout="@layout/title_layout"/>
+    <include layout="@layout/title"/>
 
     <LinearLayout
         android:background="@color/colorWhite"
@@ -20,13 +20,14 @@
 
 
         <EditText
+            android:cursorVisible="false"
             android:editable="false"
             android:layout_marginLeft="20dp"
             android:id="@+id/id_number"
             android:layout_marginRight="20dp"
             android:layout_width="match_parent"
             android:inputType="numberDecimal"
-            android:maxLength="13"
+            android:maxLength="15"
             android:textColor="@color/colorSelectText"
             android:hint="0"
             android:paddingRight="4dp"

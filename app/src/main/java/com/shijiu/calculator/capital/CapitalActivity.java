@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.shijiu.calculator.R;
+import com.shijiu.calculator.utils.Main;
 import com.shijiu.calculator.utils.Tool;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import java.util.List;
 public class CapitalActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView back;
     private TextView title;
+    private TextView detail;
     private EditText number;
     private TextView capital;
     private static final String TAG = "CapitalActivity";
@@ -40,6 +42,7 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
     private TextView btn_equal;
     private TextView btn_del;
     private TextView btn_point;
+    private boolean flag =true;
 
 
     @Override
@@ -48,13 +51,31 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_capital);
 
         initView();
+        detail = (TextView) findViewById(R.id.id_detail);
         title.setText("大写转换");
+        detail.setText("罗马数字");
+        btn_point.setClickable(true);
+        detail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (flag){
+                    detail.setText("大写数字");
+                    btn_point.setClickable(false);
+                    flag =false;
+                }else {
+                    detail.setText("罗马数字");
+                    btn_point.setClickable(true);
+                    flag =true;
+                }
+            }
+        });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+
 
         initListener();
     }
@@ -72,10 +93,14 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
 
 
                 if (number != null && !s.equals("")) {
-                    double d = Double.parseDouble(s);
-                    Log.e(TAG, "onTextChanged: " + d);
+                    if (flag){
+                        double d = Double.parseDouble(s);
+                        capital.setText(Tool.change(d));
+                    }else {
+                        capital.setText(Main.intToRoman(Integer.parseInt(s)));
+                    }
 
-                    capital.setText(Tool.change(d));
+
                 } else {
 //                    number.setHint("0");
                     capital.setText("零元整");

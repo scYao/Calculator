@@ -256,24 +256,32 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (i) {
             case 0:
-                double d0 = d / 1000000;
-                result.setText(decimalFormat.format(d0));
+//                double d0 = d / 1000000;
+//                result.setText(decimalFormat.format(d0));
+                String d0 = Cac2(d, "1000000");
+                result.setText(d0);
                 break;
             case 1:
                 double d1 = d;
                 result.setText(decimalFormat.format(d1));
                 break;
             case 2:
-                double d2 = d * 100;
-                result.setText(decimalFormat.format(d2));
+//                double d2 = d * 100;
+//                result.setText(decimalFormat.format(d2));
+                String d2 = Cac1(d, "100");
+                result.setText(d2);
                 break;
             case 3:
-                double d3 = d * 10000;
-                result.setText(decimalFormat.format(d3));
+//                double d3 = d * 10000;
+//                result.setText(decimalFormat.format(d3));
+                String d3 = Cac1(d, "10000");
+                result.setText(d3);
                 break;
             case 4:
-                double d4 = d * 1000000;
-                result.setText(decimalFormat.format(d4));
+//                double d4 = d * 1000000;
+//                result.setText(decimalFormat.format(d4));
+                String d4 = Cac1(d, "1000000");
+                result.setText(d4);
                 break;
 //            case 5:
 //                double d5 = d * 10000;
@@ -288,6 +296,22 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
 //                result.setText(d7 + "");
 //                break;
         }
+    }
+
+    private String Cac1(double d, String s) {
+        BigDecimal bigDecimal1 = new BigDecimal(d);
+        BigDecimal bigDecimal2 = new BigDecimal(s);
+        Double d1 = bigDecimal1.multiply(bigDecimal2).doubleValue();
+        String str = new BigDecimal(d1.toString()).toString();
+        return str;
+    }
+
+    private String Cac2(double d, String s) {
+        BigDecimal bigDecimal1 = new BigDecimal(d);
+        BigDecimal bigDecimal2 = new BigDecimal(s);
+        Double d1 = bigDecimal1.divide(bigDecimal2).doubleValue();
+        String str = new BigDecimal(d1.toString()).toString();
+        return str;
     }
 
     public class TakePhotoPopWin extends PopupWindow {
@@ -321,14 +345,26 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
                     if (i == 1) {
                         unit1 = position;
                         spinner1.setText(beanList.get(position).getUnit());
-                        beanList.get(position).setImgae(R.mipmap.tick);
-                        adapter.notifyDataSetChanged();
+                        for (int j = 0; j <beanList.size() ; j++) {
+                            if (j==position){
+                                beanList.get(j).setImgae(R.mipmap.tick);
+                                adapter.notifyItemChanged(position);
+                            }else {
+                                beanList.get(j).setImgae(null);
+                            }
+                        }
                         dismiss();
                     } else {
                         unit2 = position;
                         spinner2.setText(beanList.get(position).getUnit());
-                        beanList.get(position).setImgae(R.mipmap.tick);
-                        adapter.notifyDataSetChanged();
+                        for (int j = 0; j <beanList.size() ; j++) {
+                            if (j==position){
+                                beanList.get(j).setImgae(R.mipmap.tick);
+                                adapter.notifyItemChanged(position);
+                            }else {
+                                beanList.get(j).setImgae(null);
+                            }
+                        }
                         dismiss();
                     }
 

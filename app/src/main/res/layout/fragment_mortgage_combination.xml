@@ -229,18 +229,20 @@
                     android:gravity="right"
                     android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/id_radioButton1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="等额本息"/>
 
                     <RadioButton
+                        android:checked="true"
                         android:id="@+id/id_radioButton2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="等额本金"/>
+
+
+                    <RadioButton
+                        android:id="@+id/id_radioButton1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="等额本息"/>
 
                 </RadioGroup>
             </LinearLayout>
@@ -313,6 +315,7 @@
                     style="@style/valueEditStyle1"
                     android:layout_width="40dp"
                     android:maxLength="4"
+                    android:text="4.90"
                     android:inputType="numberDecimal" />
 
                 <TextView
@@ -326,6 +329,7 @@
                     style="@style/valueEditStyle1"
                     android:layout_width="40dp"
                     android:maxLength="4"
+                    android:text="1.0"
                     android:inputType="numberDecimal" />
 
                 <TextView
@@ -362,6 +366,7 @@
                     android:id="@+id/id_interest_rate4"
                     style="@style/valueEditStyle1"
                     android:layout_width="40dp"
+                    android:text="3.25"
                     android:inputType="numberDecimal" />
 
                 <TextView
@@ -375,6 +380,7 @@
                     android:id="@+id/id_interest_rate5"
                     style="@style/valueEditStyle1"
                     android:layout_width="40dp"
+                    android:text="1.0"
                     android:inputType="numberDecimal" />
 
                 <TextView
@@ -407,7 +413,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/text_shape"
+                android:background="@drawable/text_shape_un"
                 android:gravity="center"
                 android:text="开始计算"
                 android:textColor="@color/colorWhite"

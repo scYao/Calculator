@@ -27,6 +27,8 @@ import com.shijiu.calculator.R;
 import com.shijiu.calculator.bean.MortgageBean;
 import com.shijiu.calculator.utils.Util;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.Calendar;
 
 /**
@@ -84,6 +86,7 @@ public class MortgageFragmentBusiness extends Fragment {
         bean = new MortgageBean();
         bean.setTotal_years("1");
         bean.setFlag("0");
+        bean.setRate("49");
         initView(view);
         initListener();
         initData();
@@ -153,7 +156,9 @@ public class MortgageFragmentBusiness extends Fragment {
 
                         if (d1 > 0 && d2 > 0) {
                             double result = d1 * d2;
-                            total_price.setText(result + "元");
+                            BigDecimal bigDecimal = new BigDecimal(result);
+                            String str = bigDecimal.toString();
+                            total_price.setText(str);
                         }
                     }
                 }
@@ -186,7 +191,9 @@ public class MortgageFragmentBusiness extends Fragment {
 
                         if (d1 > 0 && d2 > 0) {
                             double result = d1 * d2;
-                            total_price.setText(result + "");
+                            BigDecimal bigDecimal = new BigDecimal(result);
+                            String str = bigDecimal.toString();
+                            total_price.setText(str);
                         }
                     }
                 }
@@ -249,6 +256,13 @@ public class MortgageFragmentBusiness extends Fragment {
                 if (!charSequence.toString().equals("")) {
                     double result = Double.parseDouble(charSequence.toString());
                     bean.setTotal_mortgage(result * 10000 + "");
+                }
+
+                if (bean.getTotal_mortgage() == null || bean.getRate() == null || bean.getTotal_years() == null) {
+
+                    start_calculate.setBackgroundResource(R.drawable.text_shape_un);
+                } else {
+                    start_calculate.setBackgroundResource(R.drawable.text_shape);
                 }
             }
 
@@ -319,6 +333,13 @@ public class MortgageFragmentBusiness extends Fragment {
                     interest_rate3.setText(0 + "%");
                     current_rate.setText("当前年限基准利率：商业" + 0 + "%");
                 }
+
+                if (bean.getTotal_mortgage() == null || bean.getRate() == null || bean.getTotal_years() == null) {
+
+                    start_calculate.setBackgroundResource(R.drawable.text_shape_un);
+                } else {
+                    start_calculate.setBackgroundResource(R.drawable.text_shape);
+                }
             }
 
             @Override
@@ -351,6 +372,14 @@ public class MortgageFragmentBusiness extends Fragment {
                     interest_rate3.setText(0 + "%");
                     current_rate.setText("当前年限基准利率：商业" + 0 + "%");
                 }
+                if (bean.getTotal_mortgage() == null || bean.getRate() == null || bean.getTotal_years() == null) {
+
+                    start_calculate.setBackgroundResource(R.drawable.text_shape_un);
+                } else {
+                    start_calculate.setBackgroundResource(R.drawable.text_shape);
+                }
+
+
             }
 
             @Override

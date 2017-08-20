@@ -31,20 +31,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     //图片数组
     private Integer[] imageList = {
             R.mipmap.mortgage, R.mipmap.appellation,
-            R.mipmap.length, R.mipmap.capital,
+            R.mipmap.capital, R.mipmap.length,
             R.mipmap.calculator, R.mipmap.area
     };
 
     private String[] nameList = {
-            "算房贷", "称谓计算器", "长度转换",
-            "大写转换", "计算器", "面积转换"
+            "算房贷", "称谓计算器", "大写转换",
+            "长度转换", "计算器", "面积转换"
     };
 
 
-    private String[] contentList ={
-            "合理分配购房资金","三姑六婆不再搞错",
-            "大写数字无需百度","各种长度互相转换",
-            "快捷计算器","各种面积互相转换"
+    private String[] contentList = {
+            "合理分配购房资金", "三姑六婆不再搞错",
+            "各种长度互相转换", "大写数字无需百度",
+            "快捷计算器", "各种面积互相转换"
     };
 
     private List<GridBean> beanList = new ArrayList<>();
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 //        String[] dataFrom = {"image","text"};
 //        int[] dataTo ={R.id.id_grid_image, R.id.id_grid_text};
 //        simpleAdapter = new SimpleAdapter(this,dataList,R.layout.gird_item,dataFrom, dataTo);
-        adapter = new GridAdapter(this,beanList);
+        adapter = new GridAdapter(this, beanList);
 
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(this);
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        switch (i){
+        switch (i) {
 
             case 0:
                 Util.forwardActivity(MainActivity.this, MortgageActivity.class);
@@ -99,10 +99,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Util.forwardActivity(MainActivity.this, AppellationActivity.class);
                 break;
             case 2:
-                Util.forwardActivity(MainActivity.this, LengthActivity.class);
+                Util.forwardActivity(MainActivity.this, CapitalActivity.class);
                 break;
             case 3:
-                Util.forwardActivity(MainActivity.this, CapitalActivity.class);
+
+                Util.forwardActivity(MainActivity.this, LengthActivity.class);
                 break;
             case 4:
                 Util.forwardActivity(MainActivity.this, CalculatorActivity.class);

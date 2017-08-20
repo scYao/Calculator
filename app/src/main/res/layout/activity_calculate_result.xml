@@ -3,48 +3,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorBackground"
+    android:orientation="vertical"
     tools:context="com.shijiu.calculator.mortgage.CalculateResultActivity">
 
-    <include layout="@layout/title"/>
+    <include layout="@layout/title" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="@color/colorWhite"
-        android:layout_height="80dp">
+        android:layout_height="80dp"
+        android:background="@color/colorWhite">
 
         <TextView
             android:id="@+id/id_first_month"
-            android:textSize="16sp"
-            android:text="每月还款金额"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"/>
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="每月还款金额"
+            android:textSize="16sp" />
 
 
         <TextView
             android:id="@+id/id_month_repay"
-            android:textSize="18sp"
-            android:textColor="@color/colorSelectText"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
             android:layout_marginRight="20dp"
-            android:gravity="center_vertical|right"/>
+            android:layout_weight="1"
+            android:gravity="center_vertical|right"
+            android:textColor="@color/colorSelectText"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="20dp"
-        android:background="@color/colorWhite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorWhite"
         android:orientation="vertical">
 
-        <LinearLayout
-            style="@style/dropDownList">
+        <LinearLayout style="@style/dropDownList">
+
             <TextView
                 style="@style/keyTextStyle"
                 android:layout_width="0dp"
@@ -58,8 +58,10 @@
                 android:layout_weight="1" />
         </LinearLayout>
 
-        <LinearLayout
-            style="@style/dropDownList">
+        <View style="@style/lineHorizontal" />
+
+        <LinearLayout style="@style/dropDownList">
+
             <TextView
                 style="@style/keyTextStyle"
                 android:layout_width="0dp"
@@ -72,9 +74,10 @@
                 android:layout_width="0dp"
                 android:layout_weight="1" />
         </LinearLayout>
+        <View style="@style/lineHorizontal" />
 
-        <LinearLayout
-            style="@style/dropDownList">
+        <LinearLayout style="@style/dropDownList">
+
             <TextView
                 style="@style/keyTextStyle"
                 android:layout_width="0dp"
@@ -87,9 +90,10 @@
                 android:layout_width="0dp"
                 android:layout_weight="1" />
         </LinearLayout>
+        <View style="@style/lineHorizontal" />
 
-        <LinearLayout
-            style="@style/dropDownList">
+        <LinearLayout style="@style/dropDownList">
+
             <TextView
                 style="@style/keyTextStyle"
                 android:layout_width="0dp"

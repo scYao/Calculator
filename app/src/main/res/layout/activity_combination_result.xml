@@ -58,6 +58,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1" />
         </LinearLayout>
+        <View style="@style/lineHorizontal" />
 
         <LinearLayout
             style="@style/dropDownList">
@@ -74,6 +75,8 @@
                 android:layout_weight="1" />
         </LinearLayout>
 
+        <View style="@style/lineHorizontal" />
+
         <LinearLayout
             style="@style/dropDownList">
             <TextView
@@ -88,6 +91,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="1" />
         </LinearLayout>
+
+        <View style="@style/lineHorizontal" />
 
         <LinearLayout
             style="@style/dropDownList">

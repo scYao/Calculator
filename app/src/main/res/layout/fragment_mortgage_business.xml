@@ -33,6 +33,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@id/id_loan_amount"
                 android:background="@drawable/edit_shape"
+                android:hint="请输入贷款总金额"
                 android:inputType="numberDecimal"
                 android:paddingLeft="2dp" />
 
@@ -215,18 +216,21 @@
                     android:gravity="right"
                     android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/id_radioButton1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="等额本息" />
+
 
                     <RadioButton
                         android:id="@+id/id_radioButton2"
                         android:layout_width="wrap_content"
+                        android:checked="true"
                         android:layout_height="wrap_content"
                         android:text="等额本金" />
+
+                    <RadioButton
+                        android:id="@+id/id_radioButton1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="等额本息" />
 
                 </RadioGroup>
             </LinearLayout>
@@ -302,6 +306,7 @@
                     android:id="@+id/id_interest_rate1"
                     style="@style/valueEditStyle1"
                     android:layout_width="40dp"
+                    android:text="4.90"
                     android:maxLength="4"
                     android:inputType="numberDecimal" />
 
@@ -316,6 +321,7 @@
                     style="@style/valueEditStyle1"
                     android:layout_width="40dp"
                     android:maxLength="4"
+                    android:text="1.0"
                     android:inputType="numberDecimal" />
 
                 <TextView
@@ -347,7 +353,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/text_shape"
+                android:background="@drawable/text_shape_un"
                 android:gravity="center"
                 android:text="开始计算"
                 android:textColor="@color/colorWhite"

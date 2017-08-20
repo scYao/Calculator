@@ -133,6 +133,8 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.toString().equals("")) {
                     id_result_text.setText("");
+                }else {
+                    id_result_text.setText(charSequence.toString());
                 }
             }
 
@@ -184,12 +186,17 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
             case R.id.btn_minus:
             case R.id.btn_multiply:
             case R.id.btn_divide:
+                if (needclear) {
+                    id_input_edit.setText("");
+                    id_result_text.setText("");
+                }
+                id_input_edit.setText(str + " " + ((TextView) view).getText() + " ");
+                break;
             case R.id.btn_complementation:
                 if (needclear) {
                     id_input_edit.setText("");
                     id_result_text.setText("");
                 }
-
 
 
                 if (!str.equals("")){
@@ -220,6 +227,12 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
         Log.e(TAG, "getResult: wodddddddddddddddddddddddddd");
         needclear = true;
         String exp = id_input_edit.getText().toString();
+//        if (exp.equals(id_result_text.getText().toString())){
+//            needclear = false;
+//            Log.e(TAG, "getResult: sssssssssssssssssssssssssssss" );
+//        }else {
+//            needclear = true;
+//        }
         double r = 0;
         int space = exp.indexOf(' ');//用于搜索空格位置
 
@@ -228,6 +241,7 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
         if (space == -1) {
             String s1 = exp.substring(0);
             id_result_text.setText(s1);
+            needclear = false;
         } else {
             String s1 = exp.substring(0, space);//s1用于保存第一个运算数
             String op = exp.substring(space + 1, space + 2);//op用于保存运算符
