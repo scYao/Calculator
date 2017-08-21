@@ -212,6 +212,19 @@ public class MortgageFragmentCombination extends Fragment {
             }
         });
 
+        //判断是否获取焦点
+        down_payments.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b){
+                    if (Util.isNull(total_price)) {
+                        double price = Double.parseDouble(total_price.getText().toString().trim());
+                        need_loan.setText(price + "元");
+                    }
+                }
+            }
+        });
+
         down_payments.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -445,24 +458,24 @@ public class MortgageFragmentCombination extends Fragment {
             public void onClick(View view) {
                 Log.e(TAG, "onClick: " + bean.toString());
                 if (bean.getMortgage_business() == null) {
-                    Toast toast = Toast.makeText(getActivity(), "请填写商业贷款金额", Toast.LENGTH_LONG);
-                    Util.showMyToast(toast, 1000);
+//                    Toast toast = Toast.makeText(getActivity(), "请填写商业贷款金额", Toast.LENGTH_LONG);
+//                    Util.showMyToast(toast, 1000);
                     return;
                 } else if (bean.getMortgage_fund() == null) {
-                    Toast toast = Toast.makeText(getActivity(), "请填写公积金贷款金额", Toast.LENGTH_LONG);
-                    Util.showMyToast(toast, 1000);
+//                    Toast toast = Toast.makeText(getActivity(), "请填写公积金贷款金额", Toast.LENGTH_LONG);
+//                    Util.showMyToast(toast, 1000);
                     return;
                 } else if (bean.getTotal_years() == null) {
-                    Toast toast = Toast.makeText(getActivity(), "请设置还款年限", Toast.LENGTH_SHORT);
-                    Util.showMyToast(toast, 1000);
+//                    Toast toast = Toast.makeText(getActivity(), "请设置还款年限", Toast.LENGTH_SHORT);
+//                    Util.showMyToast(toast, 1000);
                     return;
                 } else if (bean.getRate_business() == null) {
-                    Toast toast = Toast.makeText(getActivity(), "请填写商业贷款利率", Toast.LENGTH_SHORT);
-                    Util.showMyToast(toast, 1000);
+//                    Toast toast = Toast.makeText(getActivity(), "请填写商业贷款利率", Toast.LENGTH_SHORT);
+//                    Util.showMyToast(toast, 1000);
                     return;
                 } else if (bean.getRate_fund() == null) {
-                    Toast toast = Toast.makeText(getActivity(), "请填写公积金贷款利率", Toast.LENGTH_SHORT);
-                    Util.showMyToast(toast, 1000);
+//                    Toast toast = Toast.makeText(getActivity(), "请填写公积金贷款利率", Toast.LENGTH_SHORT);
+//                    Util.showMyToast(toast, 1000);
                     return;
                 } else {
                     if (bean.getFlag() != null) {

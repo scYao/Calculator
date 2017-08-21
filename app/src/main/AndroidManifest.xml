@@ -27,6 +27,7 @@
         <activity android:name=".mortgage.CalculateDetailActivity" />
         <activity android:name=".mortgage.CombinationResultActivity" />
         <activity android:name=".mortgage.CombinationDetailActivity" />
+        <activity android:name=".calculator.NewCalculatorActivity"></activity>
     </application>
 
 </manifest>

@@ -21,7 +21,8 @@
         android:gravity="right|center_vertical"
         android:background="@drawable/edit_shape"/>
 
-    <TextView
+    <EditText
+        android:cursorVisible="false"
         android:paddingRight="4dp"
         android:id="@+id/id_result_text"
         android:gravity="right|center_vertical"
@@ -30,7 +31,8 @@
         android:textColorHint="@color/colorSelectText"
         android:textSize="16sp"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="50dp"
+        android:background="@drawable/edit_shape"/>
 
     <LinearLayout
         android:layout_width="match_parent"

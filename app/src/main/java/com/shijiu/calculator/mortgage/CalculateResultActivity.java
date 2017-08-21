@@ -69,10 +69,10 @@ public class CalculateResultActivity extends Activity {
         initView();
 
         first_month = findViewById(R.id.id_first_month);
-        if (bean.getFlag().equals("0")){
+        if (bean.getFlag().equals("0")) {
             initData(bean);
             first_month.setText("每月还款金额");
-        }else {
+        } else {
             first_month.setText("首月还款金额");
             initData1(bean);
         }
@@ -102,10 +102,14 @@ public class CalculateResultActivity extends Activity {
         month_repay.setText(beanList.get(0).getTotal() + "元");//首月还款
         mortgage_total.setText(Util.doubleTrans(total_mortgage / 10000) + "万");//贷款总额
 
-        double d3 = AverageCapitalUtils.getInterestCount(total_mortgage,rate, months);//利息总额
+        double d3 = AverageCapitalUtils.getInterestCount(total_mortgage, rate, months);//利息总额
         rate_total.setText(String.format("%.2f", d3) + "元");
 
-        repay_total.setText((total_mortgage+d3) + "元");
+        BigDecimal b = new BigDecimal(total_mortgage + d3);
+        double f1 = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        repay_total.setText(f1 + "元");
+
+//        repay_total.setText((total_mortgage+d3) + "元");
         total_years.setText((int) years + "年(" + (int) years * 12 + "个月)");
 
     }
@@ -122,8 +126,13 @@ public class CalculateResultActivity extends Activity {
         double d2 = Math.pow((1 + rate), years * 12) - 1;
         double month_money = (total_mortgage * rate * d1) / d2;
         double round_month_money = Double.parseDouble(String.format("%.2f", month_money));
+
         month_repay.setText(round_month_money + "元");
-        repay_total.setText(round_month_money * years * 12 + "元");
+
+        BigDecimal b = new BigDecimal(round_month_money * years * 12);
+        double f1 = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        repay_total.setText(f1 + "元");
+
         double d3 = round_month_money * years * 12 - total_mortgage;
         rate_total.setText(String.format("%.2f", d3) + "元");
     }

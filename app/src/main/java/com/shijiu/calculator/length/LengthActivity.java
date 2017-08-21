@@ -219,119 +219,149 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
     public void getResult(int i1, int i2) {
 
 
-        double re = Double.parseDouble(input.getText().toString());
+        BigDecimal re = BigDecimal.valueOf(Double.parseDouble(input.getText().toString()));
         Log.e(TAG, "getResult: " + re);
 
         switch (i1) {
             case 0:
-                double re0 = re * 1000;
-//                s re0 = Cac1(re, "1000");
+//                double re0 = re * 1000;
+                BigDecimal re0 = Cac1(re, "1000");
                 toMeter(i2, re0);
                 break;
             case 1:
-                double re1 = re;
+                BigDecimal re1 = re;
                 toMeter(i2, re1);
                 break;
             case 2:
-                double re2 = re / 10;
-//                double re2 = Cac2(re, "10");
+//                double re2 = re / 10;
+                BigDecimal re2 = Cac2(re, "10");
                 toMeter(i2, re2);
                 break;
             case 3:
-                double re3 = re / 100;
-//                double re3 = Cac2(re, "100");
+//                double re3 = re / 100;
+                BigDecimal re3 = Cac2(re, "100");
                 toMeter(i2, re3);
                 break;
             case 4:
-                double re4 = re / 1000;
-//                double re4 = Cac2(re, "1000");
+//                double re4 = re / 1000;
+                BigDecimal re4 = Cac2(re, "1000");
                 toMeter(i2, re4);
                 break;
             case 5:
-                double re5 = re / 1000000;
-//                double re5 = Cac2(re, "1000000");
+//                double re5 = re / 1000000;
+                BigDecimal re5 = Cac2(re, "1000000");
                 toMeter(i2, re5);
                 break;
             case 6:
-                double re6 = re / 1000000000;
-//                double re6 = Cac2(re, "1000000000");
+//                double re6 = re / 1000000000;
+                BigDecimal re6 = Cac2(re, "1000000000");
                 toMeter(i2, re6);
                 break;
             case 7:
-                BigDecimal bigDecimal1 = new BigDecimal(re);
-                BigDecimal bigDecimal2 = new BigDecimal("1000000000000");
-
-                double re7 = bigDecimal1.divide(bigDecimal2).doubleValue();
+                BigDecimal re7 = Cac2(re, "1000000000000");
                 toMeter(i2, re7);
                 break;
         }
 
     }
 
-    private void toMeter(int i, double d) {
+    private void toMeter(int i, BigDecimal d) {
         DecimalFormat decimalFormat = (DecimalFormat) DecimalFormat.getInstance();
         switch (i) {
             case 0:
 //                double d0 = d / 1000;
-                String d0 = Cac2(d, "1000");
-                result.setText(decimalFormat.format(d0));
+                BigDecimal d0 = Cac2(d, "1000");
+//                result.setText(decimalFormat.format(d0));
+                result.setText(d0.toString());
                 break;
             case 1:
-                double d1 = d;
-                result.setText(decimalFormat.format(d1));
+                BigDecimal d1 = d;
+
+                result.setText(d1.toString());
                 break;
             case 2:
 
 //                double d2 = d * 10;
-                String d2 = Cac1(d, "10");
-                Log.e(TAG, "toMeter: ," + d + d2);
-
-                result.setText(d2);
+                BigDecimal d2 = Cac1(d, "10");
+//                result.setText(decimalFormat.format(d2));
+                result.setText(d2.toString());
                 break;
             case 3:
 //                double d3 = d * 100;
-                String d3 = Cac1(d, "100");
-                result.setText(decimalFormat.format(d3));
+                BigDecimal d3 = Cac1(d, "100");
+//                result.setText(decimalFormat.format(d3));
+                result.setText(d3.toString());
                 break;
             case 4:
 //                double d4 = d * 1000;
-                String d4 = Cac1(d, "1000");
-                result.setText(decimalFormat.format(d4));
+                BigDecimal d4 = Cac1(d, "1000");
+//                result.setText(decimalFormat.format(d4));
+                result.setText(d4.toString());
                 break;
             case 5:
 //                double d5 = d * 1000000;
-                String d5 = Cac1(d, "1000000");
-                result.setText(decimalFormat.format(d5));
+                BigDecimal d5 = Cac1(d, "1000000");
+                result.setText(d5.toString());
                 break;
             case 6:
 //                double d6 = d * 1000000000;
-                String d6 = Cac1(d, "1000000000");
-                result.setText(decimalFormat.format(d6));
+                BigDecimal d6 = Cac1(d, "1000000000");
+//                result.setText(decimalFormat.format(d6));
+                result.setText(d6.toString());
                 break;
             case 7:
-                BigDecimal bigDecimal1 = new BigDecimal(d);
-                BigDecimal bigDecimal2 = new BigDecimal("1000000000000");
 
-                double d7 = bigDecimal1.multiply(bigDecimal2).doubleValue();
-                result.setText(decimalFormat.format(d7));
+                BigDecimal d7 = Cac1(d, "1000000000000");
+
+                result.setText(d7.toString());
                 break;
         }
     }
 
-    private String Cac1(double d, String s) {
-        BigDecimal bigDecimal1 = new BigDecimal(d);
+//    private String Cac1(double d, String s) {
+//        BigDecimal bigDecimal1 = new BigDecimal(d);
+//        BigDecimal bigDecimal2 = new BigDecimal(s);
+//        Double d1 = bigDecimal1.multiply(bigDecimal2).doubleValue();
+//        String str = new BigDecimal(d1.toString()).toString();
+//        return str;
+//    }
+//
+//    private String Cac2(double d, String s) {
+//        BigDecimal bigDecimal1 = new BigDecimal(d);
+//        BigDecimal bigDecimal2 = new BigDecimal(s);
+//        Double d1 = bigDecimal1.divide(bigDecimal2).doubleValue();
+//        String str = new BigDecimal(d1.toString()).toString();
+//        return str;
+//    }
+
+//    private Double Cac1(double d, String s) {
+//        BigDecimal bigDecimal1 = new BigDecimal(d);
+//        BigDecimal bigDecimal2 = new BigDecimal(s);
+//        Double d1 = bigDecimal1.multiply(bigDecimal2).doubleValue();
+//
+//        return d1;
+//    }
+//
+//    private Double Cac2(double d, String s) {
+//        BigDecimal bigDecimal1 = new BigDecimal(d);
+//        BigDecimal bigDecimal2 = new BigDecimal(s);
+//        Double d1 = bigDecimal1.divide(bigDecimal2).doubleValue();
+//
+//        return d1;
+//    }
+
+    private BigDecimal Cac1(BigDecimal d, String s) {
+        BigDecimal bigDecimal1 = d;
         BigDecimal bigDecimal2 = new BigDecimal(s);
-        Double d1 = bigDecimal1.multiply(bigDecimal2).doubleValue();
-        String str = new BigDecimal(d1.toString()).toString();
-        return str;
+
+        return bigDecimal1.multiply(bigDecimal2);
     }
 
-    private String Cac2(double d, String s) {
-        BigDecimal bigDecimal1 = new BigDecimal(d);
+    private BigDecimal Cac2(BigDecimal d, String s) {
+        BigDecimal bigDecimal1 = d;
         BigDecimal bigDecimal2 = new BigDecimal(s);
-        Double d1 = bigDecimal1.divide(bigDecimal2).doubleValue();
-        String str = new BigDecimal(d1.toString()).toString();
-        return str;
+
+        return bigDecimal1.divide(bigDecimal2);
     }
 
     private static String big(double d) {

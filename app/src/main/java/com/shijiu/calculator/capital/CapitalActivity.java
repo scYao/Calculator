@@ -3,6 +3,7 @@ package com.shijiu.calculator.capital;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -42,7 +43,7 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
     private TextView btn_equal;
     private TextView btn_del;
     private TextView btn_point;
-    private boolean flag =true;
+    private boolean flag = true;
 
 
     @Override
@@ -58,14 +59,18 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
         detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (flag){
+                if (flag) {
                     detail.setText("大写数字");
                     btn_point.setClickable(false);
-                    flag =false;
-                }else {
+                    number.setText("");
+                    number.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
+                    flag = false;
+                } else {
+                    number.setText("");
                     detail.setText("罗马数字");
                     btn_point.setClickable(true);
-                    flag =true;
+                    number.setFilters(new InputFilter[]{new InputFilter.LengthFilter(15)});
+                    flag = true;
                 }
             }
         });
@@ -93,10 +98,10 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
 
 
                 if (number != null && !s.equals("")) {
-                    if (flag){
+                    if (flag) {
                         double d = Double.parseDouble(s);
                         capital.setText(Tool.change(d));
-                    }else {
+                    } else {
                         capital.setText(Main.intToRoman(Integer.parseInt(s)));
                     }
 
@@ -160,6 +165,13 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         String in = number.getText().toString();
 
+        final double MAX_VALUE;
+        if (flag) {
+            MAX_VALUE = 999999999999.99D;
+        } else {
+            MAX_VALUE = 399D;
+        }
+
         Log.e(TAG, "onClick: sssssssssssssssssss" + in);
 
 
@@ -175,39 +187,45 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_7:
             case R.id.btn_8:
             case R.id.btn_9:
+                if (!in.equals("")) {
 
-                if (in.contains(".")){
-                    int point = in.indexOf(".");
-                    String s = in.substring(point);
-                    if (s.length() >2){
+                    if (Double.parseDouble(in) > MAX_VALUE) {
                         return;
                     }
                 }
 
-                if (in.length() ==1 && in.substring(0,1).equals("0")){
+                if (in.contains(".")) {
+                    int point = in.indexOf(".");
+                    String s = in.substring(point);
+                    if (s.length() > 2) {
+                        return;
+                    }
+                }
+
+                if (in.length() == 1 && in.substring(0, 1).equals("0")) {
                     number.setText(((TextView) view).getText());
 
-                }else {
+                } else {
                     number.setText(in + ((TextView) view).getText() + "");
                 }
 
                 break;
             case R.id.btn_point:
 
-                if (in.contains(".")){
+                if (in.contains(".")) {
                     int point = in.indexOf(".");
                     String s = in.substring(point);
-                    if (s.length() >2){
+                    if (s.length() > 2) {
                         return;
                     }
                 }
 
-                if (in.length() >0){
+                if (in.length() > 0) {
 //                    if (in.length() ==1 && in.substring(0,1).equals("0")){
 //                        number.setText(((TextView) view).getText());
 //
 //                    }else {
-                        number.setText(in + ((TextView) view).getText() + "");
+                    number.setText(in + ((TextView) view).getText() + "");
 //                    }
                 }
 

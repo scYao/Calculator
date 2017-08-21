@@ -85,7 +85,7 @@ public class MortgageFragmentBusiness extends Fragment {
 
         bean = new MortgageBean();
         bean.setTotal_years("1");
-        bean.setFlag("0");
+        bean.setFlag("1");
         bean.setRate("49");
         initView(view);
         initListener();
@@ -206,6 +206,19 @@ public class MortgageFragmentBusiness extends Fragment {
             }
         });
 
+        //判断是否获取焦点
+        down_payments.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b){
+                    if (Util.isNull(total_price)) {
+                        double price = Double.parseDouble(total_price.getText().toString().trim());
+                        need_loan.setText(price + "元");
+                    }
+                }
+            }
+        });
+
         down_payments.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -214,21 +227,24 @@ public class MortgageFragmentBusiness extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Log.e(TAG, "onTextChanged: "+charSequence.toString() );
                 if (Util.isNull(total_price)) {
                     double price = Double.parseDouble(total_price.getText().toString().trim());
-                    Log.e(TAG, "onTextChanged: " + price);
+
                     if (!charSequence.toString().equals("")) {
                         double result = Double.parseDouble(charSequence.toString()) * price / 100;
                         down_payments_value.setText((int) result + "");
                         double rs = price - result;
                         need_loan.setText(rs + "元");
-//                        loan_edit.setText(rs / 10000 + "");
-//                        if (rs > 0) {
-//                            bean.setTotal_mortgage(rs + "");
-//                        }
+                        loan_edit.setText(rs / 10000 + "");
+                        if (rs > 0) {
+                            bean.setTotal_mortgage(rs + "");
+                        }
                     } else {
+                        Log.e(TAG, "onTextChanged: " + price);
+                        need_loan.setText(price + "元");
                         down_payments_value.setText("");
-                        need_loan.setText(0 + "元");
+
 //                        loan_edit.setText("");
                     }
 
@@ -261,8 +277,10 @@ public class MortgageFragmentBusiness extends Fragment {
                 if (bean.getTotal_mortgage() == null || bean.getRate() == null || bean.getTotal_years() == null) {
 
                     start_calculate.setBackgroundResource(R.drawable.text_shape_un);
+                    start_calculate.setClickable(false);
                 } else {
                     start_calculate.setBackgroundResource(R.drawable.text_shape);
+                    start_calculate.setClickable(true);
                 }
             }
 
@@ -337,8 +355,10 @@ public class MortgageFragmentBusiness extends Fragment {
                 if (bean.getTotal_mortgage() == null || bean.getRate() == null || bean.getTotal_years() == null) {
 
                     start_calculate.setBackgroundResource(R.drawable.text_shape_un);
+                    start_calculate.setClickable(false);
                 } else {
                     start_calculate.setBackgroundResource(R.drawable.text_shape);
+                    start_calculate.setClickable(true);
                 }
             }
 
@@ -375,8 +395,10 @@ public class MortgageFragmentBusiness extends Fragment {
                 if (bean.getTotal_mortgage() == null || bean.getRate() == null || bean.getTotal_years() == null) {
 
                     start_calculate.setBackgroundResource(R.drawable.text_shape_un);
+                    start_calculate.setClickable(false);
                 } else {
                     start_calculate.setBackgroundResource(R.drawable.text_shape);
+                    start_calculate.setClickable(true);
                 }
 
 
@@ -393,16 +415,16 @@ public class MortgageFragmentBusiness extends Fragment {
             public void onClick(View view) {
                 Log.e(TAG, "onClick: " + bean.toString());
                 if (bean.getTotal_mortgage() == null) {
-                    Toast toast = Toast.makeText(getActivity(), "没有贷款总额", Toast.LENGTH_LONG);
-                    Util.showMyToast(toast, 1000);
+//                    Toast toast = Toast.makeText(getActivity(), "没有贷款总额", Toast.LENGTH_LONG);
+//                    Util.showMyToast(toast, 1000);
                     return;
                 } else if (bean.getRate() == null) {
-                    Toast toast = Toast.makeText(getActivity(), "请填写利率", Toast.LENGTH_SHORT);
-                    Util.showMyToast(toast, 1000);
+//                    Toast toast = Toast.makeText(getActivity(), "请填写利率", Toast.LENGTH_SHORT);
+//                    Util.showMyToast(toast, 1000);
                     return;
                 } else if (bean.getTotal_years() == null) {
-                    Toast toast = Toast.makeText(getActivity(), "请设置还款年限", Toast.LENGTH_SHORT);
-                    Util.showMyToast(toast, 1000);
+//                    Toast toast = Toast.makeText(getActivity(), "请设置还款年限", Toast.LENGTH_SHORT);
+//                    Util.showMyToast(toast, 1000);
                     return;
                 } else {
 

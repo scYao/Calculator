@@ -31,6 +31,7 @@
                 android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
+                android:textSize="14sp"
                 android:layout_toRightOf="@id/id_loan_amount"
                 android:background="@drawable/edit_shape"
                 android:inputType="numberDecimal"
@@ -202,7 +203,7 @@
                     style="@style/keyTextStyle1"
                     android:layout_width="match_parent"
                     android:gravity="right|center_vertical"
-                    android:text="等额本金（每月等额还款）"
+                    android:text="等额本金（每月递减还款）"
                     android:textColor="@color/colorSelectText" />
             </LinearLayout>
 
@@ -327,7 +328,7 @@
                     android:id="@+id/id_interest_rate3"
                     style="@style/valueTextStyle1"
                     android:layout_width="wrap_content"
-                    android:text="0%" />
+                    android:text="3.25%" />
             </LinearLayout>
 
             <TextView
@@ -335,7 +336,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:gravity="center"
-                android:text="当前年限基准利率：公积金0%"
+                android:text="当前年限基准利率：公积金3.25%"
                 android:textColor="@color/colorLightGrey"
                 android:textSize="14sp" />
 

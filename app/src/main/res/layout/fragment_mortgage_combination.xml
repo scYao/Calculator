@@ -23,9 +23,9 @@
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/edit_shape"
                 android:hint="商业贷款"
+                android:textSize="14sp"
                 android:paddingLeft="2dp"
-                android:textColor="@color/colorDefaultText"
-                android:textSize="16sp" />
+                android:textColor="@color/colorDefaultText" />
 
             <TextView
                 android:id="@+id/id_amount_unit"
@@ -39,7 +39,7 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:id="@+id/id_loan_edit"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
@@ -216,7 +216,7 @@
                     style="@style/keyTextStyle1"
                     android:layout_width="match_parent"
                     android:gravity="right|center_vertical"
-                    android:text="等额本金（每月等额还款）"
+                    android:text="等额本金（每月递减还款）"
                     android:textColor="@color/colorSelectText" />
             </LinearLayout>
 
@@ -342,7 +342,7 @@
                     android:id="@+id/id_interest_rate3"
                     style="@style/valueTextStyle1"
                     android:layout_width="wrap_content"
-                    android:text="0%" />
+                    android:text="4.90%" />
             </LinearLayout>
 
             <TextView
@@ -350,7 +350,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:gravity="center"
-                android:text="当前年限基准利率：商业0%"
+                android:text="当前年限基准利率：商业4.90%"
                 android:textColor="@color/colorLightGrey"
                 android:textSize="14sp" />
 
@@ -393,7 +393,7 @@
                     android:id="@+id/id_interest_rate6"
                     style="@style/valueTextStyle1"
                     android:layout_width="wrap_content"
-                    android:text="0%" />
+                    android:text="3.25%" />
             </LinearLayout>
 
             <TextView
@@ -401,7 +401,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:gravity="center"
-                android:text="当前年限基准利率：公积金0%"
+                android:text="当前年限基准利率：公积金3.25%"
                 android:textColor="@color/colorLightGrey"
                 android:textSize="14sp" />
 

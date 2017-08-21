@@ -116,7 +116,7 @@ public class CalculateDetailActivity extends AppCompatActivity {
             int month = calendar.get(Calendar.MONTH);
             int year = calendar.get(Calendar.YEAR);
             if (month ==0){
-                year =year -1;
+                year =year +1;
                 month = 12;
             }
             bean1.setOrder_number(year+"."+month);

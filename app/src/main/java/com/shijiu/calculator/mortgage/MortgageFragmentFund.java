@@ -203,6 +203,19 @@ public class MortgageFragmentFund extends Fragment {
             }
         });
 
+        //判断是否获取焦点
+        down_payments.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b){
+                    if (Util.isNull(total_price)) {
+                        double price = Double.parseDouble(total_price.getText().toString().trim());
+                        need_loan.setText(price + "元");
+                    }
+                }
+            }
+        });
+
         down_payments.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -219,10 +232,10 @@ public class MortgageFragmentFund extends Fragment {
                         down_payments_value.setText((int) result + "");
                         double rs = price - result;
                         need_loan.setText(rs + "元");
-//                        loan_edit.setText(rs / 10000 + "");
-//                        if (rs > 0) {
-//                            bean.setTotal_mortgage(rs + "");
-//                        }
+                        loan_edit.setText(rs / 10000 + "");
+                        if (rs > 0) {
+                            bean.setTotal_mortgage(rs + "");
+                        }
                     } else {
                         down_payments_value.setText("");
                         need_loan.setText(0 + "元");
@@ -390,16 +403,16 @@ public class MortgageFragmentFund extends Fragment {
             public void onClick(View view) {
                 Log.e(TAG, "onClick: " + bean.toString());
                 if (bean.getTotal_mortgage() == null) {
-                    Toast toast = Toast.makeText(getActivity(), "没有贷款总额", Toast.LENGTH_SHORT);
-                    Util.showMyToast(toast, 1000);
+//                    Toast toast = Toast.makeText(getActivity(), "没有贷款总额", Toast.LENGTH_SHORT);
+//                    Util.showMyToast(toast, 1000);
                     return;
                 } else if (bean.getRate() == null) {
-                    Toast toast = Toast.makeText(getActivity(), "请填写利率", Toast.LENGTH_SHORT);
-                    Util.showMyToast(toast, 1000);
+//                    Toast toast = Toast.makeText(getActivity(), "请填写利率", Toast.LENGTH_SHORT);
+//                    Util.showMyToast(toast, 1000);
                     return;
                 } else if (bean.getTotal_years() == null) {
-                    Toast toast = Toast.makeText(getActivity(), "请设置还款年限", Toast.LENGTH_SHORT);
-                    Util.showMyToast(toast, 1000);
+//                    Toast toast = Toast.makeText(getActivity(), "请设置还款年限", Toast.LENGTH_SHORT);
+//                    Util.showMyToast(toast, 1000);
                     return;
                 } else {
                     if (bean.getFlag() != null) {

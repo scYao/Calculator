@@ -213,26 +213,29 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void getResult(int i1, int i2) {
-        double re = Double.parseDouble(input.getText().toString());
+        BigDecimal re = BigDecimal.valueOf(Double.parseDouble(input.getText().toString()));
         switch (i1) {
             case 0:
-                double re0 = re * 1000000;
+                BigDecimal re0 =Cac1(re,"1000000") ;
                 toMeter(i2, re0);
                 break;
             case 1:
-                double re1 = re;
+                BigDecimal re1 = re;
                 toMeter(i2, re1);
                 break;
             case 2:
-                double re2 = re / 100;
+//                double re2 = re / 100;
+                BigDecimal re2 =Cac2(re,"100") ;
                 toMeter(i2, re2);
                 break;
             case 3:
-                double re3 = re / 10000;
+//                double re3 = re / 10000;
+                BigDecimal re3 =Cac2(re,"10000") ;
                 toMeter(i2, re3);
                 break;
             case 4:
-                double re4 = re / 1000000;
+                BigDecimal re4 =Cac2(re,"1000000") ;
+//                double re4 = re / 1000000;
                 toMeter(i2, re4);
                 break;
 //            case 5:
@@ -251,37 +254,37 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void toMeter(int i, double d) {
+    private void toMeter(int i, BigDecimal d) {
         DecimalFormat decimalFormat = new DecimalFormat();
 
         switch (i) {
             case 0:
 //                double d0 = d / 1000000;
 //                result.setText(decimalFormat.format(d0));
-                String d0 = Cac2(d, "1000000");
-                result.setText(d0);
+                BigDecimal d0 = Cac2(d, "1000000");
+                result.setText(d0.toString());
                 break;
             case 1:
-                double d1 = d;
+                BigDecimal d1 = d;
                 result.setText(decimalFormat.format(d1));
                 break;
             case 2:
 //                double d2 = d * 100;
 //                result.setText(decimalFormat.format(d2));
-                String d2 = Cac1(d, "100");
-                result.setText(d2);
+                BigDecimal d2 = Cac1(d, "100");
+                result.setText(d2.toString());
                 break;
             case 3:
 //                double d3 = d * 10000;
 //                result.setText(decimalFormat.format(d3));
-                String d3 = Cac1(d, "10000");
-                result.setText(d3);
+                BigDecimal d3 = Cac1(d, "10000");
+                result.setText(d3.toString());
                 break;
             case 4:
 //                double d4 = d * 1000000;
 //                result.setText(decimalFormat.format(d4));
-                String d4 = Cac1(d, "1000000");
-                result.setText(d4);
+                BigDecimal d4 = Cac1(d, "1000000");
+                result.setText(d4.toString());
                 break;
 //            case 5:
 //                double d5 = d * 10000;
@@ -298,20 +301,34 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private String Cac1(double d, String s) {
-        BigDecimal bigDecimal1 = new BigDecimal(d);
+//    private String Cac1(double d, String s) {
+//        BigDecimal bigDecimal1 = new BigDecimal(d);
+//        BigDecimal bigDecimal2 = new BigDecimal(s);
+//        Double d1 = bigDecimal1.multiply(bigDecimal2).doubleValue();
+//        String str = new BigDecimal(d1.toString()).toString();
+//        return str;
+//    }
+//
+//    private String Cac2(double d, String s) {
+//        BigDecimal bigDecimal1 = new BigDecimal(d);
+//        BigDecimal bigDecimal2 = new BigDecimal(s);
+//        Double d1 = bigDecimal1.divide(bigDecimal2).doubleValue();
+//        String str = new BigDecimal(d1.toString()).toString();
+//        return str;
+//    }
+
+    private BigDecimal Cac1(BigDecimal d, String s) {
+        BigDecimal bigDecimal1 = d;
         BigDecimal bigDecimal2 = new BigDecimal(s);
-        Double d1 = bigDecimal1.multiply(bigDecimal2).doubleValue();
-        String str = new BigDecimal(d1.toString()).toString();
-        return str;
+
+        return bigDecimal1.multiply(bigDecimal2);
     }
 
-    private String Cac2(double d, String s) {
-        BigDecimal bigDecimal1 = new BigDecimal(d);
+    private BigDecimal Cac2(BigDecimal d, String s) {
+        BigDecimal bigDecimal1 = d;
         BigDecimal bigDecimal2 = new BigDecimal(s);
-        Double d1 = bigDecimal1.divide(bigDecimal2).doubleValue();
-        String str = new BigDecimal(d1.toString()).toString();
-        return str;
+
+        return bigDecimal1.divide(bigDecimal2);
     }
 
     public class TakePhotoPopWin extends PopupWindow {
