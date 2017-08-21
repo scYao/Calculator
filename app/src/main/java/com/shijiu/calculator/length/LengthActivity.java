@@ -261,6 +261,20 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 BigDecimal re7 = Cac2(re, "1000000000000");
                 toMeter(i2, re7);
                 break;
+
+            case 8:
+                BigDecimal re8 = Cac1(re, "1852");
+                toMeter(i2, re8);
+                break;
+            case 9:
+                BigDecimal re9 = Cac1(re, "1609.344");
+                toMeter(i2, re9);
+                break;
+
+            case 10:
+                BigDecimal re10 = Cac1(re, "201.168");
+                toMeter(i2, re10);
+                break;
         }
 
     }
@@ -272,48 +286,60 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
 //                double d0 = d / 1000;
                 BigDecimal d0 = Cac2(d, "1000");
 //                result.setText(decimalFormat.format(d0));
-                result.setText(d0.toString());
+                result.setText(d0.stripTrailingZeros().toPlainString());
                 break;
             case 1:
                 BigDecimal d1 = d;
 
-                result.setText(d1.toString());
+                result.setText(d1.stripTrailingZeros().toPlainString());
                 break;
             case 2:
 
 //                double d2 = d * 10;
                 BigDecimal d2 = Cac1(d, "10");
 //                result.setText(decimalFormat.format(d2));
-                result.setText(d2.toString());
+                result.setText(d2.stripTrailingZeros().toPlainString());
                 break;
             case 3:
 //                double d3 = d * 100;
                 BigDecimal d3 = Cac1(d, "100");
 //                result.setText(decimalFormat.format(d3));
-                result.setText(d3.toString());
+                result.setText(d3.stripTrailingZeros().toPlainString());
                 break;
             case 4:
 //                double d4 = d * 1000;
                 BigDecimal d4 = Cac1(d, "1000");
 //                result.setText(decimalFormat.format(d4));
-                result.setText(d4.toString());
+                result.setText(d4.stripTrailingZeros().toPlainString());
                 break;
             case 5:
 //                double d5 = d * 1000000;
                 BigDecimal d5 = Cac1(d, "1000000");
-                result.setText(d5.toString());
+                result.setText(d5.stripTrailingZeros().toPlainString());
                 break;
             case 6:
 //                double d6 = d * 1000000000;
                 BigDecimal d6 = Cac1(d, "1000000000");
 //                result.setText(decimalFormat.format(d6));
-                result.setText(d6.toString());
+                result.setText(d6.stripTrailingZeros().toPlainString());
                 break;
             case 7:
-
                 BigDecimal d7 = Cac1(d, "1000000000000");
+                result.setText(d7.stripTrailingZeros().toPlainString());
+                break;
 
-                result.setText(d7.toString());
+            case 8:
+                BigDecimal d8 = Cac2(d, "1852");
+                result.setText(d8.stripTrailingZeros().toPlainString());
+                break;
+            case 9:
+                BigDecimal d9 = Cac2(d, "1609.344");
+                result.setText(d9.stripTrailingZeros().toPlainString());
+                break;
+
+            case 10:
+                BigDecimal d10 = Cac2(d, "201.168");
+                result.setText(d10.stripTrailingZeros().toPlainString());
                 break;
         }
     }
@@ -360,8 +386,11 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
     private BigDecimal Cac2(BigDecimal d, String s) {
         BigDecimal bigDecimal1 = d;
         BigDecimal bigDecimal2 = new BigDecimal(s);
+//        BigDecimal bigDecimal =bigDecimal1.divide(bigDecimal2);
+//        bigDecimal.setScale(10,BigDecimal.ROUND_HALF_UP);
 
-        return bigDecimal1.divide(bigDecimal2);
+        return bigDecimal1.divide(bigDecimal2,6,BigDecimal.ROUND_HALF_UP);
+//        return bigDecimal;
     }
 
     private static String big(double d) {
@@ -497,6 +526,9 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             beanList1.add(new UnitBean("微米 um"));
             beanList1.add(new UnitBean("纳米 nm"));
             beanList1.add(new UnitBean("皮米 pm"));
+            beanList1.add(new UnitBean("海里 nmi"));
+            beanList1.add(new UnitBean("英里 mi"));
+            beanList1.add(new UnitBean("弗隆 fur"));
 
             beanList2.add(new UnitBean("千米 km"));
             beanList2.add(new UnitBean("米 m"));
@@ -506,7 +538,9 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             beanList2.add(new UnitBean("微米 um"));
             beanList2.add(new UnitBean("纳米 nm"));
             beanList2.add(new UnitBean("皮米 pm"));
-//            beanList.add(new UnitBean("海里 nmi"));
+            beanList2.add(new UnitBean("海里 nmi"));
+            beanList2.add(new UnitBean("英里 mi"));
+            beanList2.add(new UnitBean("弗隆 fur"));
         }
     }
 

@@ -60,8 +60,8 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
     private TextView btn_del;
     private TextView btn_point;
 
-    private static int unit1=1;
-    private static int unit2=1;
+    private static int unit1 = 1;
+    private static int unit2 = 1;
 
     private static final String TAG = "AreaActivity";
     private List<UnitBean> beanList1 = new ArrayList<>();
@@ -82,7 +82,6 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
         });
 
     }
-
 
 
     private void initView() {
@@ -134,18 +133,18 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.id_spinner1:
-                    showPopFormBottom(1,beanList1);
+                    showPopFormBottom(1, beanList1);
                     break;
 
                 case R.id.id_spinner2:
-                    showPopFormBottom(2,beanList2);
+                    showPopFormBottom(2, beanList2);
                     break;
             }
         }
     };
 
-    public void showPopFormBottom(int i,List<UnitBean> beanList) {
-        AreaActivity.TakePhotoPopWin takePhotoPopWin = new AreaActivity.TakePhotoPopWin(this, i,beanList);
+    public void showPopFormBottom(int i, List<UnitBean> beanList) {
+        AreaActivity.TakePhotoPopWin takePhotoPopWin = new AreaActivity.TakePhotoPopWin(this, i, beanList);
 //        设置Popupwindow显示位置（从底部弹出）
         takePhotoPopWin.showAtLocation(findViewById(R.id.main_view1), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
         params = getWindow().getAttributes();
@@ -216,7 +215,7 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
         BigDecimal re = BigDecimal.valueOf(Double.parseDouble(input.getText().toString()));
         switch (i1) {
             case 0:
-                BigDecimal re0 =Cac1(re,"1000000") ;
+                BigDecimal re0 = Cac1(re, "1000000");
                 toMeter(i2, re0);
                 break;
             case 1:
@@ -225,31 +224,35 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case 2:
 //                double re2 = re / 100;
-                BigDecimal re2 =Cac2(re,"100") ;
+                BigDecimal re2 = Cac2(re, "100");
                 toMeter(i2, re2);
                 break;
             case 3:
 //                double re3 = re / 10000;
-                BigDecimal re3 =Cac2(re,"10000") ;
+                BigDecimal re3 = Cac2(re, "10000");
                 toMeter(i2, re3);
                 break;
             case 4:
-                BigDecimal re4 =Cac2(re,"1000000") ;
+                BigDecimal re4 = Cac2(re, "1000000");
 //                double re4 = re / 1000000;
                 toMeter(i2, re4);
                 break;
-//            case 5:
-//                double re5 = re * 10000;
-//                toMeter(i2, re5);
-//                break;
-//            case 6:
-//                double re6 = re * 100000;
-//                toMeter(i2, re6);
-//                break;
-//            case 7:
-//                double re7 = re * 1000000;
-//                toMeter(i2, re7);
-//                break;
+            case 5:
+                BigDecimal re5 = Cac2(re, "1000000000000");
+                toMeter(i2, re5);
+                break;
+            case 6:
+                BigDecimal re6 = Cac1(re, "10000");
+                toMeter(i2, re6);
+                break;
+            case 7:
+                BigDecimal re7 = Cac1(re, "100");
+                toMeter(i2, re7);
+                break;
+            case 8:
+                BigDecimal re8 = Cac1(re, "4046.85");
+                toMeter(i2, re8);
+                break;
         }
 
     }
@@ -262,42 +265,46 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
 //                double d0 = d / 1000000;
 //                result.setText(decimalFormat.format(d0));
                 BigDecimal d0 = Cac2(d, "1000000");
-                result.setText(d0.toString());
+                result.setText(d0.stripTrailingZeros().toPlainString());
                 break;
             case 1:
                 BigDecimal d1 = d;
-                result.setText(decimalFormat.format(d1));
+                result.setText(d1.stripTrailingZeros().toPlainString());
                 break;
             case 2:
 //                double d2 = d * 100;
 //                result.setText(decimalFormat.format(d2));
                 BigDecimal d2 = Cac1(d, "100");
-                result.setText(d2.toString());
+                result.setText(d2.stripTrailingZeros().toPlainString());
                 break;
             case 3:
 //                double d3 = d * 10000;
 //                result.setText(decimalFormat.format(d3));
                 BigDecimal d3 = Cac1(d, "10000");
-                result.setText(d3.toString());
+                result.setText(d3.stripTrailingZeros().toPlainString());
                 break;
             case 4:
 //                double d4 = d * 1000000;
 //                result.setText(decimalFormat.format(d4));
                 BigDecimal d4 = Cac1(d, "1000000");
-                result.setText(d4.toString());
+                result.setText(d4.stripTrailingZeros().toPlainString());
                 break;
-//            case 5:
-//                double d5 = d * 10000;
-//                result.setText(d5 + "");
-//                break;
-//            case 6:
-//                double d6 = d * 100000;
-//                result.setText(d6 + "");
-//                break;
-//            case 7:
-//                double d7 = d * 100000;
-//                result.setText(d7 + "");
-//                break;
+            case 5:
+                BigDecimal re5 = Cac1(d, "1000000000000");
+                result.setText(re5.stripTrailingZeros().toPlainString());
+                break;
+            case 6:
+                BigDecimal re6 = Cac2(d, "10000");
+                result.setText(re6.stripTrailingZeros().toPlainString());
+                break;
+            case 7:
+                BigDecimal re7 = Cac2(d, "100");
+                result.setText(re7.stripTrailingZeros().toPlainString());
+                break;
+            case 8:
+                BigDecimal re8 = Cac2(d, "4046.85");
+                result.setText(re8.stripTrailingZeros().toPlainString());
+                break;
         }
     }
 
@@ -328,7 +335,7 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
         BigDecimal bigDecimal1 = d;
         BigDecimal bigDecimal2 = new BigDecimal(s);
 
-        return bigDecimal1.divide(bigDecimal2);
+        return bigDecimal1.divide(bigDecimal2, 8, BigDecimal.ROUND_HALF_UP);
     }
 
     public class TakePhotoPopWin extends PopupWindow {
@@ -342,9 +349,9 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
         private RecyclerView.LayoutManager layoutManager;
 
 
-        public TakePhotoPopWin(Context mContext, final int i,final List<UnitBean> beanList) {
+        public TakePhotoPopWin(Context mContext, final int i, final List<UnitBean> beanList) {
             view = LayoutInflater.from(mContext).inflate(R.layout.pop_window, null);
-            if (beanList.size() ==0){
+            if (beanList.size() == 0) {
                 initData();
             }
 
@@ -362,11 +369,11 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
                     if (i == 1) {
                         unit1 = position;
                         spinner1.setText(beanList.get(position).getUnit());
-                        for (int j = 0; j <beanList.size() ; j++) {
-                            if (j==position){
+                        for (int j = 0; j < beanList.size(); j++) {
+                            if (j == position) {
                                 beanList.get(j).setImgae(R.mipmap.tick);
                                 adapter.notifyItemChanged(position);
-                            }else {
+                            } else {
                                 beanList.get(j).setImgae(null);
                             }
                         }
@@ -374,11 +381,11 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
                     } else {
                         unit2 = position;
                         spinner2.setText(beanList.get(position).getUnit());
-                        for (int j = 0; j <beanList.size() ; j++) {
-                            if (j==position){
+                        for (int j = 0; j < beanList.size(); j++) {
+                            if (j == position) {
                                 beanList.get(j).setImgae(R.mipmap.tick);
                                 adapter.notifyItemChanged(position);
-                            }else {
+                            } else {
                                 beanList.get(j).setImgae(null);
                             }
                         }
@@ -447,17 +454,20 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
             beanList1.add(new UnitBean("平方分米 dm²"));
             beanList1.add(new UnitBean("平方厘米 cm²"));
             beanList1.add(new UnitBean("平方毫米 mm²"));
+            beanList1.add(new UnitBean("平方微米 um²"));
+            beanList1.add(new UnitBean("公顷 ha"));
+            beanList1.add(new UnitBean("公亩 are"));
+            beanList1.add(new UnitBean("英亩 acre"));
 
             beanList2.add(new UnitBean("平方千米 km²"));
             beanList2.add(new UnitBean("平方米 m²"));
             beanList2.add(new UnitBean("平方分米 dm²"));
             beanList2.add(new UnitBean("平方厘米 cm²"));
             beanList2.add(new UnitBean("平方毫米 mm²"));
-//            beanList.add(new UnitBean("平方微米 um2"));
-//            beanList.add(new UnitBean("平方纳米 nm2"));
-//            beanList.add(new UnitBean("平方皮米 pm2"));
-//            beanList.add(new UnitBean("英亩 acre"));
-//            beanList.add(new UnitBean("海里 nmi"));
+            beanList2.add(new UnitBean("平方微米 um²"));
+            beanList2.add(new UnitBean("公顷 ha"));
+            beanList2.add(new UnitBean("公亩 are"));
+            beanList2.add(new UnitBean("英亩 acre"));
         }
     }
 }
