@@ -52,6 +52,7 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
     private TextView title;
 
     private static final String TAG = "CalculatorActivity";
+    private int flag = 0;//0表示正数,1表示负数
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -214,7 +215,19 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
 
 
             case R.id.btn_equal:
+                flag = 0;
                 getResult();
+                break;
+            case R.id.btn_pluse_minus:
+                if (str.equals("")){
+                    if (needclear) {
+                        id_input_edit.setText("");
+                        id_result_text.setText("");
+                    }
+                    flag =1;
+                    id_input_edit.setText(str + "-");
+
+                }
                 break;
 
         }
@@ -224,7 +237,7 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
      * 获取计算结果
      */
     private void getResult() {
-        Log.e(TAG, "getResult: wodddddddddddddddddddddddddd");
+
         needclear = true;
         String exp = id_input_edit.getText().toString();
 //        if (exp.equals(id_result_text.getText().toString())){
@@ -246,6 +259,8 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
             String s1 = exp.substring(0, space);//s1用于保存第一个运算数
             String op = exp.substring(space + 1, space + 2);//op用于保存运算符
             double arg1 = Double.parseDouble(s1);//将运算数从string转换为Single;
+
+
             s2 = exp.substring(space + 3);//s2用于保存第二个运算数
 
 
@@ -256,16 +271,30 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
             }
 
             if (op.equals("+")) {
+                if (flag ==1){
+                    arg1 = -arg1;
+                }
                 r = arg1 + arg2;
             } else if (op.equals("-")) {
+                if (flag ==1){
+                    arg1 = -arg1;
+                }
                 r = arg1 - arg2;
             } else if (op.equals("×")) {
+
                 r = arg1 * arg2;
+                if (flag ==1){
+                    r = -r;
+                }
             } else if (op.equals("÷")) {
                 if (arg2 == 0) {
                     r = 0;
                 } else {
                     r = arg1 / arg2;
+                }
+
+                if (flag ==1){
+                    r = -r;
                 }
             } else if (op.equals("%")) {
                 if (arg2 == 0) {
@@ -273,9 +302,14 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
                 } else {
                     r = arg1 % arg2;
                 }
+                if (flag ==1){
+                    r = -r;
+                }
             }
 
-            if (!s1.contains(".") && !s2.contains(".")) {
+            Log.e(TAG, "getResult: "+r );
+
+            if (!String.valueOf(r).contains(".")) {
                 int result = (int) r;
                 id_result_text.setText(result + "");
 
