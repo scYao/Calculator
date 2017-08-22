@@ -261,7 +261,6 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 BigDecimal re7 = Cac2(re, "1000000000000");
                 toMeter(i2, re7);
                 break;
-
             case 8:
                 BigDecimal re8 = Cac1(re, "1852");
                 toMeter(i2, re8);
@@ -270,111 +269,205 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 BigDecimal re9 = Cac1(re, "1609.344");
                 toMeter(i2, re9);
                 break;
-
             case 10:
                 BigDecimal re10 = Cac1(re, "201.168");
                 toMeter(i2, re10);
+                break;
+            case 11:
+                BigDecimal re11 = Cac1(re, "1.8288");
+                toMeter(i2, re11);
+                break;
+            //码 英尺 英寸
+            case 12:
+                BigDecimal re12 = Cac1(re, "0.9144");
+                toMeter(i2, re12);
+                break;
+            case 13:
+                BigDecimal re13 = Cac1(re, "0.3048");
+                toMeter(i2, re13);
+                break;
+            case 14:
+                BigDecimal re14 = Cac1(re, "0.0254");
+                toMeter(i2, re14);
+                break;
+            //公里 里 丈
+            case 15:
+                BigDecimal re15 = Cac1(re, "1000");
+                toMeter(i2, re15);
+                break;
+            case 16:
+                BigDecimal re16 = Cac1(re, "500");
+                toMeter(i2, re16);
+                break;
+            case 17:
+                BigDecimal re17 = Cac1(re, "3.333");
+                toMeter(i2, re17);
+                break;
+            //尺 寸 分
+            case 18:
+                BigDecimal re18 = Cac1(re, "0.3333");
+                toMeter(i2, re18);
+                break;
+            case 19:
+                BigDecimal re19 = Cac1(re, "0.03333");
+                toMeter(i2, re19);
+                break;
+            case 20:
+                BigDecimal re20 = Cac1(re, "0.003333");
+                toMeter(i2, re20);
+                break;
+            //厘 毫 秒差距
+            case 21:
+                BigDecimal re21 = Cac1(re, "0.0003333");
+                toMeter(i2, re21);
+                break;
+            case 22:
+                BigDecimal re22 = Cac1(re, "0.0000333");
+                toMeter(i2, re22);
+                break;
+            case 23:
+                BigDecimal re23 = Cac1(re, "30856775814671915.808");
+                toMeter(i2, re23);
+                break;
+            //月球距离 天文单位 光年
+            case 24:
+                BigDecimal re24 = Cac1(re, "38400000");
+                toMeter(i2, re24);
+                break;
+            case 25:
+                BigDecimal re25 = Cac1(re, "149600000000");
+                toMeter(i2, re25);
+                break;
+            case 26:
+                BigDecimal re26 = Cac1(re, "9460730472580800");
+                toMeter(i2, re26);
                 break;
         }
 
     }
 
     private void toMeter(int i, BigDecimal d) {
-        DecimalFormat decimalFormat = (DecimalFormat) DecimalFormat.getInstance();
         switch (i) {
             case 0:
-//                double d0 = d / 1000;
                 BigDecimal d0 = Cac2(d, "1000");
-//                result.setText(decimalFormat.format(d0));
                 result.setText(d0.stripTrailingZeros().toPlainString());
                 break;
             case 1:
                 BigDecimal d1 = d;
-
                 result.setText(d1.stripTrailingZeros().toPlainString());
                 break;
             case 2:
-
-//                double d2 = d * 10;
                 BigDecimal d2 = Cac1(d, "10");
-//                result.setText(decimalFormat.format(d2));
                 result.setText(d2.stripTrailingZeros().toPlainString());
                 break;
+
             case 3:
-//                double d3 = d * 100;
                 BigDecimal d3 = Cac1(d, "100");
-//                result.setText(decimalFormat.format(d3));
                 result.setText(d3.stripTrailingZeros().toPlainString());
                 break;
             case 4:
-//                double d4 = d * 1000;
                 BigDecimal d4 = Cac1(d, "1000");
-//                result.setText(decimalFormat.format(d4));
                 result.setText(d4.stripTrailingZeros().toPlainString());
                 break;
             case 5:
-//                double d5 = d * 1000000;
                 BigDecimal d5 = Cac1(d, "1000000");
                 result.setText(d5.stripTrailingZeros().toPlainString());
                 break;
+
             case 6:
-//                double d6 = d * 1000000000;
                 BigDecimal d6 = Cac1(d, "1000000000");
-//                result.setText(decimalFormat.format(d6));
                 result.setText(d6.stripTrailingZeros().toPlainString());
                 break;
             case 7:
                 BigDecimal d7 = Cac1(d, "1000000000000");
                 result.setText(d7.stripTrailingZeros().toPlainString());
                 break;
-
             case 8:
                 BigDecimal d8 = Cac2(d, "1852");
                 result.setText(d8.stripTrailingZeros().toPlainString());
                 break;
+
             case 9:
                 BigDecimal d9 = Cac2(d, "1609.344");
                 result.setText(d9.stripTrailingZeros().toPlainString());
                 break;
-
             case 10:
                 BigDecimal d10 = Cac2(d, "201.168");
                 result.setText(d10.stripTrailingZeros().toPlainString());
                 break;
+            case 11:
+                BigDecimal d11 = Cac2(d, "1.8288");
+                result.setText(d11.stripTrailingZeros().toPlainString());
+                break;
+            //码 英尺 英寸
+            case 12:
+                BigDecimal d12 = Cac2(d, "0.9144");
+                result.setText(d12.stripTrailingZeros().toPlainString());
+                break;
+            case 13:
+                BigDecimal d13 = Cac2(d, "0.3048");
+                result.setText(d13.stripTrailingZeros().toPlainString());
+                break;
+            case 14:
+                BigDecimal d14 = Cac2(d, "0.0254");
+                result.setText(d14.stripTrailingZeros().toPlainString());
+                break;
+            //公里 里 丈
+            case 15:
+                BigDecimal d15 = Cac2(d, "1000");
+                result.setText(d15.stripTrailingZeros().toPlainString());
+                break;
+            case 16:
+                BigDecimal d16 = Cac2(d, "500");
+                result.setText(d16.stripTrailingZeros().toPlainString());
+                break;
+            case 17:
+                BigDecimal d17 = Cac2(d, "3.333");
+                result.setText(d17.stripTrailingZeros().toPlainString());
+                break;
+            //尺 寸 分
+            case 18:
+                BigDecimal d18 = Cac2(d, "0.3333");
+                result.setText(d18.stripTrailingZeros().toPlainString());
+                break;
+            case 19:
+                BigDecimal d19 = Cac2(d, "0.03333");
+                result.setText(d19.stripTrailingZeros().toPlainString());
+                break;
+            case 20:
+                BigDecimal d20 = Cac2(d, "0.003333");
+                result.setText(d20.stripTrailingZeros().toPlainString());
+                break;
+            //厘 毫 秒差距
+            case 21:
+                BigDecimal d21 = Cac2(d, "0.0003333");
+                result.setText(d21.stripTrailingZeros().toPlainString());
+                break;
+            case 22:
+                BigDecimal d22 = Cac2(d, "0.0000333");
+                result.setText(d22.stripTrailingZeros().toPlainString());
+                break;
+            case 23:
+                BigDecimal d23 = Cac2(d, "30856775814671915.808");
+                result.setText(d23.stripTrailingZeros().toPlainString());
+                break;
+            //月球距离 天文单位 光年
+            case 24:
+                BigDecimal d24 = Cac2(d, "384000000");
+                result.setText(d24.stripTrailingZeros().toPlainString());
+                break;
+            case 25:
+                BigDecimal d25 = Cac2(d, "149600000000");
+                result.setText(d25.stripTrailingZeros().toPlainString());
+                break;
+            case 26:
+                BigDecimal d26 = Cac2(d, "9460730472580800");
+                result.setText(d26.stripTrailingZeros().toPlainString());
+                break;
         }
     }
 
-//    private String Cac1(double d, String s) {
-//        BigDecimal bigDecimal1 = new BigDecimal(d);
-//        BigDecimal bigDecimal2 = new BigDecimal(s);
-//        Double d1 = bigDecimal1.multiply(bigDecimal2).doubleValue();
-//        String str = new BigDecimal(d1.toString()).toString();
-//        return str;
-//    }
-//
-//    private String Cac2(double d, String s) {
-//        BigDecimal bigDecimal1 = new BigDecimal(d);
-//        BigDecimal bigDecimal2 = new BigDecimal(s);
-//        Double d1 = bigDecimal1.divide(bigDecimal2).doubleValue();
-//        String str = new BigDecimal(d1.toString()).toString();
-//        return str;
-//    }
 
-//    private Double Cac1(double d, String s) {
-//        BigDecimal bigDecimal1 = new BigDecimal(d);
-//        BigDecimal bigDecimal2 = new BigDecimal(s);
-//        Double d1 = bigDecimal1.multiply(bigDecimal2).doubleValue();
-//
-//        return d1;
-//    }
-//
-//    private Double Cac2(double d, String s) {
-//        BigDecimal bigDecimal1 = new BigDecimal(d);
-//        BigDecimal bigDecimal2 = new BigDecimal(s);
-//        Double d1 = bigDecimal1.divide(bigDecimal2).doubleValue();
-//
-//        return d1;
-//    }
 
     private BigDecimal Cac1(BigDecimal d, String s) {
         BigDecimal bigDecimal1 = d;
@@ -389,7 +482,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
 //        BigDecimal bigDecimal =bigDecimal1.divide(bigDecimal2);
 //        bigDecimal.setScale(10,BigDecimal.ROUND_HALF_UP);
 
-        return bigDecimal1.divide(bigDecimal2,6,BigDecimal.ROUND_HALF_UP);
+        return bigDecimal1.divide(bigDecimal2,8,BigDecimal.ROUND_HALF_UP);
 //        return bigDecimal;
     }
 
@@ -529,6 +622,22 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             beanList1.add(new UnitBean("海里 nmi"));
             beanList1.add(new UnitBean("英里 mi"));
             beanList1.add(new UnitBean("弗隆 fur"));
+            beanList1.add(new UnitBean("英寻 fm"));
+            beanList1.add(new UnitBean("码 yd"));
+            beanList1.add(new UnitBean("英尺 ft"));
+            beanList1.add(new UnitBean("英寸 in"));
+            beanList1.add(new UnitBean("公里 gongli"));
+            beanList1.add(new UnitBean("里 li"));
+            beanList1.add(new UnitBean("丈 zhang"));
+            beanList1.add(new UnitBean("尺 chi"));
+            beanList1.add(new UnitBean("寸 cun"));
+            beanList1.add(new UnitBean("分 fen"));
+            beanList1.add(new UnitBean("厘 li"));
+            beanList1.add(new UnitBean("毫 hao"));
+            beanList1.add(new UnitBean("秒差距 pc"));
+            beanList1.add(new UnitBean("月球距离 ld"));
+            beanList1.add(new UnitBean("天文单位 AU"));
+            beanList1.add(new UnitBean("光年 ly"));
 
             beanList2.add(new UnitBean("千米 km"));
             beanList2.add(new UnitBean("米 m"));
@@ -541,6 +650,22 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             beanList2.add(new UnitBean("海里 nmi"));
             beanList2.add(new UnitBean("英里 mi"));
             beanList2.add(new UnitBean("弗隆 fur"));
+            beanList2.add(new UnitBean("英寻 fm"));
+            beanList2.add(new UnitBean("码 yd"));
+            beanList2.add(new UnitBean("英尺 ft"));
+            beanList2.add(new UnitBean("英寸 in"));
+            beanList2.add(new UnitBean("公里 gongli"));
+            beanList2.add(new UnitBean("里 li"));
+            beanList2.add(new UnitBean("丈 zhang"));
+            beanList2.add(new UnitBean("尺 chi"));
+            beanList2.add(new UnitBean("寸 cun"));
+            beanList2.add(new UnitBean("分 fen"));
+            beanList2.add(new UnitBean("厘 li"));
+            beanList2.add(new UnitBean("毫 hao"));
+            beanList2.add(new UnitBean("秒差距 pc"));
+            beanList2.add(new UnitBean("月球距离 ld"));
+            beanList2.add(new UnitBean("天文单位 AU"));
+            beanList2.add(new UnitBean("光年 ly"));
         }
     }
 
