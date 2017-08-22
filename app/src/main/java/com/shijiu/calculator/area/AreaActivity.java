@@ -253,6 +253,42 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
                 BigDecimal re8 = Cac1(re, "4046.85");
                 toMeter(i2, re8);
                 break;
+            //平方英里 平方码 平方英尺
+            case 9:
+                BigDecimal re9 = Cac1(re, "2589988.110336");
+                toMeter(i2, re9);
+                break;
+            case 10:
+                BigDecimal re10 = Cac1(re, "0.8361274");
+                toMeter(i2, re10);
+                break;
+            case 11:
+                BigDecimal re11 = Cac1(re, "0.092903");
+                toMeter(i2, re11);
+                break;
+            //顷 亩 平方尺
+            case 12:
+                BigDecimal re12 = Cac1(re, "66666.6666667");
+                toMeter(i2, re12);
+                break;
+            case 13:
+                BigDecimal re13 = Cac1(re, "666.6666667");
+                toMeter(i2, re13);
+                break;
+            case 14:
+                BigDecimal re14 = Cac1(re, "0.1111111");
+                toMeter(i2, re14);
+                break;
+            //平方寸 平方公里
+            case 15:
+                BigDecimal re15 = Cac1(re, "0.0011111");
+                toMeter(i2, re15);
+                break;
+            case 16:
+                BigDecimal re16 = Cac1(re, "1000000");
+                toMeter(i2, re16);
+                break;
+
         }
 
     }
@@ -305,6 +341,40 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
                 BigDecimal re8 = Cac2(d, "4046.85");
                 result.setText(re8.stripTrailingZeros().toPlainString());
                 break;
+            //平方英里 平方码 平方英尺
+            case 9:
+                BigDecimal re9 = Cac2(d, "2589988.110336");
+                result.setText(re9.stripTrailingZeros().toPlainString());
+                break;
+            case 10:
+                BigDecimal re10 = Cac2(d, "0.8361274");
+                result.setText(re10.stripTrailingZeros().toPlainString());
+                break;
+            case 11:
+                BigDecimal re11 = Cac2(d, "0.092903");
+                result.setText(re11.stripTrailingZeros().toPlainString());
+                break;
+            //顷 亩 平方尺
+            case 12:
+                BigDecimal re12 = Cac2(d, "66666.6666667");
+                result.setText(re12.stripTrailingZeros().toPlainString());
+                break;
+            case 13:
+                BigDecimal re13 = Cac2(d, "666.6666667");
+                result.setText(re13.stripTrailingZeros().toPlainString());
+                break;
+            case 14:
+                BigDecimal re14 = Cac2(d, "0.1111111");
+                result.setText(re14.stripTrailingZeros().toPlainString());
+                break;
+            //平方寸 平方公里
+            case 15:
+                BigDecimal re15 = Cac2(d, "0.0011111");
+                result.setText(re15.stripTrailingZeros().toPlainString());
+                break;
+            case 16:
+                BigDecimal re16 = Cac2(d, "1000000");
+                result.setText(re16.stripTrailingZeros().toPlainString());
         }
     }
 
@@ -458,6 +528,14 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
             beanList1.add(new UnitBean("公顷 ha"));
             beanList1.add(new UnitBean("公亩 are"));
             beanList1.add(new UnitBean("英亩 acre"));
+            beanList1.add(new UnitBean("平方英里 mi²"));
+            beanList1.add(new UnitBean("平方码 yd²"));
+            beanList1.add(new UnitBean("平方英尺 ft²"));
+            beanList1.add(new UnitBean("顷 qing"));
+            beanList1.add(new UnitBean("亩 mu"));
+            beanList1.add(new UnitBean("平方尺 chi²"));
+            beanList1.add(new UnitBean("平方寸 cun²"));
+            beanList1.add(new UnitBean("平方公里 gongli²"));
 
             beanList2.add(new UnitBean("平方千米 km²"));
             beanList2.add(new UnitBean("平方米 m²"));
@@ -468,6 +546,14 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
             beanList2.add(new UnitBean("公顷 ha"));
             beanList2.add(new UnitBean("公亩 are"));
             beanList2.add(new UnitBean("英亩 acre"));
+            beanList2.add(new UnitBean("平方英里 mi²"));
+            beanList2.add(new UnitBean("平方码 yd²"));
+            beanList2.add(new UnitBean("平方英尺 ft²"));
+            beanList2.add(new UnitBean("顷 qing"));
+            beanList2.add(new UnitBean("亩 mu"));
+            beanList2.add(new UnitBean("平方尺 chi²"));
+            beanList2.add(new UnitBean("平方寸 cun²"));
+            beanList2.add(new UnitBean("平方公里 gongli²"));
         }
     }
 }
