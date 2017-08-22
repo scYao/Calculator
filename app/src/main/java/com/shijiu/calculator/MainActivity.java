@@ -13,6 +13,7 @@ import com.shijiu.calculator.appellation.AppellationActivity;
 import com.shijiu.calculator.area.AreaActivity;
 import com.shijiu.calculator.bean.GridBean;
 import com.shijiu.calculator.calculator.CalculatorActivity;
+import com.shijiu.calculator.calculator.NewCalculatorActivity;
 import com.shijiu.calculator.capital.CapitalActivity;
 import com.shijiu.calculator.length.LengthActivity;
 import com.shijiu.calculator.mortgage.MortgageActivity;
@@ -106,7 +107,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Util.forwardActivity(MainActivity.this, LengthActivity.class);
                 break;
             case 4:
-                Util.forwardActivity(MainActivity.this, CalculatorActivity.class);
+//                Util.forwardActivity(MainActivity.this, CalculatorActivity.class);
+                Util.forwardActivity(MainActivity.this, NewCalculatorActivity.class);
                 break;
             case 5:
                 Util.forwardActivity(MainActivity.this, AreaActivity.class);

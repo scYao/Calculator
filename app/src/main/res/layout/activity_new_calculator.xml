@@ -1,290 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorBackground"
-    tools:context=".calculator.NewCalculatorActivity" >
+    android:layout_marginTop="2dp"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_layout"/>
 
     <EditText
-        android:id="@+id/result"
-        android:layout_width="fill_parent"
-        android:layout_height="80dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/result"
+        android:id="@+id/id_input_edit"
+        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="18sp"
+        android:textColor="@color/colorBlack"
+        android:hint="0"
+        android:text="0"
+        android:editable="false"
+        android:paddingRight="4dp"
+        android:maxLength="15"
         android:gravity="right|center_vertical"
-        android:paddingLeft="5dp"
-        android:paddingRight="15dp"
-        android:singleLine="true"
-        android:text=""
-        android:textColor="@android:color/black"
-        android:textSize="25dp"
-        android:textStyle="bold" />
+        android:background="@drawable/edit_shape"/>
+
+    <EditText
+        android:cursorVisible="false"
+        android:paddingRight="4dp"
+        android:id="@+id/id_result_text"
+        android:gravity="right|center_vertical"
+        android:textColor="@color/colorSelectText"
+        android:hint="0"
+        android:textColorHint="@color/colorSelectText"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_shape"/>
 
     <LinearLayout
-        android:id="@+id/button"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_below="@id/result"
-        android:layout_margin="5dp"
-        android:gravity="right|center_vertical" >
+        android:layout_marginTop="2dp"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp">
 
         <TextView
-            android:id="@+id/clear"
-            android:layout_width="100dp"
-            android:layout_height="fill_parent"
-            android:background="@drawable/button"
-            android:clickable="true"
+            android:id="@+id/btn_clear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/edit_shape"
             android:gravity="center"
-            android:onClick="onClick"
-            android:text="clear"
-            android:textSize="18sp" />
+            android:text="C"
+            android:textColor="@color/colorSelectText"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/btn_pluse_minus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/edit_shape"
+            android:gravity="center"
+            android:text="+/-"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/btn_del"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/edit_shape"
+            android:gravity="center"
+            android:text="del"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/btn_divide"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/edit_shape"
+            android:gravity="center"
+            android:text="÷"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp" />
+
+
     </LinearLayout>
 
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@id/button"
-        android:padding="5dp" >
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:background="@color/colorWhite" >
-        </TableRow>
+    <LinearLayout
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal">
 
-        <TableRow
+        <TextView
+            android:id="@+id/btn_7"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/edit_shape"
+            android:text="7"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
+            android:layout_height="match_parent" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:padding="3dp"
-                android:text="7"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:padding="3dp"
-                android:text="8"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:padding="3dp"
-                android:text="9"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:padding="3dp"
-                android:text="/"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
+        <TextView
+            android:id="@+id/btn_8"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/edit_shape"
+            android:text="8"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
+            android:layout_height="match_parent" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:padding="3dp"
-                android:text="4"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:padding="3dp"
-                android:text="5"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:padding="3dp"
-                android:text="6"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:padding="3dp"
-                android:text="*"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
+        <TextView
+            android:id="@+id/btn_9"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/edit_shape"
+            android:text="9"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
+            android:layout_height="match_parent" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:padding="3dp"
-                android:text="1"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:padding="3dp"
-                android:text="2"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:padding="3dp"
-                android:text="3"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:padding="3dp"
-                android:text="-"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
+        <TextView
+            android:id="@+id/btn_multiply"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" >
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/edit_shape"
+            android:gravity="center"
+            android:text="×"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:padding="3dp"
-                android:text="."
-                android:textSize="20dp"
-                android:textStyle="bold" />
+    </LinearLayout>
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:padding="3dp"
-                android:text="0"
-                android:textSize="20dp"
-                android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:padding="3dp"
-                android:text="="
-                android:textSize="20dp"
-                android:textStyle="bold" />
+    <LinearLayout
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:padding="3dp"
-                android:text="+"
-                android:textSize="20dp" />
-        </TableRow>
-    </TableLayout>
+        <TextView
+            android:id="@+id/btn_4"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/edit_shape"
+            android:text="4"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/btn_5"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/edit_shape"
+            android:text="5"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/btn_6"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/edit_shape"
+            android:text="6"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/btn_minus"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/edit_shape"
+            android:text="-"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btn_1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/edit_shape"
+            android:text="1"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/btn_2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/edit_shape"
+            android:text="2"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/btn_3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/edit_shape"
+            android:text="3"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/btn_pluse"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/edit_shape"
+            android:text="+"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btn_complementation"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/edit_shape"
+            android:text="%"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/btn_0"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/edit_shape"
+            android:text="0"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/btn_point"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/edit_shape"
+            android:text="."
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/btn_equal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/edit_shape_select"
+            android:text="="
+            android:textSize="16sp"
+            android:textColor="@color/colorWhite"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

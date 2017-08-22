@@ -30,6 +30,8 @@
             android:drawableRight="@mipmap/arrow_right"/>
 
         <EditText
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
             android:id="@+id/id_input"
             android:layout_marginRight="20dp"
             android:layout_width="0dp"
@@ -63,6 +65,8 @@
             android:text="平方米 m²" />
 
         <EditText
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
             android:id="@+id/id_result"
             android:layout_marginRight="20dp"
             android:layout_width="0dp"
