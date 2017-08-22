@@ -20,6 +20,7 @@ import com.shijiu.calculator.utils.AverageCapitalUtils;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -69,8 +70,8 @@ public class CombinationDetailActivity extends AppCompatActivity {
         double mortgage_fund = Double.parseDouble(bean.getMortgage_fund())*10000;
 
 
-        double rate_business = Double.parseDouble(bean.getRate_business()) / 100;
-        double rate_fund = Double.parseDouble(bean.getRate_fund()) / 100;
+        double rate_business = Double.parseDouble(bean.getRate_business()) / 1000;
+        double rate_fund = Double.parseDouble(bean.getRate_fund()) / 1000;
 
 
         int months = (int) (Double.parseDouble(bean.getTotal_years()) * 12);
@@ -82,16 +83,13 @@ public class CombinationDetailActivity extends AppCompatActivity {
         Map<Integer, BigDecimal> maps = AverageCapitalPlusInterestUtils.getPerMonthInterest(mortgage_business, rate_business, months);
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(bean.getYear(), bean.getMonth(), bean.getDay());
+        calendar.set(bean.getYear(), bean.getMonth()-1, bean.getDay());
         for (Map.Entry<Integer, BigDecimal> entry : maps.entrySet()) {
             CalculateBean bean1 = new CalculateBean();
 
-            int month = calendar.get(Calendar.MONTH);
-            int year = calendar.get(Calendar.YEAR);
-            if (month == 0) {
-                year = year - 1;
-                month = 12;
-            }
+            int month = calendar.get(calendar.MONTH)+1;
+            int year = calendar.get(calendar.YEAR);
+
             bean1.setOrder_number(year + "." + month);
 
             bean1.setTotal(total + "");//总额
@@ -112,10 +110,10 @@ public class CombinationDetailActivity extends AppCompatActivity {
         }
 
         //每月偿还本金和利息
-        double total1 = AverageCapitalPlusInterestUtils.getPerMonthPrincipalInterest(mortgage_business, rate_business, months);
+        double total1 = AverageCapitalPlusInterestUtils.getPerMonthPrincipalInterest(mortgage_fund, rate_fund, months);
 
         //每月偿还利息
-        Map<Integer, BigDecimal> maps1 = AverageCapitalPlusInterestUtils.getPerMonthInterest(mortgage_business, rate_business, months);
+        Map<Integer, BigDecimal> maps1 = AverageCapitalPlusInterestUtils.getPerMonthInterest(mortgage_fund, rate_fund, months);
 
         Calendar calendar1 = Calendar.getInstance();
         calendar.set(bean.getYear(), bean.getMonth(), bean.getDay());
@@ -137,9 +135,9 @@ public class CombinationDetailActivity extends AppCompatActivity {
             BigDecimal value = entry.getValue();
             bean2.setRate(value + "");
 
-            double monthRate = rate_business / 12;
+            double monthRate = rate_fund / 12;
 
-            BigDecimal monthIncome = new BigDecimal(mortgage_business)
+            BigDecimal monthIncome = new BigDecimal(mortgage_fund)
                     .multiply(new BigDecimal(monthRate * Math.pow(1 + monthRate, months)))
                     .divide(new BigDecimal(Math.pow(1 + monthRate, months) - 1), 2, BigDecimal.ROUND_DOWN);
             bean2.setInvest(monthIncome.subtract(entry.getValue()) + "");//偿还本金
@@ -170,20 +168,20 @@ public class CombinationDetailActivity extends AppCompatActivity {
         double mortgage_business = Double.parseDouble(bean.getMortgage_business())*10000;
         double mortgage_fund = Double.parseDouble(bean.getMortgage_fund())*10000;
 
-        double rate_business = Double.parseDouble(bean.getRate_business()) / 100;
-        double rate_fund = Double.parseDouble(bean.getRate_fund()) / 100;
+        double rate_business = Double.parseDouble(bean.getRate_business()) / 1000;
+        double rate_fund = Double.parseDouble(bean.getRate_fund()) / 1000;
 
         int months = (int) (Double.parseDouble(bean.getTotal_years()) * 12);
 
         Map<Integer, Double> maps = AverageCapitalUtils.getPerMonthPrincipalInterest(mortgage_business, rate_business, months);
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(bean.getYear(), bean.getMonth(), bean.getDay());
+        calendar.set(bean.getYear(), bean.getMonth()-1, bean.getDay());
         for (Map.Entry<Integer, Double> entry : maps.entrySet()) {
             CalculateBean bean1 = new CalculateBean();
 
-            int month = calendar.get(Calendar.MONTH);
-            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(calendar.MONTH)+1;
+            int year = calendar.get(calendar.YEAR);
             if (month ==0){
                 year =year +1;
                 month = 12;
@@ -248,6 +246,7 @@ public class CombinationDetailActivity extends AppCompatActivity {
             bean3.setRate(rate+"");
             beanList.add(bean3);
         }
+        Collections.reverse(beanList);
 
     }
 

@@ -44,6 +44,7 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
     private TextView btn_del;
     private TextView btn_point;
     private boolean flag = true;
+    private String content;
 
 
     @Override
@@ -64,8 +65,12 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
                     btn_point.setClickable(false);
                     number.setText("");
                     number.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
+                    content ="0";
+                    capital.setText(content);
                     flag = false;
                 } else {
+                    content ="零元整";
+                    capital.setText(content);
                     number.setText("");
                     detail.setText("罗马数字");
                     btn_point.setClickable(true);
@@ -108,7 +113,7 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
 
                 } else {
 //                    number.setHint("0");
-                    capital.setText("零元整");
+                    capital.setText(content);
                 }
 
             }
@@ -167,7 +172,9 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
 
         final double MAX_VALUE;
         if (flag) {
-            MAX_VALUE = 999999999999.99D;
+//            MAX_VALUE = 999999999999.99D;
+            MAX_VALUE = 9999999999999.99D;
+
         } else {
             MAX_VALUE = 399D;
         }
@@ -178,6 +185,32 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()) {
 
             case R.id.btn_0:
+                if (in.equals("")){
+                    return;
+                }
+                if (!in.equals("")) {
+
+                    if (Double.parseDouble(in) >= MAX_VALUE) {
+                        return;
+                    }
+                }
+
+                if (in.contains(".")) {
+                    int point = in.indexOf(".");
+                    String s = in.substring(point);
+                    if (s.length() > 2) {
+                        return;
+                    }
+                }
+
+                if (in.length() == 1 && in.substring(0, 1).equals("0")) {
+                    number.setText(((TextView) view).getText());
+
+                } else {
+                    number.setText(in + ((TextView) view).getText() + "");
+                }
+
+                break;
             case R.id.btn_1:
             case R.id.btn_2:
             case R.id.btn_3:
@@ -189,7 +222,7 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_9:
                 if (!in.equals("")) {
 
-                    if (Double.parseDouble(in) > MAX_VALUE) {
+                    if (Double.parseDouble(in) >= MAX_VALUE) {
                         return;
                     }
                 }
@@ -237,12 +270,12 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
                     number.setText(in.substring(0, in.length() - 1));
 
                 } else {
-                    capital.setText("零元整");
+                    capital.setText(content);
                 }
                 break;
             case R.id.btn_equal:
                 number.setText("");
-                capital.setText("零元整");
+                capital.setText(content);
                 break;
 
         }

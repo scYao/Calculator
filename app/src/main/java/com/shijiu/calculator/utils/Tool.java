@@ -51,4 +51,7 @@ public class Tool {
 //    public static void main(String[] args){
 //        System.out.println(Tool.change(12356789.9845));
 //    }
+
+    //数组颠倒
+
 }

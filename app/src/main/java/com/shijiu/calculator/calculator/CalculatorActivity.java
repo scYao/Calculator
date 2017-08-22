@@ -301,7 +301,6 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
 
                 if (!isRuler(content)) {
 
-
                 } else if (stringBuffer.length() > 22 | content.equals("C")) {
                     clear();
                 } else {
@@ -323,9 +322,18 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
                     id_input_edit.setText(stringBuffer);
                     id_input_edit.setSelection(stringBuffer.length());
                     if (content.equals("=")) {
-                        jisuan();
-                        id_result_text.setText(stringBuffer);
-                        currentNumber = new StringBuffer(stringBuffer.toString());
+//                        if (flag == 1) {
+//                            flag = 0;
+//                            id_result_text.setText(stringBuffer);
+//                            stringBuffer = new StringBuffer(stringBuffer.replace(0, 1, "0-"));
+//                            jisuan();
+//                        } else {
+                            jisuan();
+                            id_result_text.setText(stringBuffer);
+                            currentNumber = new StringBuffer(stringBuffer.toString());
+//                        }
+
+
                     }
                 }
                 break;
@@ -353,9 +361,9 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
                     double arg1 = Double.parseDouble(s1);//将运算数从string转换为Single;
                     double r = arg1 / 100;
 
-                    if (r == (long)r){
-                        id_result_text.setText((long)r + "");
-                    }else {
+                    if (r == (long) r) {
+                        id_result_text.setText((long) r + "");
+                    } else {
                         id_result_text.setText(r + "");
                     }
 
@@ -363,11 +371,11 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
 
                 break;
             case R.id.btn_pluse_minus:
-                Log.e(TAG, "onClick: "+stringBuffer);
+                Log.e(TAG, "onClick: " + stringBuffer);
                 if (stringBuffer.toString().equals("")) {
+                    stringBuffer.append("-");
+                    id_input_edit.setText(stringBuffer);
                     flag = 1;
-                    id_input_edit.setText(stringBuffer.append("-"));
-
                 }
                 break;
         }
@@ -402,6 +410,7 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
 
     private void jisuan() {
         // TODO Auto-generated method stub
+        Log.e(TAG, "jisuan: " + stringBuffer);
         BigDecimal number = null;
         calculateProcess("[\\×÷]");
         calculateProcess("[\\+\\-]");
@@ -411,27 +420,57 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
 
     private BigDecimal getResult(ArrayList<Integer> array) {
         BigDecimal decimal = null;
+
+        Log.e(TAG, "getResult:" + stringBuffer);
         String first = stringBuffer.substring(array.get(0), array.get(1));
-        String second = stringBuffer.substring(array.get(2), array.get(3));
-        String fuhao = stringBuffer.substring(array.get(1), array.get(2));
-        BigDecimal number1 = new BigDecimal(first);
-        BigDecimal number2 = new BigDecimal(second);
-        if ("+".equals(fuhao)) {
-            decimal = number1.add(number2);
-        } else if ("-".equals(fuhao)) {
-            decimal = number1.subtract(number2);
-        } else if ("×".equals(fuhao)) {
-            decimal = number1.multiply(number2);
-            // decimal.setScale(2, BigDecimal.ROUND_HALF_UP);
-        } else if ("÷".equals(fuhao)) {
-            try {
-                decimal = number1.divide(number2);
-            } catch (ArithmeticException e) {
-                // TODO: handle exception
-                decimal = number1.divide(number2, 2, BigDecimal.ROUND_HALF_UP);
+//        String first = stringBuffer.substring(0, 1);
+        Log.e(TAG, "getResult: "+ first);
+        if (first.equals("-")) {
+            first =stringBuffer.substring(array.get(1),array.get(2));
+            String second = stringBuffer.substring(array.get(3), array.get(4));
+            String fuhao = stringBuffer.substring(array.get(2), array.get(3));
+            BigDecimal number1 = new BigDecimal("-"+first);
+            BigDecimal number2 = new BigDecimal(second);
+            if ("+".equals(fuhao)) {
+                decimal = number1.add(number2);
+            } else if ("-".equals(fuhao)) {
+                decimal = number1.subtract(number2);
+            } else if ("×".equals(fuhao)) {
+                decimal = number1.multiply(number2);
+                // decimal.setScale(2, BigDecimal.ROUND_HALF_UP);
+            } else if ("÷".equals(fuhao)) {
+                try {
+                    decimal = number1.divide(number2);
+                } catch (ArithmeticException e) {
+                    // TODO: handle exception
+                    decimal = number1.divide(number2, 2, BigDecimal.ROUND_HALF_UP);
+                }
+
+            }
+        }else {
+            String second = stringBuffer.substring(array.get(2), array.get(3));
+            String fuhao = stringBuffer.substring(array.get(1), array.get(2));
+            BigDecimal number1 = new BigDecimal(first);
+            BigDecimal number2 = new BigDecimal(second);
+            if ("+".equals(fuhao)) {
+                decimal = number1.add(number2);
+            } else if ("-".equals(fuhao)) {
+                decimal = number1.subtract(number2);
+            } else if ("×".equals(fuhao)) {
+                decimal = number1.multiply(number2);
+                // decimal.setScale(2, BigDecimal.ROUND_HALF_UP);
+            } else if ("÷".equals(fuhao)) {
+                try {
+                    decimal = number1.divide(number2);
+                } catch (ArithmeticException e) {
+                    // TODO: handle exception
+                    decimal = number1.divide(number2, 2, BigDecimal.ROUND_HALF_UP);
+                }
+
             }
 
         }
+
         return decimal;
     }
 

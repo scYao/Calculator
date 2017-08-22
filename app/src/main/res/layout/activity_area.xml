@@ -34,6 +34,7 @@
             android:layout_marginRight="20dp"
             android:layout_width="0dp"
             android:layout_weight="3"
+            android:maxLength="15"
             android:editable="false"
             android:text=""
             android:background="@drawable/edit_shape"

@@ -17,8 +17,11 @@ import com.shijiu.calculator.utils.Util;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import static android.R.id.list;
 
 public class CalculateResultActivity extends Activity {
     private TextView mortgage_total;
@@ -82,7 +85,7 @@ public class CalculateResultActivity extends Activity {
 
     private void initData1(MortgageBean bean) {
         double total_mortgage = Double.parseDouble(bean.getTotal_mortgage());
-        double rate = Double.parseDouble(bean.getRate()) / 100;
+        double rate = Double.parseDouble(bean.getRate()) / 1000;
         int months = (int) (Double.parseDouble(bean.getTotal_years()) * 12);
         double years = Double.parseDouble(bean.getTotal_years());
 
@@ -99,8 +102,11 @@ public class CalculateResultActivity extends Activity {
             beanList.add(bean1);
 
         }
+        Collections.reverse(beanList);
         month_repay.setText(beanList.get(0).getTotal() + "元");//首月还款
         mortgage_total.setText(Util.doubleTrans(total_mortgage / 10000) + "万");//贷款总额
+
+        Log.e(TAG, "initData1: total_mortgage"+ total_mortgage+"rate"+rate+"months"+months);
 
         double d3 = AverageCapitalUtils.getInterestCount(total_mortgage, rate, months);//利息总额
         rate_total.setText(String.format("%.2f", d3) + "元");
@@ -116,7 +122,8 @@ public class CalculateResultActivity extends Activity {
 
     private void initData(MortgageBean bean) {
         double total_mortgage = Double.parseDouble(bean.getTotal_mortgage());
-        double rate = Double.parseDouble(bean.getRate()) / 12 / 100;
+        double rate = Double.parseDouble(bean.getRate()) / 12 / 1000;
+        Log.e(TAG, "initData: "+bean.getRate() );
         double years = Double.parseDouble(bean.getTotal_years());
 
         mortgage_total.setText(Util.doubleTrans(total_mortgage / 10000) + "万");

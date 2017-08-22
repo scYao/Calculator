@@ -217,6 +217,9 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     public void getResult(int i1, int i2) {
+        if (input.getText().toString().equals("")){
+            return;
+        }
 
 
         BigDecimal re = BigDecimal.valueOf(Double.parseDouble(input.getText().toString()));
@@ -468,7 +471,6 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
-
     private BigDecimal Cac1(BigDecimal d, String s) {
         BigDecimal bigDecimal1 = d;
         BigDecimal bigDecimal2 = new BigDecimal(s);
@@ -482,7 +484,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
 //        BigDecimal bigDecimal =bigDecimal1.divide(bigDecimal2);
 //        bigDecimal.setScale(10,BigDecimal.ROUND_HALF_UP);
 
-        return bigDecimal1.divide(bigDecimal2,8,BigDecimal.ROUND_HALF_UP);
+        return bigDecimal1.divide(bigDecimal2, 8, BigDecimal.ROUND_HALF_UP);
 //        return bigDecimal;
     }
 
@@ -512,8 +514,19 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             if (beanList.size() == 0) {
                 initData();
             }
-
-
+            int in = 0;
+            for (int j = 0; j < beanList.size(); j++) {
+                UnitBean bean = beanList.get(j);
+                if (bean.getImgae() == null) {
+                    in = 0;
+                } else {
+                    in = 1;
+                    break;
+                }
+            }
+            if (in==0){
+                beanList.get(1).setImgae(R.mipmap.tick);
+            }
             btn_cancel = view.findViewById(R.id.id_cancel);
             recylerView = view.findViewById(R.id.id_recycleListView);
             layoutManager = new LinearLayoutManager(mContext);
@@ -555,6 +568,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                         }
                         dismiss();
                     }
+                    getResult(unit1, unit2);
 
                 }
             });
@@ -616,7 +630,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             beanList1.add(new UnitBean("分米 dm"));
             beanList1.add(new UnitBean("厘米 cm"));
             beanList1.add(new UnitBean("毫米 mm"));
-            beanList1.add(new UnitBean("微米 um"));
+            beanList1.add(new UnitBean("微米 μm"));
             beanList1.add(new UnitBean("纳米 nm"));
             beanList1.add(new UnitBean("皮米 pm"));
             beanList1.add(new UnitBean("海里 nmi"));
@@ -644,7 +658,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             beanList2.add(new UnitBean("分米 dm"));
             beanList2.add(new UnitBean("厘米 cm"));
             beanList2.add(new UnitBean("毫米 mm"));
-            beanList2.add(new UnitBean("微米 um"));
+            beanList2.add(new UnitBean("微米 μm"));
             beanList2.add(new UnitBean("纳米 nm"));
             beanList2.add(new UnitBean("皮米 pm"));
             beanList2.add(new UnitBean("海里 nmi"));
