@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.shijiu.calculator.R;
 import com.shijiu.calculator.utils.Main;
+import com.shijiu.calculator.utils.NumberToCN;
 import com.shijiu.calculator.utils.Tool;
 
 import java.util.ArrayList;
@@ -105,7 +106,12 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
                 if (number != null && !s.equals("")) {
                     if (flag) {
                         double d = Double.parseDouble(s);
-                        capital.setText(Tool.change(d));
+//                        capital.setText(Tool.change(d));
+                        try {
+                            capital.setText(NumberToCN.digitUppercase(s));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     } else {
                         capital.setText(Main.intToRoman(Integer.parseInt(s)));
                     }
@@ -173,7 +179,7 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
         final double MAX_VALUE;
         if (flag) {
 //            MAX_VALUE = 999999999999.99D;
-            MAX_VALUE = 9999999999999.99D;
+            MAX_VALUE = 99999999999999999.99D;
 
         } else {
             MAX_VALUE = 399D;
@@ -222,7 +228,7 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_9:
                 if (!in.equals("")) {
 
-                    if (Double.parseDouble(in) >= MAX_VALUE) {
+                    if (Double.parseDouble(in) > MAX_VALUE) {
                         return;
                     }
                 }

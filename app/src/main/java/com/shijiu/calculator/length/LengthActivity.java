@@ -334,11 +334,11 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             //月球距离 天文单位 光年
             case 24:
-                BigDecimal re24 = Cac1(re, "38400000");
+                BigDecimal re24 = Cac1(re, "384000000");
                 toMeter(i2, re24);
                 break;
             case 25:
-                BigDecimal re25 = Cac1(re, "149600000000");
+                BigDecimal re25 = Cac1(re, "149597870700");
                 toMeter(i2, re25);
                 break;
             case 26:
@@ -460,7 +460,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 result.setText(d24.stripTrailingZeros().toPlainString());
                 break;
             case 25:
-                BigDecimal d25 = Cac2(d, "149600000000");
+                BigDecimal d25 = Cac2(d, "149597870700");
                 result.setText(d25.stripTrailingZeros().toPlainString());
                 break;
             case 26:
@@ -484,7 +484,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
 //        BigDecimal bigDecimal =bigDecimal1.divide(bigDecimal2);
 //        bigDecimal.setScale(10,BigDecimal.ROUND_HALF_UP);
 
-        return bigDecimal1.divide(bigDecimal2, 8, BigDecimal.ROUND_HALF_UP);
+        return bigDecimal1.divide(bigDecimal2, 10, BigDecimal.ROUND_HALF_UP);
 //        return bigDecimal;
     }
 
