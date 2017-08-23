@@ -25,6 +25,7 @@ import com.shijiu.calculator.R;
 import com.shijiu.calculator.adapter.PopAdapter;
 import com.shijiu.calculator.bean.UnitBean;
 import com.shijiu.calculator.length.LengthActivity;
+import com.shijiu.calculator.utils.SpaceItemDecoration;
 import com.shijiu.calculator.utils.Util;
 
 import java.math.BigDecimal;
@@ -212,6 +213,9 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void getResult(int i1, int i2) {
+        if (input.getText().toString().equals("")){
+            return;
+        }
         BigDecimal re = BigDecimal.valueOf(Double.parseDouble(input.getText().toString()));
         switch (i1) {
             case 0:
@@ -250,7 +254,7 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
                 toMeter(i2, re7);
                 break;
             case 8:
-                BigDecimal re8 = Cac1(re, "4046.85");
+                BigDecimal re8 = Cac1(re, "4046.864798");
                 toMeter(i2, re8);
                 break;
             //平方英里 平方码 平方英尺
@@ -347,7 +351,7 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
                 result.setText(re7.stripTrailingZeros().toPlainString());
                 break;
             case 8:
-                BigDecimal re8 = Cac2(d, "4046.85");
+                BigDecimal re8 = Cac2(d, "4046.864798");
                 result.setText(re8.stripTrailingZeros().toPlainString());
                 break;
             //平方英里 平方码 平方英尺
@@ -461,6 +465,7 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
             layoutManager = new LinearLayoutManager(mContext);
             adapter = new PopAdapter(beanList, mContext);
             recylerView.setLayoutManager(layoutManager);
+            recylerView.addItemDecoration(new SpaceItemDecoration(10));
             recylerView.setAdapter(adapter);
 
             adapter.setOnItemClickListener(new PopAdapter.OnItemClickListener() {
@@ -491,6 +496,8 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
                         }
                         dismiss();
                     }
+
+                    getResult(unit1, unit2);
 
                 }
             });
@@ -530,7 +537,7 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
             // 设置视图
             this.setContentView(this.view);
             // 设置弹出窗体的宽和高
-            this.setHeight(RelativeLayout.LayoutParams.WRAP_CONTENT);
+            this.setHeight(RelativeLayout.LayoutParams.MATCH_PARENT);
             this.setWidth(RelativeLayout.LayoutParams.MATCH_PARENT);
 
             // 设置弹出窗体可点击

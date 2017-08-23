@@ -82,6 +82,7 @@
                     android:text="房屋单价" />
 
                 <EditText
+                    android:maxLength="7"
                     android:id="@+id/id_unit_price"
                     style="@style/valueEditStyle"
                     android:layout_width="100dp"
@@ -103,6 +104,7 @@
                     android:text="房屋面积" />
 
                 <EditText
+                    android:maxLength="7"
                     android:id="@+id/id_area"
                     style="@style/valueEditStyle"
                     android:layout_width="100dp"
@@ -144,6 +146,7 @@
                     android:text="首付" />
 
                 <EditText
+                    android:maxLength="3"
                     android:id="@+id/id_down_payments"
                     style="@style/valueEditStyle"
                     android:layout_width="60dp"

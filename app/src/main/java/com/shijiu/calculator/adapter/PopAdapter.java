@@ -52,10 +52,11 @@ public class PopAdapter  extends RecyclerView.Adapter<PopAdapter.ViewHolder> imp
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.item_unit,parent,false);
+        View view = inflater.inflate(R.layout.item_unit,null);
         ViewHolder viewHolder =new ViewHolder(view);
         view.setOnClickListener(this);
         return viewHolder;
+//        return new ViewHolder(view);
     }
 
     @Override

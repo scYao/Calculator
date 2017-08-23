@@ -214,6 +214,7 @@ public class MortgageFragmentBusiness extends Fragment {
                     if (Util.isNull(total_price)) {
                         double price = Double.parseDouble(total_price.getText().toString().trim());
                         need_loan.setText(price + "元");
+                        loan_edit.setText(price/10000+"");
                     }
                 }
             }
@@ -274,7 +275,7 @@ public class MortgageFragmentBusiness extends Fragment {
                     bean.setTotal_mortgage(result * 10000 + "");
                 }
 
-                if (bean.getTotal_mortgage() == null || bean.getRate() == null || bean.getTotal_years() == null) {
+                if (bean.getTotal_mortgage() == null || bean.getRate() == null || bean.getTotal_years() == null || bean.getTotal_mortgage().equals("0.0")) {
 
                     start_calculate.setBackgroundResource(R.drawable.text_shape_un);
                     start_calculate.setClickable(false);
@@ -352,7 +353,7 @@ public class MortgageFragmentBusiness extends Fragment {
                     current_rate.setText("当前年限基准利率：商业" + 0 + "%");
                 }
 
-                if (bean.getTotal_mortgage() == null || bean.getRate() == null || bean.getTotal_years() == null) {
+                if (bean.getTotal_mortgage() == null || bean.getRate() == null || bean.getTotal_years() == null || bean.getTotal_mortgage().equals("0.0")) {
 
                     start_calculate.setBackgroundResource(R.drawable.text_shape_un);
                     start_calculate.setClickable(false);
@@ -392,7 +393,7 @@ public class MortgageFragmentBusiness extends Fragment {
                     interest_rate3.setText(0 + "%");
                     current_rate.setText("当前年限基准利率：商业" + 0 + "%");
                 }
-                if (bean.getTotal_mortgage() == null || bean.getRate() == null || bean.getTotal_years() == null) {
+                if (bean.getTotal_mortgage() == null || bean.getRate() == null || bean.getTotal_years() == null || bean.getTotal_mortgage().equals("0.0")) {
 
                     start_calculate.setBackgroundResource(R.drawable.text_shape_un);
                     start_calculate.setClickable(false);

@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.shijiu.calculator.R;
 import com.shijiu.calculator.adapter.PopAdapter;
 import com.shijiu.calculator.bean.UnitBean;
+import com.shijiu.calculator.utils.SpaceItemDecoration;
 import com.shijiu.calculator.utils.Util;
 
 import java.math.BigDecimal;
@@ -84,6 +85,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 finish();
             }
         });
+        initData();
 
     }
 
@@ -511,14 +513,16 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
         public TakePhotoPopWin(Context mContext, final int i, final List<UnitBean> beanList) {
             view = LayoutInflater.from(mContext).inflate(R.layout.pop_window, null);
 
-            if (beanList.size() == 0) {
-                initData();
-            }
+//            if (beanList.size() == 0) {
+//                initData();
+//            }
             int in = 0;
+            Log.e(TAG, "TakePhotoPopWin: "+beanList.toString() );
             for (int j = 0; j < beanList.size(); j++) {
                 UnitBean bean = beanList.get(j);
                 if (bean.getImgae() == null) {
                     in = 0;
+//                    continue;
                 } else {
                     in = 1;
                     break;
@@ -527,13 +531,17 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             if (in==0){
                 beanList.get(1).setImgae(R.mipmap.tick);
             }
+            Log.e(TAG, "TakePhotoPopWin: "+beanList.toString() );
             btn_cancel = view.findViewById(R.id.id_cancel);
             recylerView = view.findViewById(R.id.id_recycleListView);
             layoutManager = new LinearLayoutManager(mContext);
             adapter = new PopAdapter(beanList, mContext);
             recylerView.setLayoutManager(layoutManager);
             recylerView.setAdapter(adapter);
+            recylerView.addItemDecoration(new SpaceItemDecoration(10));
             adapter.notifyDataSetChanged();
+
+            Log.e(TAG, "TakePhotoPopWin: "+beanList.toString()+beanList.size() );
 
             Log.e(TAG, "TakePhotoPopWin: " + beanList.toString());
             adapter.setOnItemClickListener(new PopAdapter.OnItemClickListener() {
@@ -546,11 +554,14 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                             if (j == position) {
                                 beanList.get(j).setImgae(R.mipmap.tick);
                                 adapter.notifyItemChanged(position);
+
                             } else {
                                 beanList.get(j).setImgae(null);
+                                adapter.notifyItemChanged(j);
                             }
-                        }
 
+                        }
+//                        adapter.notifyDataSetChanged();
                         Log.e(TAG, "onItemClick: " + beanList.toString());
 
 
@@ -564,8 +575,10 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                                 adapter.notifyItemChanged(position);
                             } else {
                                 beanList.get(j).setImgae(null);
+                                adapter.notifyItemChanged(j);
                             }
                         }
+//                        adapter.notifyDataSetChanged();
                         dismiss();
                     }
                     getResult(unit1, unit2);
@@ -608,7 +621,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             // 设置视图
             this.setContentView(this.view);
             // 设置弹出窗体的宽和高
-            this.setHeight(RelativeLayout.LayoutParams.WRAP_CONTENT);
+            this.setHeight(RelativeLayout.LayoutParams.MATCH_PARENT);
             this.setWidth(RelativeLayout.LayoutParams.MATCH_PARENT);
 
             // 设置弹出窗体可点击
@@ -624,64 +637,64 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
 
         }
 
-        private void initData() {
-            beanList1.add(new UnitBean("千米 km"));
-            beanList1.add(new UnitBean("米 m"));
-            beanList1.add(new UnitBean("分米 dm"));
-            beanList1.add(new UnitBean("厘米 cm"));
-            beanList1.add(new UnitBean("毫米 mm"));
-            beanList1.add(new UnitBean("微米 μm"));
-            beanList1.add(new UnitBean("纳米 nm"));
-            beanList1.add(new UnitBean("皮米 pm"));
-            beanList1.add(new UnitBean("海里 nmi"));
-            beanList1.add(new UnitBean("英里 mi"));
-            beanList1.add(new UnitBean("弗隆 fur"));
-            beanList1.add(new UnitBean("英寻 fm"));
-            beanList1.add(new UnitBean("码 yd"));
-            beanList1.add(new UnitBean("英尺 ft"));
-            beanList1.add(new UnitBean("英寸 in"));
-            beanList1.add(new UnitBean("公里 gongli"));
-            beanList1.add(new UnitBean("里 li"));
-            beanList1.add(new UnitBean("丈 zhang"));
-            beanList1.add(new UnitBean("尺 chi"));
-            beanList1.add(new UnitBean("寸 cun"));
-            beanList1.add(new UnitBean("分 fen"));
-            beanList1.add(new UnitBean("厘 li"));
-            beanList1.add(new UnitBean("毫 hao"));
-            beanList1.add(new UnitBean("秒差距 pc"));
-            beanList1.add(new UnitBean("月球距离 ld"));
-            beanList1.add(new UnitBean("天文单位 AU"));
-            beanList1.add(new UnitBean("光年 ly"));
 
-            beanList2.add(new UnitBean("千米 km"));
-            beanList2.add(new UnitBean("米 m"));
-            beanList2.add(new UnitBean("分米 dm"));
-            beanList2.add(new UnitBean("厘米 cm"));
-            beanList2.add(new UnitBean("毫米 mm"));
-            beanList2.add(new UnitBean("微米 μm"));
-            beanList2.add(new UnitBean("纳米 nm"));
-            beanList2.add(new UnitBean("皮米 pm"));
-            beanList2.add(new UnitBean("海里 nmi"));
-            beanList2.add(new UnitBean("英里 mi"));
-            beanList2.add(new UnitBean("弗隆 fur"));
-            beanList2.add(new UnitBean("英寻 fm"));
-            beanList2.add(new UnitBean("码 yd"));
-            beanList2.add(new UnitBean("英尺 ft"));
-            beanList2.add(new UnitBean("英寸 in"));
-            beanList2.add(new UnitBean("公里 gongli"));
-            beanList2.add(new UnitBean("里 li"));
-            beanList2.add(new UnitBean("丈 zhang"));
-            beanList2.add(new UnitBean("尺 chi"));
-            beanList2.add(new UnitBean("寸 cun"));
-            beanList2.add(new UnitBean("分 fen"));
-            beanList2.add(new UnitBean("厘 li"));
-            beanList2.add(new UnitBean("毫 hao"));
-            beanList2.add(new UnitBean("秒差距 pc"));
-            beanList2.add(new UnitBean("月球距离 ld"));
-            beanList2.add(new UnitBean("天文单位 AU"));
-            beanList2.add(new UnitBean("光年 ly"));
-        }
     }
 
+    private void initData() {
+        beanList1.add(new UnitBean("千米 km"));
+        beanList1.add(new UnitBean("米 m"));
+        beanList1.add(new UnitBean("分米 dm"));
+        beanList1.add(new UnitBean("厘米 cm"));
+        beanList1.add(new UnitBean("毫米 mm"));
+        beanList1.add(new UnitBean("微米 μm"));
+        beanList1.add(new UnitBean("纳米 nm"));
+        beanList1.add(new UnitBean("皮米 pm"));
+        beanList1.add(new UnitBean("海里 nmi"));
+        beanList1.add(new UnitBean("英里 mi"));
+        beanList1.add(new UnitBean("弗隆 fur"));
+        beanList1.add(new UnitBean("英寻 fm"));
+        beanList1.add(new UnitBean("码 yd"));
+        beanList1.add(new UnitBean("英尺 ft"));
+        beanList1.add(new UnitBean("英寸 in"));
+        beanList1.add(new UnitBean("公里 gongli"));
+        beanList1.add(new UnitBean("里 li"));
+        beanList1.add(new UnitBean("丈 zhang"));
+        beanList1.add(new UnitBean("尺 chi"));
+        beanList1.add(new UnitBean("寸 cun"));
+        beanList1.add(new UnitBean("分 fen"));
+        beanList1.add(new UnitBean("厘 li"));
+        beanList1.add(new UnitBean("毫 hao"));
+        beanList1.add(new UnitBean("秒差距 pc"));
+        beanList1.add(new UnitBean("月球距离 ld"));
+        beanList1.add(new UnitBean("天文单位 AU"));
+        beanList1.add(new UnitBean("光年 ly"));
 
+        beanList2.add(new UnitBean("千米 km"));
+        beanList2.add(new UnitBean("米 m"));
+        beanList2.add(new UnitBean("分米 dm"));
+        beanList2.add(new UnitBean("厘米 cm"));
+        beanList2.add(new UnitBean("毫米 mm"));
+        beanList2.add(new UnitBean("微米 μm"));
+        beanList2.add(new UnitBean("纳米 nm"));
+        beanList2.add(new UnitBean("皮米 pm"));
+        beanList2.add(new UnitBean("海里 nmi"));
+        beanList2.add(new UnitBean("英里 mi"));
+        beanList2.add(new UnitBean("弗隆 fur"));
+        beanList2.add(new UnitBean("英寻 fm"));
+        beanList2.add(new UnitBean("码 yd"));
+        beanList2.add(new UnitBean("英尺 ft"));
+        beanList2.add(new UnitBean("英寸 in"));
+        beanList2.add(new UnitBean("公里 gongli"));
+        beanList2.add(new UnitBean("里 li"));
+        beanList2.add(new UnitBean("丈 zhang"));
+        beanList2.add(new UnitBean("尺 chi"));
+        beanList2.add(new UnitBean("寸 cun"));
+        beanList2.add(new UnitBean("分 fen"));
+        beanList2.add(new UnitBean("厘 li"));
+        beanList2.add(new UnitBean("毫 hao"));
+        beanList2.add(new UnitBean("秒差距 pc"));
+        beanList2.add(new UnitBean("月球距离 ld"));
+        beanList2.add(new UnitBean("天文单位 AU"));
+        beanList2.add(new UnitBean("光年 ly"));
+    }
 }

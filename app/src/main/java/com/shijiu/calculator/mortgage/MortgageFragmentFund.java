@@ -207,10 +207,11 @@ public class MortgageFragmentFund extends Fragment {
         down_payments.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                if (b){
+                if (b) {
                     if (Util.isNull(total_price)) {
                         double price = Double.parseDouble(total_price.getText().toString().trim());
                         need_loan.setText(price + "元");
+                        loan_edit.setText(price / 10000 + "");
                     }
                 }
             }
@@ -267,7 +268,7 @@ public class MortgageFragmentFund extends Fragment {
                     double result = Double.parseDouble(charSequence.toString());
                     bean.setTotal_mortgage(result * 10000 + "");
                 }
-                if (bean.getTotal_mortgage() == null || bean.getRate() == null || bean.getTotal_years() == null) {
+                if (bean.getTotal_mortgage() == null || bean.getRate() == null || bean.getTotal_years() == null || bean.getTotal_mortgage().equals("0.0")) {
 
                     start_calculate.setBackgroundResource(R.drawable.text_shape_un);
                 } else {
@@ -345,7 +346,7 @@ public class MortgageFragmentFund extends Fragment {
                     interest_rate3.setText(0 + "%");
                     current_rate.setText("当前年限基准利率：商业" + 0 + "%");
                 }
-                if (bean.getTotal_mortgage() == null || bean.getRate() == null || bean.getTotal_years() == null) {
+                if (bean.getTotal_mortgage() == null || bean.getRate() == null || bean.getTotal_years() == null || bean.getTotal_mortgage().equals("0.0")) {
 
                     start_calculate.setBackgroundResource(R.drawable.text_shape_un);
                 } else {
@@ -384,7 +385,7 @@ public class MortgageFragmentFund extends Fragment {
                     current_rate.setText("当前年限基准利率：商业" + 0 + "%");
                 }
 
-                if (bean.getTotal_mortgage() == null || bean.getRate() == null || bean.getTotal_years() == null) {
+                if (bean.getTotal_mortgage() == null || bean.getRate() == null || bean.getTotal_years() == null || bean.getTotal_mortgage().equals("0.0")) {
 
                     start_calculate.setBackgroundResource(R.drawable.text_shape_un);
                 } else {

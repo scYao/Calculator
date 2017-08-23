@@ -11,10 +11,12 @@ import android.widget.TextView;
 import com.shijiu.calculator.R;
 import com.shijiu.calculator.bean.CalculateBean;
 import com.shijiu.calculator.bean.MortgageBean;
+import com.shijiu.calculator.bean.UnitBean;
 import com.shijiu.calculator.utils.AverageCapitalUtils;
 import com.shijiu.calculator.utils.Util;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -89,31 +91,52 @@ public class CalculateResultActivity extends Activity {
         int months = (int) (Double.parseDouble(bean.getTotal_years()) * 12);
         double years = Double.parseDouble(bean.getTotal_years());
 
-        Map<Integer, Double> maps = AverageCapitalUtils.getPerMonthPrincipalInterest(total_mortgage, rate, months);
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(bean.getYear(), bean.getMonth(), bean.getDay());
-        for (Map.Entry<Integer, Double> entry : maps.entrySet()) {
+        calendar.set(bean.getYear(), bean.getMonth()-1, bean.getDay());
+        // 每月本息金额  = (贷款本金÷还款月数) + (贷款本金-已归还本金累计额)×月利率
+        // 每月本金 = 贷款本金÷还款月数
+        // 每月利息 = (贷款本金-已归还本金累计额)×月利率
+        double monthCapital = 0;
+        double tmpCapital =0;
+        double monthInterest = 0;
+        double monthRate = rate/12;
+        double d3=0;//利息总额
+        for(int i=1;i<months+1;i++){
+            monthCapital = (total_mortgage/months) + (total_mortgage-tmpCapital) * monthRate;
+            monthInterest = (total_mortgage-tmpCapital) * monthRate;
+            tmpCapital = tmpCapital + (total_mortgage/months);
             CalculateBean bean1 = new CalculateBean();
 
+            int month = calendar.get(calendar.MONTH)+1;
+            int year = calendar.get(calendar.YEAR);
+            bean1.setOrder_number(year+"."+month);
 
-            double value = entry.getValue();
-            bean1.setTotal(value + "");
+            calendar.add(Calendar.MONTH, 1);
+
+            bean1.setTotal(monthCapital+"");
+            bean1.setInvest((total_mortgage/months)+"");
+            bean1.setRate(monthInterest+"");
+
             beanList.add(bean1);
 
+            System.out.println("第" + i + "月本息： " + monthCapital + "，本金：" + (total_mortgage/months) + "，利息：" + monthInterest);
+            d3 = d3+monthInterest;
         }
-        Collections.reverse(beanList);
-        month_repay.setText(beanList.get(0).getTotal() + "元");//首月还款
+        double d0 = Double.parseDouble(beanList.get(0).getTotal());
+        month_repay.setText(new  DecimalFormat("#.00").format(d0)+ "元");//首月还款
         mortgage_total.setText(Util.doubleTrans(total_mortgage / 10000) + "万");//贷款总额
 
-        Log.e(TAG, "initData1: total_mortgage"+ total_mortgage+"rate"+rate+"months"+months);
 
-        double d3 = AverageCapitalUtils.getInterestCount(total_mortgage, rate, months);//利息总额
-        rate_total.setText(String.format("%.2f", d3) + "元");
+//        double d6 = AverageCapitalUtils.getInterestCount(total_mortgage, rate, months);//利息总额
 
-        BigDecimal b = new BigDecimal(total_mortgage + d3);
+
+        rate_total.setText(new  DecimalFormat("#.00").format(d3) + "元");
+//        rate_total.setText(new  DecimalFormat("#.00").format(d6) + "元");
+
+        BigDecimal b = new BigDecimal((total_mortgage + d3)/10000);
         double f1 = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        repay_total.setText(f1 + "元");
+        repay_total.setText(f1 + "万");
 
 //        repay_total.setText((total_mortgage+d3) + "元");
         total_years.setText((int) years + "年(" + (int) years * 12 + "个月)");
@@ -122,25 +145,45 @@ public class CalculateResultActivity extends Activity {
 
     private void initData(MortgageBean bean) {
         double total_mortgage = Double.parseDouble(bean.getTotal_mortgage());
-        double rate = Double.parseDouble(bean.getRate()) / 12 / 1000;
+        double rate = Double.parseDouble(bean.getRate())  / 1000;
         Log.e(TAG, "initData: "+bean.getRate() );
         double years = Double.parseDouble(bean.getTotal_years());
+        double monthRate = rate/12;
+        int month =(int) years * 12;
+
+
+        total_years.setText((int) years + "年(" + (int) years * 12 + "个月)");
+        // 每月本息金额  = (本金×月利率×(1＋月利率)＾还款月数)÷ ((1＋月利率)＾还款月数-1)
+        double monthIncome = (total_mortgage* monthRate * Math.pow(1+monthRate,month))/(Math.pow(1+monthRate,month)-1);
+        Log.e(TAG, "每月本息金额 : " + monthIncome);;
+        System.out.println("---------------------------------------------------");
+        // 每月本金 = 本金×月利率×(1+月利率)^(还款月序号-1)÷((1+月利率)^还款月数-1)
+        double monthCapital = 0;
+        for(int i=1;i<month+1;i++){
+            monthCapital = (total_mortgage* monthRate * (Math.pow((1+monthRate),i-1)))/(Math.pow(1+monthRate,month)-1);
+            System.out.println("第" + i + "月本金： " + monthCapital);
+        }
+        System.out.println("---------------------------------------------------");
+        // 每月利息  = 剩余本金 x 贷款月利率
+        double monthInterest = 0;
+        double capital = total_mortgage;
+        double tmpCapital = 0;
+        for(int i=1;i<month+1;i++){
+            capital = capital - tmpCapital;
+            monthInterest = capital * monthRate;
+            tmpCapital = (total_mortgage* monthRate * (Math.pow((1+monthRate),i-1)))/(Math.pow(1+monthRate,month)-1);
+            System.out.println("第" + i + "月利息： " + monthInterest);
+        }
 
         mortgage_total.setText(Util.doubleTrans(total_mortgage / 10000) + "万");
-        total_years.setText((int) years + "年(" + (int) years * 12 + "个月)");
 
-        double d1 = Math.pow((1 + rate), years * 12);
-        double d2 = Math.pow((1 + rate), years * 12) - 1;
-        double month_money = (total_mortgage * rate * d1) / d2;
-        double round_month_money = Double.parseDouble(String.format("%.2f", month_money));
+        month_repay.setText(new BigDecimal(monthIncome).setScale(2,BigDecimal.ROUND_HALF_UP) + "元");
 
-        month_repay.setText(round_month_money + "元");
-
-        BigDecimal b = new BigDecimal(round_month_money * years * 12);
+        BigDecimal b = new BigDecimal(monthIncome * years * 12/10000);
         double f1 = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        repay_total.setText(f1 + "元");
+        repay_total.setText(f1 + "万");
 
-        double d3 = round_month_money * years * 12 - total_mortgage;
+        double d3 = monthIncome * years * 12 - total_mortgage;
         rate_total.setText(String.format("%.2f", d3) + "元");
     }
 

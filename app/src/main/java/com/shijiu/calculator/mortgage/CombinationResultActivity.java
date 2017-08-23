@@ -96,28 +96,69 @@ public class CombinationResultActivity extends Activity {
 
         int months = (int) (Double.parseDouble(bean.getTotal_years()) * 12);
 
-
-        Map<Integer, Double> maps = AverageCapitalUtils.getPerMonthPrincipalInterest(mortgage_business, rate_business, months);
-
-        for (Map.Entry<Integer, Double> entry : maps.entrySet()) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(bean.getYear(), bean.getMonth()-1, bean.getDay());
+        // 每月本息金额  = (贷款本金÷还款月数) + (贷款本金-已归还本金累计额)×月利率
+        // 每月本金 = 贷款本金÷还款月数
+        // 每月利息 = (贷款本金-已归还本金累计额)×月利率
+        double monthCapital1 = 0;
+        double tmpCapital1 =0;
+        double monthInterest1 = 0;
+        double monthRate1 = rate_business/12;
+        double d3=0;//利息总额
+        for(int i=1;i<months+1;i++){
+            monthCapital1 = (mortgage_business/months) + (mortgage_business-tmpCapital1) * monthRate1;
+            monthInterest1 = (mortgage_business-monthCapital1) * monthRate1;
+            tmpCapital1 = tmpCapital1 + (mortgage_business/months);
             CalculateBean bean1 = new CalculateBean();
 
-            double value = entry.getValue();
-            bean1.setTotal(value+"");//每月还款总额
+            int month = calendar.get(calendar.MONTH)+1;
+            int year = calendar.get(calendar.YEAR);
+            bean1.setOrder_number(year+"."+month);
+
+            calendar.add(Calendar.MONTH, 1);
+
+            bean1.setTotal(monthCapital1+"");
+            bean1.setInvest((mortgage_business/months)+"");
+            bean1.setRate(monthInterest1+"");
 
             beanList1.add(bean1);
+
+            d3 = d3+monthInterest1;
         }
 
-        Map<Integer, Double> maps1 = AverageCapitalUtils.getPerMonthPrincipalInterest(mortgage_fund, rate_fund, months);
 
-        for (Map.Entry<Integer, Double> entry : maps1.entrySet()) {
-            CalculateBean bean2 = new CalculateBean();
+        // 每月本息金额  = (贷款本金÷还款月数) + (贷款本金-已归还本金累计额)×月利率
+        // 每月本金 = 贷款本金÷还款月数
+        // 每月利息 = (贷款本金-已归还本金累计额)×月利率
+        double monthCapital2 = 0;
+        double tmpCapital2 =0;
+        double monthInterest2 = 0;
+        double monthRate2 = rate_fund/12;
+        double d4=0;//利息总额
+        for(int i=1;i<months+1;i++){
+            monthCapital2 = (mortgage_fund/months) + (mortgage_fund-tmpCapital2) * monthRate2;
+            monthInterest2 = (mortgage_fund-tmpCapital2) * monthRate2;
+            tmpCapital2 = tmpCapital2 + (mortgage_fund/months);
+            CalculateBean bean1 = new CalculateBean();
 
-            double value = entry.getValue();
-            bean2.setTotal(value+"");
+            int month = calendar.get(calendar.MONTH)+1;
+            int year = calendar.get(calendar.YEAR);
+            bean1.setOrder_number(year+"."+month);
 
-            beanList2.add(bean2);
+            calendar.add(Calendar.MONTH, 1);
+
+            bean1.setTotal(monthCapital2+"");
+            bean1.setInvest((mortgage_fund/months)+"");
+            bean1.setRate(monthInterest2+"");
+
+            beanList2.add(bean1);
+
+            d4 = d4+monthInterest2;
         }
+
+
+
 
         for (int i = 0; i < beanList1.size(); i++) {
             CalculateBean bean3 = new CalculateBean();
@@ -127,15 +168,13 @@ public class CombinationResultActivity extends Activity {
 
             beanList.add(bean3);
         }
-        Collections.reverse(beanList);
         mortgage_total.setText(Util.doubleTrans((mortgage_fund+mortgage_business)/10000)+"万");//贷款总额
         month_repay.setText(String.format("%.2f",Double.parseDouble(beanList.get(0).getTotal()))+"元");//首月还款
 
-        double rate_total1 = AverageCapitalUtils.getInterestCount(mortgage_business, rate_business, months);
-        double rate_total2 = AverageCapitalUtils.getInterestCount(mortgage_fund, rate_fund, months);
-        rate_total.setText(String.format("%.2f", rate_total1+rate_total2)+"元");//利息总和
 
-        double d6= (mortgage_fund+mortgage_business)+(rate_total1+rate_total2);
+        rate_total.setText(String.format("%.2f", d3+d4)+"元");//利息总和
+
+        double d6= (mortgage_fund+mortgage_business)+(d3+d4);
         repay_total.setText(String.format("%.2f", d6)+"元");//还款总额
 
         double years = Double.parseDouble(bean.getTotal_years());

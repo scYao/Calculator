@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'calc'
+            keyPassword 'shijiumemory'
+            storeFile file('C:/calc.jks')
+            storePassword 'shijiumemory'
+        }
+    }
     compileSdkVersion 26
     buildToolsVersion "25.0.0"
     defaultConfig {
@@ -15,6 +23,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
 }

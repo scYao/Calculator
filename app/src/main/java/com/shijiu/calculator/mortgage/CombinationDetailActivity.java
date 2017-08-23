@@ -70,79 +70,81 @@ public class CombinationDetailActivity extends AppCompatActivity {
         double mortgage_fund = Double.parseDouble(bean.getMortgage_fund())*10000;
 
 
-        double rate_business = Double.parseDouble(bean.getRate_business()) / 1000;
-        double rate_fund = Double.parseDouble(bean.getRate_fund()) / 1000;
+        double rate_business = Double.parseDouble(bean.getRate_business()) / 1000/12;
+        double rate_fund = Double.parseDouble(bean.getRate_fund()) / 1000/12;
 
 
-        int months = (int) (Double.parseDouble(bean.getTotal_years()) * 12);
+        int month = (int) (Double.parseDouble(bean.getTotal_years()) * 12);
 
-        //每月偿还本金和利息
-        double total = AverageCapitalPlusInterestUtils.getPerMonthPrincipalInterest(mortgage_business, rate_business, months);
-
-        //每月偿还利息
-        Map<Integer, BigDecimal> maps = AverageCapitalPlusInterestUtils.getPerMonthInterest(mortgage_business, rate_business, months);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(bean.getYear(), bean.getMonth()-1, bean.getDay());
-        for (Map.Entry<Integer, BigDecimal> entry : maps.entrySet()) {
-            CalculateBean bean1 = new CalculateBean();
 
-            int month = calendar.get(calendar.MONTH)+1;
+        // 每月本息金额  = (本金×月利率×(1＋月利率)＾还款月数)÷ ((1＋月利率)＾还款月数-1)
+        double monthIncome = (mortgage_business* rate_business * Math.pow(1+rate_business,month))/(Math.pow(1+rate_business,month)-1);
+        Log.e(TAG, "每月本息金额 : " + monthIncome);;
+        System.out.println("---------------------------------------------------");
+        // 每月本金 = 本金×月利率×(1+月利率)^(还款月序号-1)÷((1+月利率)^还款月数-1)
+        double monthCapital = 0;
+        for(int i=1;i<month+1;i++){
+            monthCapital = (mortgage_business* rate_business * (Math.pow((1+rate_business),i-1)))/(Math.pow(1+rate_business,month)-1);
+            System.out.println("第" + i + "月本金： " + monthCapital);
+            CalculateBean bean1 = new CalculateBean();
+            bean1.setTotal(monthIncome+"");//总额
+            bean1.setInvest(monthCapital+"");//偿还本金
+            int montht = calendar.get(calendar.MONTH)+1;
             int year = calendar.get(calendar.YEAR);
 
-            bean1.setOrder_number(year + "." + month);
-
-            bean1.setTotal(total + "");//总额
-
-            //每月偿还利息
+            bean1.setOrder_number(year + "." + montht);
             calendar.add(Calendar.MONTH, 1);
-            BigDecimal value = entry.getValue();
-            bean1.setRate(value + "");
-
-            double monthRate = rate_business / 12;
-
-            BigDecimal monthIncome = new BigDecimal(mortgage_business)
-                    .multiply(new BigDecimal(monthRate * Math.pow(1 + monthRate, months)))
-                    .divide(new BigDecimal(Math.pow(1 + monthRate, months) - 1), 2, BigDecimal.ROUND_DOWN);
-            bean1.setInvest(monthIncome.subtract(entry.getValue()) + "");//偿还本金
-
             beanList1.add(bean1);
         }
+        System.out.println("---------------------------------------------------");
+        // 每月利息  = 剩余本金 x 贷款月利率
+        double monthInterest = 0;
+        double capital = mortgage_business;
+        double tmpCapital = 0;
+        for(int i=0;i<beanList1.size();i++){
+            capital = capital - tmpCapital;
+            monthInterest = capital * rate_business;
+            tmpCapital = (mortgage_business* rate_business * (Math.pow((1+rate_business),i-1)))/(Math.pow(1+rate_business,month)-1);
+            System.out.println("第" + i + "月利息： " + monthInterest);
 
-        //每月偿还本金和利息
-        double total1 = AverageCapitalPlusInterestUtils.getPerMonthPrincipalInterest(mortgage_fund, rate_fund, months);
+            beanList1.get(i).setRate(monthInterest+"");
+        }
 
-        //每月偿还利息
-        Map<Integer, BigDecimal> maps1 = AverageCapitalPlusInterestUtils.getPerMonthInterest(mortgage_fund, rate_fund, months);
 
-        Calendar calendar1 = Calendar.getInstance();
-        calendar.set(bean.getYear(), bean.getMonth(), bean.getDay());
-        for (Map.Entry<Integer, BigDecimal> entry : maps.entrySet()) {
-            CalculateBean bean2 = new CalculateBean();
+        // 每月本息金额  = (本金×月利率×(1＋月利率)＾还款月数)÷ ((1＋月利率)＾还款月数-1)
+        double monthIncome1 = (mortgage_fund* rate_fund * Math.pow(1+rate_fund,month))/(Math.pow(1+rate_fund,month)-1);
+        Log.e(TAG, "每月本息金额 : " + monthIncome1);;
+        System.out.println("---------------------------------------------------");
+        // 每月本金 = 本金×月利率×(1+月利率)^(还款月序号-1)÷((1+月利率)^还款月数-1)
+        double monthCapital1 = 0;
+        for(int i=1;i<month+1;i++){
+            monthCapital1 = (mortgage_fund* rate_fund * (Math.pow((1+rate_fund),i-1)))/(Math.pow(1+rate_fund,month)-1);
+            System.out.println("第" + i + "月本金： " + monthCapital1);
+            CalculateBean bean1 = new CalculateBean();
+            bean1.setTotal(monthIncome1+"");//总额
+            bean1.setInvest(monthCapital1+"");//偿还本金
+            int montht = calendar.get(calendar.MONTH)+1;
+            int year = calendar.get(calendar.YEAR);
 
-            int month = calendar1.get(Calendar.MONTH);
-            int year = calendar1.get(Calendar.YEAR);
-            if (month == 0) {
-                year = year - 1;
-                month = 12;
-            }
-            bean2.setOrder_number(year + "." + month);
-
-            bean2.setTotal(total1 + "");//总额
-
-            //每月偿还利息
+            bean1.setOrder_number(year + "." + montht);
             calendar.add(Calendar.MONTH, 1);
-            BigDecimal value = entry.getValue();
-            bean2.setRate(value + "");
+            beanList2.add(bean1);
+        }
+        System.out.println("---------------------------------------------------");
+        // 每月利息  = 剩余本金 x 贷款月利率
+        double monthInterest1 = 0;
+        double capital1 = mortgage_fund;
+        double tmpCapital1 = 0;
+        for(int i=0;i<beanList2.size();i++){
+            capital1 = capital1 - tmpCapital1;
+            monthInterest1 = capital1 * rate_fund;
+            tmpCapital1 = (mortgage_fund* rate_fund * (Math.pow((1+rate_fund),i-1)))/(Math.pow(1+rate_fund,month)-1);
+            System.out.println("第" + i + "月利息： " + monthInterest1);
 
-            double monthRate = rate_fund / 12;
-
-            BigDecimal monthIncome = new BigDecimal(mortgage_fund)
-                    .multiply(new BigDecimal(monthRate * Math.pow(1 + monthRate, months)))
-                    .divide(new BigDecimal(Math.pow(1 + monthRate, months) - 1), 2, BigDecimal.ROUND_DOWN);
-            bean2.setInvest(monthIncome.subtract(entry.getValue()) + "");//偿还本金
-
-            beanList2.add(bean2);
+            beanList2.get(i).setRate(monthInterest1+"");
         }
 
 
@@ -173,63 +175,65 @@ public class CombinationDetailActivity extends AppCompatActivity {
 
         int months = (int) (Double.parseDouble(bean.getTotal_years()) * 12);
 
-        Map<Integer, Double> maps = AverageCapitalUtils.getPerMonthPrincipalInterest(mortgage_business, rate_business, months);
-
         Calendar calendar = Calendar.getInstance();
         calendar.set(bean.getYear(), bean.getMonth()-1, bean.getDay());
-        for (Map.Entry<Integer, Double> entry : maps.entrySet()) {
+        // 每月本息金额  = (贷款本金÷还款月数) + (贷款本金-已归还本金累计额)×月利率
+        // 每月本金 = 贷款本金÷还款月数
+        // 每月利息 = (贷款本金-已归还本金累计额)×月利率
+        double monthCapital = 0;
+        double tmpCapital =0;
+        double monthInterest = 0;
+        double monthRate = rate_business/12;
+        for(int i=1;i<months+1;i++){
+            monthCapital = (mortgage_business/months) + (mortgage_business-tmpCapital) * monthRate;
+            monthInterest = (mortgage_business-tmpCapital) * monthRate;
+            tmpCapital = tmpCapital + (mortgage_business/months);
             CalculateBean bean1 = new CalculateBean();
 
             int month = calendar.get(calendar.MONTH)+1;
             int year = calendar.get(calendar.YEAR);
-            if (month ==0){
-                year =year +1;
-                month = 12;
-            }
             bean1.setOrder_number(year+"."+month);
 
             calendar.add(Calendar.MONTH, 1);
-            double value = entry.getValue();
-            bean1.setTotal(value+"");
-            double invest = AverageCapitalUtils.getPerMonthPrincipal(mortgage_business, months);
-            bean1.setInvest(invest+"");
 
-            BigDecimal principalBigDecimal = new BigDecimal(invest);
-            BigDecimal principalInterestBigDecimal = new BigDecimal(entry.getValue());
-            BigDecimal interestBigDecimal = principalInterestBigDecimal.subtract(principalBigDecimal);
-            interestBigDecimal = interestBigDecimal.setScale(2, BigDecimal.ROUND_DOWN);
-
-            bean1.setRate(interestBigDecimal.doubleValue()+"");
+            bean1.setTotal(monthCapital+"");
+            bean1.setInvest((mortgage_business/months)+"");
+            bean1.setRate(monthInterest+"");
 
             beanList1.add(bean1);
         }
 
-        Map<Integer, Double> maps1 = AverageCapitalUtils.getPerMonthPrincipalInterest(mortgage_fund, rate_fund, months);
 
         Calendar calendar1 = Calendar.getInstance();
-        calendar1.set(bean.getYear(), bean.getMonth(), bean.getDay());
-        for (Map.Entry<Integer, Double> entry : maps1.entrySet()) {
+        calendar.set(bean.getYear(), bean.getMonth()-1, bean.getDay());
+        // 每月本息金额  = (贷款本金÷还款月数) + (贷款本金-已归还本金累计额)×月利率
+        // 每月本金 = 贷款本金÷还款月数
+        // 每月利息 = (贷款本金-已归还本金累计额)×月利率
+        double monthCapital1 = 0;
+        double tmpCapital1 =0;
+        double monthInterest1 = 0;
+        double monthRate1 = rate_fund/12;
+        for(int i=1;i<months+1;i++){
+            monthCapital = (mortgage_fund/months) + (mortgage_fund-tmpCapital1) * monthRate1;
+            monthInterest1 = (mortgage_fund-tmpCapital1) * monthRate1;
+            tmpCapital1 = tmpCapital1 + (mortgage_fund/months);
             CalculateBean bean2 = new CalculateBean();
 
-            int month = calendar1.get(Calendar.MONTH);
-            int year = calendar1.get(Calendar.YEAR);
+            int month = calendar.get(calendar.MONTH)+1;
+            int year = calendar.get(calendar.YEAR);
             bean2.setOrder_number(year+"."+month);
 
             calendar.add(Calendar.MONTH, 1);
-            double value = entry.getValue();
-            bean2.setTotal(value+"");
-            double invest = AverageCapitalUtils.getPerMonthPrincipal(mortgage_fund, months);
-            bean2.setInvest(invest+"");
 
-            BigDecimal principalBigDecimal = new BigDecimal(invest);
-            BigDecimal principalInterestBigDecimal = new BigDecimal(entry.getValue());
-            BigDecimal interestBigDecimal = principalInterestBigDecimal.subtract(principalBigDecimal);
-            interestBigDecimal = interestBigDecimal.setScale(2, BigDecimal.ROUND_DOWN);
-
-            bean2.setRate(interestBigDecimal.doubleValue()+"");
+            bean2.setTotal(monthCapital+"");
+            bean2.setInvest((mortgage_fund/months)+"");
+            bean2.setRate(monthInterest1+"");
 
             beanList2.add(bean2);
+
         }
+
+
 
         for (int i = 0; i < beanList1.size(); i++) {
             CalculateBean bean3 = new CalculateBean();
@@ -246,7 +250,10 @@ public class CombinationDetailActivity extends AppCompatActivity {
             bean3.setRate(rate+"");
             beanList.add(bean3);
         }
-        Collections.reverse(beanList);
+        List<String> stringList = new ArrayList<>();
+        for (int i = 0; i <beanList.size() ; i++) {
+            stringList.add(beanList.get(i).getTotal());
+        }
 
     }
 
