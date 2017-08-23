@@ -25,6 +25,9 @@ public class PopAdapter  extends RecyclerView.Adapter<PopAdapter.ViewHolder> imp
 
     private OnItemClickListener mOnItemClickListener = null;
     private static final String TAG = "PopAdapter";
+    //两个final int类型表示ViewType的两种类型
+    private final int NORMAL_TYPE = 0;
+    private final int FOOT_TYPE = 1111;
 
     @Override
     public void onClick(View view) {
@@ -35,7 +38,7 @@ public class PopAdapter  extends RecyclerView.Adapter<PopAdapter.ViewHolder> imp
     }
 
     //define interface
-    public static interface OnItemClickListener {
+    public  interface OnItemClickListener {
         void onItemClick(View view , int position);
     }
 
@@ -49,6 +52,9 @@ public class PopAdapter  extends RecyclerView.Adapter<PopAdapter.ViewHolder> imp
         this.context = context;
         inflater = LayoutInflater.from(context);
     }
+
+
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

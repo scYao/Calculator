@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 import com.shijiu.calculator.R;
 import com.shijiu.calculator.adapter.PopAdapter;
 import com.shijiu.calculator.bean.UnitBean;
+import com.shijiu.calculator.utils.MyLayoutManager;
 import com.shijiu.calculator.utils.SpaceItemDecoration;
 import com.shijiu.calculator.utils.Util;
 
@@ -150,7 +152,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
 
 
     public void showPopFormBottom(int i, List<UnitBean> beanList) {
-        TakePhotoPopWin takePhotoPopWin = new TakePhotoPopWin(this, i, beanList);
+        TakePhotoPopWin takePhotoPopWin = new TakePhotoPopWin(LengthActivity.this, i, beanList);
 //        设置Popupwindow显示位置（从底部弹出）
         takePhotoPopWin.showAtLocation(findViewById(R.id.main_view), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
         params = getWindow().getAttributes();
@@ -337,6 +339,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             //月球距离 天文单位 光年
             case 24:
                 BigDecimal re24 = Cac1(re, "384000000");
+//                BigDecimal re24 = Cac1(re, "389802000");
                 toMeter(i2, re24);
                 break;
             case 25:
@@ -459,6 +462,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             //月球距离 天文单位 光年
             case 24:
                 BigDecimal d24 = Cac2(d, "384000000");
+//                BigDecimal d24 = Cac2(d, "389802000");
                 result.setText(d24.stripTrailingZeros().toPlainString());
                 break;
             case 25:
@@ -508,10 +512,13 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
         private RecyclerView recylerView;
         private TextView btn_cancel;
         private RecyclerView.LayoutManager layoutManager;
+        private MyLayoutManager myLayoutManager;
 
 
         public TakePhotoPopWin(Context mContext, final int i, final List<UnitBean> beanList) {
+//            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.main_view);
             view = LayoutInflater.from(mContext).inflate(R.layout.pop_window, null);
+//            linearLayout.addView(view);
 
 //            if (beanList.size() == 0) {
 //                initData();
@@ -535,8 +542,11 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             btn_cancel = view.findViewById(R.id.id_cancel);
             recylerView = view.findViewById(R.id.id_recycleListView);
             layoutManager = new LinearLayoutManager(mContext);
-            adapter = new PopAdapter(beanList, mContext);
             recylerView.setLayoutManager(layoutManager);
+//            myLayoutManager = new MyLayoutManager(mContext);
+//            myLayoutManager.setScrollEnabled(false);
+//            recylerView.setLayoutManager(myLayoutManager);
+            adapter = new PopAdapter(beanList, mContext);
             recylerView.setAdapter(adapter);
             recylerView.addItemDecoration(new SpaceItemDecoration(10));
             adapter.notifyDataSetChanged();

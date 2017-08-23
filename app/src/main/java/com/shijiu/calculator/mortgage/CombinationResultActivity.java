@@ -108,7 +108,7 @@ public class CombinationResultActivity extends Activity {
         double d3=0;//利息总额
         for(int i=1;i<months+1;i++){
             monthCapital1 = (mortgage_business/months) + (mortgage_business-tmpCapital1) * monthRate1;
-            monthInterest1 = (mortgage_business-monthCapital1) * monthRate1;
+            monthInterest1 = (mortgage_business-tmpCapital1) * monthRate1;
             tmpCapital1 = tmpCapital1 + (mortgage_business/months);
             CalculateBean bean1 = new CalculateBean();
 
@@ -158,8 +158,6 @@ public class CombinationResultActivity extends Activity {
         }
 
 
-
-
         for (int i = 0; i < beanList1.size(); i++) {
             CalculateBean bean3 = new CalculateBean();
 
@@ -174,8 +172,8 @@ public class CombinationResultActivity extends Activity {
 
         rate_total.setText(String.format("%.2f", d3+d4)+"元");//利息总和
 
-        double d6= (mortgage_fund+mortgage_business)+(d3+d4);
-        repay_total.setText(String.format("%.2f", d6)+"元");//还款总额
+        double d6= ((mortgage_fund+mortgage_business)+(d3+d4))/10000;
+        repay_total.setText(String.format("%.2f", d6)+"万");//还款总额
 
         double years = Double.parseDouble(bean.getTotal_years());
         total_years.setText((int) years+"年("+(int) years*12+"个月)");
