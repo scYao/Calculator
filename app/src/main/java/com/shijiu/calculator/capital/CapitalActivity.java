@@ -182,7 +182,7 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
             MAX_VALUE = 99999999999999999.99D;
 
         } else {
-            MAX_VALUE = 399D;
+            MAX_VALUE = 3999D;
         }
 
         Log.e(TAG, "onClick: sssssssssssssssssss" + in);

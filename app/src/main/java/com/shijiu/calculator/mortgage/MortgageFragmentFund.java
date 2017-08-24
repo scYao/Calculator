@@ -7,6 +7,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 
 import com.shijiu.calculator.R;
 import com.shijiu.calculator.bean.MortgageBean;
+import com.shijiu.calculator.utils.InputFilterMinMax;
 import com.shijiu.calculator.utils.Util;
 
 import java.math.BigDecimal;
@@ -87,6 +89,7 @@ public class MortgageFragmentFund extends Fragment {
         initView(view);
         initListener();
         initData();
+        down_payments.setFilters(new InputFilter[]{new InputFilterMinMax("0", "100")});
         return view;
     }
 
@@ -146,7 +149,7 @@ public class MortgageFragmentFund extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 double d1;
                 double d2;
-                if (Util.isEmpty(unit_price)) {
+                if (Util.isEmpty(unit_price) && Util.isEmpty(area)) {
                     d1 = Double.parseDouble(unit_price.getText().toString().trim());
                     if (!area.getText().toString().trim().equals("")) {
                         d2 = Double.parseDouble(area.getText().toString().trim());
@@ -158,6 +161,10 @@ public class MortgageFragmentFund extends Fragment {
                             total_price.setText(str);
                         }
                     }
+                } else {
+                    total_price.setText("");
+                    need_loan.setText("");
+                    loan_edit.setText("");
                 }
 
 
@@ -179,7 +186,7 @@ public class MortgageFragmentFund extends Fragment {
                 double d1;
                 double d2;
 
-                if (Util.isEmpty(unit_price)) {
+                if (Util.isEmpty(unit_price) && Util.isEmpty(area)) {
                     d2 = Double.parseDouble(unit_price.getText().toString().trim());
 
 
@@ -193,6 +200,10 @@ public class MortgageFragmentFund extends Fragment {
                             total_price.setText(str);
                         }
                     }
+                } else {
+                    total_price.setText("");
+                    need_loan.setText("");
+                    loan_edit.setText("");
                 }
 
             }

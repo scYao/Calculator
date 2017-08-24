@@ -107,8 +107,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Util.forwardActivity(MainActivity.this, LengthActivity.class);
                 break;
             case 4:
-//                Util.forwardActivity(MainActivity.this, CalculatorActivity.class);
-                Util.forwardActivity(MainActivity.this, NewCalculatorActivity.class);
+                Util.forwardActivity(MainActivity.this, CalculatorActivity.class);
+//                Util.forwardActivity(MainActivity.this, NewCalculatorActivity.class);
                 break;
             case 5:
                 Util.forwardActivity(MainActivity.this, AreaActivity.class);

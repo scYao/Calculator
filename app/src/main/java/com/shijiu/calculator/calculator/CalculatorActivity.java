@@ -50,7 +50,7 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
     private EditText id_input_edit;
     private EditText id_result_text;
 
-    boolean needclear;
+    boolean needclear=false;
 
     private ImageView back;
     private TextView title;
@@ -79,19 +79,6 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
         title.setText("计算器");
 
         initView();
-//        getWindow().setSoftInputMode(
-//                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-//
-//        try {
-//            Class<EditText> cls = EditText.class;
-//            Method setSoftInputShownOnFocus;
-//            setSoftInputShownOnFocus = cls.getMethod(
-//                    "setShowSoftInputOnFocus", boolean.class);
-//            setSoftInputShownOnFocus.setAccessible(true);
-//            setSoftInputShownOnFocus.invoke(id_input_edit, false);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
 
     }
 
@@ -145,35 +132,13 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
         btn_pluse.setOnClickListener(this);
         btn_complementation.setOnClickListener(this);
 
-//        id_input_edit.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                if (charSequence.toString().equals("")) {
-//                    id_result_text.setText("");
-//                } else {
-//                    id_result_text.setText(charSequence.toString());
-//                }
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//
-//            }
-//        });
+
     }
 
 
     public boolean isRuler(String c) {
         boolean ruler = true;
-        Log.e(TAG, "isRuler: sssssssssssssssssssssss");
-        Log.e(TAG, "isRuler: " + currentNumber.length());
         if (currentNumber != null && currentNumber.length() > 0) {
-            Log.e(TAG, "isRuler: dddddddddddddddddddddddddddddd");
             if (c.matches("[\\+\\-\\×÷]")) {
                 if (("" + stringBuffer.charAt(stringBuffer.length() - 1))
                         .matches("[\\+\\-\\×÷]")) {
@@ -196,88 +161,8 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
 
     @Override
     public void onClick(View view) {
-//        String str = id_input_edit.getText().toString();
-
-//        String content = id_input_edit.getText().toString();
 
         switch (view.getId()) {
-
-//            case R.id.btn_0:
-//            case R.id.btn_1:
-//            case R.id.btn_2:
-//            case R.id.btn_3:
-//            case R.id.btn_4:
-//            case R.id.btn_5:
-//            case R.id.btn_6:
-//            case R.id.btn_7:
-//            case R.id.btn_8:
-//            case R.id.btn_9:
-//            case R.id.btn_point:
-//                if (needclear) {
-//                    str = "";
-//                    id_input_edit.setText("");
-//                    id_result_text.setText("");
-//                }
-//                id_input_edit.setText(str + ((TextView) view).getText());
-//                break;
-//
-//            case R.id.btn_del:
-//                if (str != null && !str.equals("")) {
-//                    id_input_edit.setText(str.substring(0, str.length() - 1));
-//
-//                }
-//                break;
-//            case R.id.btn_clear:
-//                id_input_edit.setText("");
-//                id_result_text.setText("");
-//                needclear = false;
-//                break;
-//            case R.id.btn_pluse:
-//            case R.id.btn_minus:
-//            case R.id.btn_multiply:
-//            case R.id.btn_divide:
-//                if (needclear) {
-//                    id_input_edit.setText("");
-//                    id_result_text.setText("");
-//                }
-//                id_input_edit.setText(str + " " + ((TextView) view).getText() + " ");
-//                break;
-//            case R.id.btn_complementation:
-//                if (needclear) {
-//                    id_input_edit.setText("");
-//                    id_result_text.setText("");
-//                }
-//
-//
-//                if (!str.equals("")){
-//                    id_input_edit.setText(str + " " + ((TextView) view).getText() + " ");
-//                    String exp = id_input_edit.getText().toString();
-//                    int space = exp.indexOf(' ');//用于搜索空格位置
-//                    String s1 = exp.substring(0, space);//s1用于保存第一个运算数
-//                    double arg1 = Double.parseDouble(s1);//将运算数从string转换为Single;
-//                    double r = arg1 / 100;
-//
-//                    id_result_text.setText(r + "");
-//                }
-//
-//                break;
-//
-//
-//            case R.id.btn_equal:
-//                flag = 0;
-//                getResult();
-//                break;
-//            case R.id.btn_pluse_minus:
-//                if (str.equals("")){
-//                    if (needclear) {
-//                        id_input_edit.setText("");
-//                        id_result_text.setText("");
-//                    }
-//                    flag =1;
-//                    id_input_edit.setText(str + "-");
-//
-//                }
-//                break;
 
             case R.id.btn_0:
             case R.id.btn_1:
@@ -322,52 +207,51 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
                     id_input_edit.setText(stringBuffer);
                     id_input_edit.setSelection(stringBuffer.length());
                     if (content.equals("=")) {
-//                        if (flag == 1) {
-//                            flag = 0;
-//                            id_result_text.setText(stringBuffer);
-//                            stringBuffer = new StringBuffer(stringBuffer.replace(0, 1, "0-"));
-//                            jisuan();
-//                        } else {
-                            jisuan();
-                            id_result_text.setText(stringBuffer);
-                            currentNumber = new StringBuffer(stringBuffer.toString());
-//                        }
-
+                        jisuan();
+                        id_result_text.setText(stringBuffer);
+                        currentNumber = new StringBuffer(stringBuffer.toString());
 
                     }
                 }
                 break;
 
             case R.id.btn_del:
-                if (stringBuffer != null && !stringBuffer.equals("")) {
+                String c = id_input_edit.getText().toString();
+                if (stringBuffer != null && !stringBuffer.equals("") && stringBuffer.length() > 0) {
+                    Log.e(TAG, "onClick: " + stringBuffer);
                     stringBuffer = new StringBuffer(stringBuffer.substring(0, stringBuffer.length() - 1));
                     id_input_edit.setText(stringBuffer);
                 }
                 break;
 
             case R.id.btn_complementation:
+                Log.e(TAG, "onClick: " + needclear);
                 if (needclear) {
-                    id_input_edit.setText("");
-                    id_result_text.setText("");
-                }
+//                    stringBuffer = new StringBuffer("");
+//                    id_input_edit.setText("");
+//                    id_result_text.setText("");
+                    clear();
+                } else {
 
+                    if (!stringBuffer.equals("")) {
+                        stringBuffer.append(" " + ((TextView) view).getText());
+                        id_input_edit.setText(stringBuffer);
+                        String exp = id_input_edit.getText().toString();
+                        int space = exp.indexOf(' ');//用于搜索空格位置
+                        String s1 = exp.substring(0, space);//s1用于保存第一个运算数
+                        double arg1 = Double.parseDouble(s1);//将运算数从string转换为Single;
+                        double r = arg1 / 100;
 
-                if (!stringBuffer.equals("")) {
-                    stringBuffer.append(" " + ((TextView) view).getText());
-                    id_input_edit.setText(stringBuffer);
-                    String exp = id_input_edit.getText().toString();
-                    int space = exp.indexOf(' ');//用于搜索空格位置
-                    String s1 = exp.substring(0, space);//s1用于保存第一个运算数
-                    double arg1 = Double.parseDouble(s1);//将运算数从string转换为Single;
-                    double r = arg1 / 100;
+                        if (r == (long) r) {
+                            id_result_text.setText((long) r + "");
+                        } else {
+                            id_result_text.setText(r + "");
+                        }
+                        needclear = true;
 
-                    if (r == (long) r) {
-                        id_result_text.setText((long) r + "");
-                    } else {
-                        id_result_text.setText(r + "");
                     }
-
                 }
+
 
                 break;
             case R.id.btn_pluse_minus:
@@ -381,14 +265,6 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
         }
 
     }
-
-
-//    public void onClick(View view) {
-//        // TODO Auto-generated method stub
-//        if (view instanceof TextView) {
-//
-//        }
-//    }
 
 
     public void calculateProcess(String reg) {
@@ -424,12 +300,12 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
         Log.e(TAG, "getResult:" + stringBuffer);
         String first = stringBuffer.substring(array.get(0), array.get(1));
 //        String first = stringBuffer.substring(0, 1);
-        Log.e(TAG, "getResult: "+ first);
+        Log.e(TAG, "getResult: " + first);
         if (first.equals("-")) {
-            first =stringBuffer.substring(array.get(1),array.get(2));
+            first = stringBuffer.substring(array.get(1), array.get(2));
             String second = stringBuffer.substring(array.get(3), array.get(4));
             String fuhao = stringBuffer.substring(array.get(2), array.get(3));
-            BigDecimal number1 = new BigDecimal("-"+first);
+            BigDecimal number1 = new BigDecimal("-" + first);
             BigDecimal number2 = new BigDecimal(second);
             if ("+".equals(fuhao)) {
                 decimal = number1.add(number2);
@@ -447,7 +323,7 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
                 }
 
             }
-        }else {
+        } else {
             String second = stringBuffer.substring(array.get(2), array.get(3));
             String fuhao = stringBuffer.substring(array.get(1), array.get(2));
             BigDecimal number1 = new BigDecimal(first);
@@ -511,91 +387,5 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
         id_input_edit.setText("");
     }
 
-    /**
-     * 获取计算结果
-     */
-    private void getResult() {
 
-        needclear = true;
-        String exp = id_input_edit.getText().toString();
-//        if (exp.equals(id_result_text.getText().toString())){
-//            needclear = false;
-//            Log.e(TAG, "getResult: sssssssssssssssssssssssssssss" );
-//        }else {
-//            needclear = true;
-//        }
-        double r = 0;
-        int space = exp.indexOf(' ');//用于搜索空格位置
-
-        String s2 = null;
-        double arg2;
-        if (space == -1) {
-            String s1 = exp.substring(0);
-            id_result_text.setText(s1);
-            needclear = false;
-        } else {
-            String s1 = exp.substring(0, space);//s1用于保存第一个运算数
-            String op = exp.substring(space + 1, space + 2);//op用于保存运算符
-            double arg1 = Double.parseDouble(s1);//将运算数从string转换为Single;
-
-
-            s2 = exp.substring(space + 3);//s2用于保存第二个运算数
-
-
-            if (s2.equals("")) {
-                arg2 = 0;
-            } else {
-                arg2 = Double.parseDouble(s2);
-            }
-
-            if (op.equals("+")) {
-                if (flag == 1) {
-                    arg1 = -arg1;
-                }
-                r = arg1 + arg2;
-            } else if (op.equals("-")) {
-                if (flag == 1) {
-                    arg1 = -arg1;
-                }
-                r = arg1 - arg2;
-            } else if (op.equals("×")) {
-
-                r = arg1 * arg2;
-                if (flag == 1) {
-                    r = -r;
-                }
-            } else if (op.equals("÷")) {
-                if (arg2 == 0) {
-                    r = 0;
-                } else {
-                    r = arg1 / arg2;
-                }
-
-                if (flag == 1) {
-                    r = -r;
-                }
-            } else if (op.equals("%")) {
-                if (arg2 == 0) {
-                    r = 0;
-                } else {
-                    r = arg1 % arg2;
-                }
-                if (flag == 1) {
-                    r = -r;
-                }
-            }
-
-            Log.e(TAG, "getResult: " + r);
-
-            if (!String.valueOf(r).contains(".")) {
-                int result = (int) r;
-                id_result_text.setText(result + "");
-
-            } else {
-                id_result_text.setText(r + "");
-            }
-        }
-
-
-    }
 }

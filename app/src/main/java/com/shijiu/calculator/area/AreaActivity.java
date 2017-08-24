@@ -61,8 +61,8 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
     private TextView btn_del;
     private TextView btn_point;
 
-    private static int unit1 = 1;
-    private static int unit2 = 1;
+    private int unit1 = 1;
+    private int unit2 = 1;
 
     private static final String TAG = "AreaActivity";
     private List<UnitBean> beanList1 = new ArrayList<>();
@@ -203,6 +203,7 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
                     input.setText(in.substring(0, in.length() - 1));
                     result.setText(in.substring(0, in.length() - 1));
                 }
+                getResult(unit1,unit2);
                 break;
             case R.id.btn_equal:
                 input.setText("");
@@ -213,7 +214,7 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void getResult(int i1, int i2) {
-        if (input.getText().toString().equals("")){
+        if (input.getText().toString().equals("")) {
             return;
         }
         BigDecimal re = BigDecimal.valueOf(Double.parseDouble(input.getText().toString()));
@@ -456,7 +457,7 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 }
             }
-            if (in==0){
+            if (in == 0) {
                 beanList.get(1).setImgae(R.mipmap.tick);
             }
 

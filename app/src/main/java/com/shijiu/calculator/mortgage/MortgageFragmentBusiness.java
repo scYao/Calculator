@@ -7,6 +7,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 
 import com.shijiu.calculator.R;
 import com.shijiu.calculator.bean.MortgageBean;
+import com.shijiu.calculator.utils.InputFilterMinMax;
 import com.shijiu.calculator.utils.Util;
 
 import java.math.BigDecimal;
@@ -90,6 +92,7 @@ public class MortgageFragmentBusiness extends Fragment {
         initView(view);
         initListener();
         initData();
+        down_payments.setFilters(new InputFilter[]{new InputFilterMinMax("0", "100")});
         return view;
     }
 
@@ -149,7 +152,7 @@ public class MortgageFragmentBusiness extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 double d1;
                 double d2;
-                if (Util.isEmpty(unit_price)) {
+                if (Util.isEmpty(area) && Util.isEmpty(unit_price)) {
                     d1 = Double.parseDouble(unit_price.getText().toString().trim());
                     if (!area.getText().toString().trim().equals("")) {
                         d2 = Double.parseDouble(area.getText().toString().trim());
@@ -161,6 +164,10 @@ public class MortgageFragmentBusiness extends Fragment {
                             total_price.setText(str);
                         }
                     }
+                } else {
+                    total_price.setText("");
+                    need_loan.setText("");
+                    loan_edit.setText("");
                 }
 
 
@@ -182,7 +189,7 @@ public class MortgageFragmentBusiness extends Fragment {
                 double d1;
                 double d2;
 
-                if (Util.isEmpty(unit_price)) {
+                if (Util.isEmpty(unit_price) && Util.isEmpty(area)) {
                     d2 = Double.parseDouble(unit_price.getText().toString().trim());
 
 
@@ -196,6 +203,10 @@ public class MortgageFragmentBusiness extends Fragment {
                             total_price.setText(str);
                         }
                     }
+                } else {
+                    total_price.setText("");
+                    need_loan.setText("");
+                    loan_edit.setText("");
                 }
 
             }
@@ -210,11 +221,11 @@ public class MortgageFragmentBusiness extends Fragment {
         down_payments.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                if (b){
+                if (b) {
                     if (Util.isNull(total_price)) {
                         double price = Double.parseDouble(total_price.getText().toString().trim());
                         need_loan.setText(price + "元");
-                        loan_edit.setText(price/10000+"");
+                        loan_edit.setText(price / 10000 + "");
                     }
                 }
             }
@@ -228,7 +239,7 @@ public class MortgageFragmentBusiness extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Log.e(TAG, "onTextChanged: "+charSequence.toString() );
+                Log.e(TAG, "onTextChanged: " + charSequence.toString());
                 if (Util.isNull(total_price)) {
                     double price = Double.parseDouble(total_price.getText().toString().trim());
 

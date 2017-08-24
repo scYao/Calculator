@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -66,8 +68,8 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
     private TextView btn_point;
 
     private static final String TAG = "LengthActivity";
-    private static int unit1 = 1;
-    private static int unit2 = 1;
+    private int unit1 = 1;
+    private int unit2 = 1;
 
 
     private List<UnitBean> beanList1 = new ArrayList<>();
@@ -90,6 +92,13 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
         initData();
 
     }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        unit1 = 1;
+//
+//    }
 
     private void initView() {
         title = (TextView) findViewById(R.id.id_title);
@@ -210,6 +219,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                     input.setText(in.substring(0, in.length() - 1));
                     result.setText(in.substring(0, in.length() - 1));
                 }
+                getResult(unit1, unit2);
                 break;
             case R.id.btn_equal:
                 input.setText("");
@@ -221,15 +231,16 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     public void getResult(int i1, int i2) {
-        if (input.getText().toString().equals("")){
+        if (input.getText().toString().equals("")) {
             return;
         }
 
+        Log.e(TAG, "getResult: " + input.getText().toString() + "positon1" + beanList1.get(i1).getUnit() + "position2" + beanList2.get(i2).getUnit());
 
         BigDecimal re = BigDecimal.valueOf(Double.parseDouble(input.getText().toString()));
-        Log.e(TAG, "getResult: " + re);
 
         switch (i1) {
+            //千米 米 分米
             case 0:
 //                double re0 = re * 1000;
                 BigDecimal re0 = Cac1(re, "1000");
@@ -244,6 +255,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 BigDecimal re2 = Cac2(re, "10");
                 toMeter(i2, re2);
                 break;
+            //厘米 毫米 微米
             case 3:
 //                double re3 = re / 100;
                 BigDecimal re3 = Cac2(re, "100");
@@ -259,6 +271,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 BigDecimal re5 = Cac2(re, "1000000");
                 toMeter(i2, re5);
                 break;
+            //纳米 皮米 海里
             case 6:
 //                double re6 = re / 1000000000;
                 BigDecimal re6 = Cac2(re, "1000000000");
@@ -272,6 +285,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 BigDecimal re8 = Cac1(re, "1852");
                 toMeter(i2, re8);
                 break;
+            //英里 费隆 英寻
             case 9:
                 BigDecimal re9 = Cac1(re, "1609.344");
                 toMeter(i2, re9);
@@ -356,122 +370,235 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
 
     private void toMeter(int i, BigDecimal d) {
         switch (i) {
+            //千米 米 分米
             case 0:
                 BigDecimal d0 = Cac2(d, "1000");
-                result.setText(d0.stripTrailingZeros().toPlainString());
+                if (d0.toString().length() >= 10) {
+                    result.setText(d0.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d0.stripTrailingZeros().toPlainString());
+                }
+
                 break;
             case 1:
                 BigDecimal d1 = d;
-                result.setText(d1.stripTrailingZeros().toPlainString());
+                Log.e(TAG, "toMeter: "+d1.toString().length() );
+                if (d1.toString().length() >= 10) {
+                    result.setText(d1.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d1.stripTrailingZeros().toPlainString());
+                }
+
                 break;
             case 2:
                 BigDecimal d2 = Cac1(d, "10");
-                result.setText(d2.stripTrailingZeros().toPlainString());
-                break;
+                if (d2.toString().length() >= 10) {
+                    result.setText(d2.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d2.stripTrailingZeros().toPlainString());
+                }
 
+
+                break;
+            //厘米 毫米 微米
             case 3:
                 BigDecimal d3 = Cac1(d, "100");
-                result.setText(d3.stripTrailingZeros().toPlainString());
+                if (d3.toString().length() >= 10) {
+                    result.setText(d3.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d3.stripTrailingZeros().toPlainString());
+                }
                 break;
             case 4:
                 BigDecimal d4 = Cac1(d, "1000");
-                result.setText(d4.stripTrailingZeros().toPlainString());
+                if (d4.toString().length() >= 10) {
+                    result.setText(d4.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d4.stripTrailingZeros().toPlainString());
+                }
                 break;
             case 5:
                 BigDecimal d5 = Cac1(d, "1000000");
-                result.setText(d5.stripTrailingZeros().toPlainString());
+                if (d5.toString().length() >= 10) {
+                    result.setText(d5.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d5.stripTrailingZeros().toPlainString());
+                }
                 break;
-
+            //纳米 皮米 海里
             case 6:
                 BigDecimal d6 = Cac1(d, "1000000000");
-                result.setText(d6.stripTrailingZeros().toPlainString());
+                if (d6.toString().length() >= 10) {
+                    result.setText(d6.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d6.stripTrailingZeros().toPlainString());
+                }
                 break;
             case 7:
                 BigDecimal d7 = Cac1(d, "1000000000000");
-                result.setText(d7.stripTrailingZeros().toPlainString());
+                if (d7.toString().length() >= 10) {
+                    result.setText(d7.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d7.stripTrailingZeros().toPlainString());
+                }
                 break;
             case 8:
                 BigDecimal d8 = Cac2(d, "1852");
-                result.setText(d8.stripTrailingZeros().toPlainString());
+                if (d8.toString().length() >= 10) {
+                    result.setText(d8.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d8.stripTrailingZeros().toPlainString());
+                }
                 break;
-
+            //英里 费隆 英寻
             case 9:
                 BigDecimal d9 = Cac2(d, "1609.344");
-                result.setText(d9.stripTrailingZeros().toPlainString());
+                if (d9.toString().length() >= 10) {
+                    result.setText(d9.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d9.stripTrailingZeros().toPlainString());
+                }
                 break;
             case 10:
                 BigDecimal d10 = Cac2(d, "201.168");
-                result.setText(d10.stripTrailingZeros().toPlainString());
+                if (d10.toString().length() >= 10) {
+                    result.setText(d10.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d10.stripTrailingZeros().toPlainString());
+                }
                 break;
             case 11:
                 BigDecimal d11 = Cac2(d, "1.8288");
-                result.setText(d11.stripTrailingZeros().toPlainString());
+                if (d11.toString().length() >= 10) {
+                    result.setText(d11.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d11.stripTrailingZeros().toPlainString());
+                }
                 break;
             //码 英尺 英寸
             case 12:
                 BigDecimal d12 = Cac2(d, "0.9144");
-                result.setText(d12.stripTrailingZeros().toPlainString());
+                if (d12.toString().length() >= 10) {
+                    result.setText(d12.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d12.stripTrailingZeros().toPlainString());
+                }
                 break;
             case 13:
                 BigDecimal d13 = Cac2(d, "0.3048");
-                result.setText(d13.stripTrailingZeros().toPlainString());
+                if (d13.toString().length() >= 10) {
+                    result.setText(d13.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d13.stripTrailingZeros().toPlainString());
+                }
                 break;
             case 14:
                 BigDecimal d14 = Cac2(d, "0.0254");
-                result.setText(d14.stripTrailingZeros().toPlainString());
+                if (d14.toString().length() >= 10) {
+                    result.setText(d14.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d14.stripTrailingZeros().toPlainString());
+                }
                 break;
             //公里 里 丈
             case 15:
                 BigDecimal d15 = Cac2(d, "1000");
-                result.setText(d15.stripTrailingZeros().toPlainString());
+                if (d15.toString().length() >= 10) {
+                    result.setText(d15.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d15.stripTrailingZeros().toPlainString());
+                }
                 break;
             case 16:
                 BigDecimal d16 = Cac2(d, "500");
-                result.setText(d16.stripTrailingZeros().toPlainString());
+                if (d16.toString().length() >= 10) {
+                    result.setText(d16.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d16.stripTrailingZeros().toPlainString());
+                }
                 break;
             case 17:
                 BigDecimal d17 = Cac2(d, "3.333");
-                result.setText(d17.stripTrailingZeros().toPlainString());
+                if (d17.toString().length() >= 10) {
+                    result.setText(d17.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d17.stripTrailingZeros().toPlainString());
+                }
                 break;
             //尺 寸 分
             case 18:
                 BigDecimal d18 = Cac2(d, "0.3333");
-                result.setText(d18.stripTrailingZeros().toPlainString());
+                if (d18.toString().length() >= 10) {
+                    result.setText(d18.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d18.stripTrailingZeros().toPlainString());
+                }
                 break;
             case 19:
                 BigDecimal d19 = Cac2(d, "0.03333");
-                result.setText(d19.stripTrailingZeros().toPlainString());
+                if (d19.toString().length() >= 10) {
+                    result.setText(d19.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d19.stripTrailingZeros().toPlainString());
+                }
                 break;
             case 20:
                 BigDecimal d20 = Cac2(d, "0.003333");
-                result.setText(d20.stripTrailingZeros().toPlainString());
+                if (d20.toString().length() >= 10) {
+                    result.setText(d20.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d20.stripTrailingZeros().toPlainString());
+                }
                 break;
             //厘 毫 秒差距
             case 21:
                 BigDecimal d21 = Cac2(d, "0.0003333");
-                result.setText(d21.stripTrailingZeros().toPlainString());
+                if (d21.toString().length() >= 10) {
+                    result.setText(d21.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d21.stripTrailingZeros().toPlainString());
+                }
                 break;
             case 22:
                 BigDecimal d22 = Cac2(d, "0.0000333");
-                result.setText(d22.stripTrailingZeros().toPlainString());
+                if (d22.toString().length() >= 10) {
+                    result.setText(d22.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d22.stripTrailingZeros().toPlainString());
+                }
                 break;
             case 23:
                 BigDecimal d23 = Cac2(d, "30856775814671915.808");
-                result.setText(d23.stripTrailingZeros().toPlainString());
+                if (d23.toString().length() >= 10) {
+                    result.setText(d23.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d23.stripTrailingZeros().toPlainString());
+                }
                 break;
             //月球距离 天文单位 光年
             case 24:
                 BigDecimal d24 = Cac2(d, "384000000");
-//                BigDecimal d24 = Cac2(d, "389802000");
-                result.setText(d24.stripTrailingZeros().toPlainString());
+                if (d24.toString().length() >= 10) {
+                    result.setText(d24.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d24.stripTrailingZeros().toPlainString());
+                }
                 break;
             case 25:
                 BigDecimal d25 = Cac2(d, "149597870700");
-                result.setText(d25.stripTrailingZeros().toPlainString());
+                if (d25.toString().length() >= 10) {
+                    result.setText(d25.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d25.stripTrailingZeros().toPlainString());
+                }
                 break;
             case 26:
                 BigDecimal d26 = Cac2(d, "9460730472580800");
-                result.setText(d26.stripTrailingZeros().toPlainString());
+                if (d26.toString().length() >= 10) {
+                    result.setText(d26.stripTrailingZeros().toString());
+                } else {
+                    result.setText(d26.stripTrailingZeros().toPlainString());
+                }
                 break;
         }
     }
@@ -490,7 +617,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
 //        BigDecimal bigDecimal =bigDecimal1.divide(bigDecimal2);
 //        bigDecimal.setScale(10,BigDecimal.ROUND_HALF_UP);
 
-        return bigDecimal1.divide(bigDecimal2, 10, BigDecimal.ROUND_HALF_UP);
+        return bigDecimal1.divide(bigDecimal2, 12, BigDecimal.ROUND_HALF_UP);
 //        return bigDecimal;
     }
 
@@ -524,7 +651,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
 //                initData();
 //            }
             int in = 0;
-            Log.e(TAG, "TakePhotoPopWin: "+beanList.toString() );
+            Log.e(TAG, "TakePhotoPopWin: " + beanList.toString());
             for (int j = 0; j < beanList.size(); j++) {
                 UnitBean bean = beanList.get(j);
                 if (bean.getImgae() == null) {
@@ -535,10 +662,10 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                     break;
                 }
             }
-            if (in==0){
+            if (in == 0) {
                 beanList.get(1).setImgae(R.mipmap.tick);
             }
-            Log.e(TAG, "TakePhotoPopWin: "+beanList.toString() );
+            Log.e(TAG, "TakePhotoPopWin: " + beanList.toString());
             btn_cancel = view.findViewById(R.id.id_cancel);
             recylerView = view.findViewById(R.id.id_recycleListView);
             layoutManager = new LinearLayoutManager(mContext);
@@ -551,7 +678,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             recylerView.addItemDecoration(new SpaceItemDecoration(10));
             adapter.notifyDataSetChanged();
 
-            Log.e(TAG, "TakePhotoPopWin: "+beanList.toString()+beanList.size() );
+            Log.e(TAG, "TakePhotoPopWin: " + beanList.toString() + beanList.size());
 
             Log.e(TAG, "TakePhotoPopWin: " + beanList.toString());
             adapter.setOnItemClickListener(new PopAdapter.OnItemClickListener() {

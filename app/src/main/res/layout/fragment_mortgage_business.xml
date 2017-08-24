@@ -147,7 +147,7 @@
                     android:text="首付" />
 
                 <EditText
-                    android:maxLength="3"
+                    android:maxLength="5"
                     android:id="@+id/id_down_payments"
                     style="@style/valueEditStyle"
                     android:layout_width="60dp"
