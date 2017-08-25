@@ -57,7 +57,7 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
 
     private static final String TAG = "CalculatorActivity";
     private int flag = 0;//0表示正数,1表示负数
-    private int delete =0;//0未使用删除,1使用删除
+    private int delete = 0;//0未使用删除,1使用删除
 
 
     private StringBuffer stringBuffer = new StringBuffer();
@@ -183,7 +183,7 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
             case R.id.btn_divide:
             case R.id.btn_equal:
                 String content = ((TextView) view).getText().toString();
-                Log.e(TAG, "onClick: content"+content );
+                Log.e(TAG, "onClick: content" + content);
 
                 if (!isRuler(content)) {
 
@@ -201,15 +201,15 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
                             stringBuffer.append(content);
                         }
                     } else if (content.matches("[\\+\\-\\×÷]")) {
-                        if (delete ==0){
+                        if (delete == 0) {
                             currentNumber.delete(0, currentNumber.length());
-                        }else {
+                        } else {
                             currentNumber.append(content);
-                            delete=0;
+                            delete = 0;
                         }
 
                         stringBuffer.append(content);
-                        Log.e(TAG, "onClick: ssssssssssssssssssssssss" );
+                        Log.e(TAG, "onClick: ssssssssssssssssssssssss");
                     }
 
                     id_input_edit.setText(stringBuffer);
@@ -231,9 +231,9 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
                     id_input_edit.setText(c);
                     stringBuffer = new StringBuffer(c);
                     delete = 1;
-                    Log.e(TAG, "onClick: c" + c+"stringBuffer"+stringBuffer.toString());
-                }else {
-                   clear();
+                    Log.e(TAG, "onClick: c" + c + "stringBuffer" + stringBuffer.toString());
+                } else {
+                    clear();
                 }
 
                 break;
@@ -288,7 +288,7 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
             String fuhao = matcher.group();
             int index = matcher.end();
             ArrayList<Integer> arrayList = getyunfuNumber(index);
-            if (arrayList.size() <3){
+            if (arrayList.size() < 3) {
                 return;
             }
             BigDecimal bigDecimal = getResult(arrayList);
@@ -351,8 +351,23 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
         int end = 0;
 
         String pre_content = "";
+        StringBuffer sb;
+        int newIndex=0;
         if (index == 1) {
-            pre_content = stringBuffer.toString().substring(0, index + 1);
+            Pattern pattern1 = Pattern.compile("[\\+\\-\\×÷]");
+
+            sb = new StringBuffer(stringBuffer.toString().substring(1));
+            Matcher matcher1 = pattern1.matcher(sb);
+
+            while (matcher1.find()){
+                newIndex = matcher1.end();
+            }
+
+            pre_content = stringBuffer.toString().substring(0, newIndex);
+            if (newIndex ==0){
+                id_result_text.setText(stringBuffer.toString());
+                return postion;
+            }
         } else {
             pre_content = stringBuffer.toString().substring(0, index - 1);
         }
@@ -367,27 +382,21 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
         postion.add(start);
         postion.add(end);
         String after_content = "";
-        Log.e(TAG, "getyunfuNumber: "+stringBuffer );
+        Log.e(TAG, "getyunfuNumber: " + stringBuffer);
         if (index == 1) {
-            if (stringBuffer.length()< 3){
-                id_result_text.setText(stringBuffer.toString());
-                return postion;
-            }else {
-                after_content = stringBuffer.toString().substring(index + 2, stringBuffer.length());
-            }
-
+                after_content = stringBuffer.toString().substring(newIndex+1, stringBuffer.length());
         } else {
             after_content = stringBuffer.toString().substring(index, stringBuffer.length());
         }
         Log.e(TAG, "getyunfuNumber: index " + index + "pre_content: " + pre_content + "after_content:" + after_content);
-        matcher = pattern.matcher(after_content);
-        if (matcher.find()) {
-            String fuhao = matcher.group();
-            end = matcher.end();
-            start = matcher.start();
+        Pattern pattern2 = Pattern.compile("\\d+(\\.\\d+)?");
+        Matcher matcher2 = pattern2.matcher(after_content);
+        while (matcher2.find()) {
+            end = matcher2.end();
+            start = matcher2.start();
             if (index == 1) {
-                postion.add(start + index + 2);
-                postion.add(end + index + 2);
+                postion.add(start + newIndex + 1);
+                postion.add(end + newIndex + 1);
             } else {
                 postion.add(start + index);
                 postion.add(end + index);
