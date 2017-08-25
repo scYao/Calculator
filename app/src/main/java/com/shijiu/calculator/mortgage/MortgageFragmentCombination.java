@@ -92,8 +92,8 @@ public class MortgageFragmentCombination extends Fragment {
         bean = new CombinationBean();
         bean.setFlag("1");
         bean.setTotal_years("1");
-        bean.setRate_business("49");
-        bean.setRate_fund("32.5");
+        bean.setRate_business("4.9");
+        bean.setRate_fund("3.25");
         initView(view);
         initListener();
         initData();

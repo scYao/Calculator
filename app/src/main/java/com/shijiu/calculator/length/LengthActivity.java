@@ -352,16 +352,18 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             //月球距离 天文单位 光年
             case 24:
-                BigDecimal re24 = Cac1(re, "384000000");
-//                BigDecimal re24 = Cac1(re, "389802000");
+//                BigDecimal re24 = Cac1(re, "384000000");
+                BigDecimal re24 = Cac1(re, "384401000");
                 toMeter(i2, re24);
                 break;
             case 25:
-                BigDecimal re25 = Cac1(re, "149597870700");
+//                BigDecimal re25 = Cac1(re, "149597870700");
+                BigDecimal re25 = Cac1(re, "149597871000");
                 toMeter(i2, re25);
                 break;
             case 26:
-                BigDecimal re26 = Cac1(re, "9460730472580800");
+//                BigDecimal re26 = Cac1(re, "9460730472580800");
+                BigDecimal re26 = Cac1(re, "9460730470000000");
                 toMeter(i2, re26);
                 break;
         }
@@ -373,7 +375,8 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             //千米 米 分米
             case 0:
                 BigDecimal d0 = Cac2(d, "1000");
-                if (d0.toString().length() >= 10) {
+                Log.e(TAG, "toMeter: "+d0 +d0.stripTrailingZeros().toPlainString().length());
+                if (d0.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d0.stripTrailingZeros().toString());
                 } else {
                     result.setText(d0.stripTrailingZeros().toPlainString());
@@ -382,8 +385,9 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case 1:
                 BigDecimal d1 = d;
-                Log.e(TAG, "toMeter: "+d1.toString().length() );
-                if (d1.toString().length() >= 10) {
+                Log.e(TAG, "toMeter: "+d1.stripTrailingZeros().toPlainString().length() );
+                if (d1.stripTrailingZeros().toPlainString().length() >= 10) {
+                    Log.e(TAG, "toMeter: "+d1.toString());
                     result.setText(d1.stripTrailingZeros().toString());
                 } else {
                     result.setText(d1.stripTrailingZeros().toPlainString());
@@ -392,7 +396,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case 2:
                 BigDecimal d2 = Cac1(d, "10");
-                if (d2.toString().length() >= 10) {
+                if (d2.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d2.stripTrailingZeros().toString());
                 } else {
                     result.setText(d2.stripTrailingZeros().toPlainString());
@@ -403,7 +407,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             //厘米 毫米 微米
             case 3:
                 BigDecimal d3 = Cac1(d, "100");
-                if (d3.toString().length() >= 10) {
+                if (d3.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d3.stripTrailingZeros().toString());
                 } else {
                     result.setText(d3.stripTrailingZeros().toPlainString());
@@ -411,7 +415,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case 4:
                 BigDecimal d4 = Cac1(d, "1000");
-                if (d4.toString().length() >= 10) {
+                if (d4.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d4.stripTrailingZeros().toString());
                 } else {
                     result.setText(d4.stripTrailingZeros().toPlainString());
@@ -419,7 +423,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case 5:
                 BigDecimal d5 = Cac1(d, "1000000");
-                if (d5.toString().length() >= 10) {
+                if (d5.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d5.stripTrailingZeros().toString());
                 } else {
                     result.setText(d5.stripTrailingZeros().toPlainString());
@@ -428,7 +432,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             //纳米 皮米 海里
             case 6:
                 BigDecimal d6 = Cac1(d, "1000000000");
-                if (d6.toString().length() >= 10) {
+                if (d6.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d6.stripTrailingZeros().toString());
                 } else {
                     result.setText(d6.stripTrailingZeros().toPlainString());
@@ -436,7 +440,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case 7:
                 BigDecimal d7 = Cac1(d, "1000000000000");
-                if (d7.toString().length() >= 10) {
+                if (d7.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d7.stripTrailingZeros().toString());
                 } else {
                     result.setText(d7.stripTrailingZeros().toPlainString());
@@ -444,7 +448,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case 8:
                 BigDecimal d8 = Cac2(d, "1852");
-                if (d8.toString().length() >= 10) {
+                if (d8.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d8.stripTrailingZeros().toString());
                 } else {
                     result.setText(d8.stripTrailingZeros().toPlainString());
@@ -453,7 +457,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             //英里 费隆 英寻
             case 9:
                 BigDecimal d9 = Cac2(d, "1609.344");
-                if (d9.toString().length() >= 10) {
+                if (d9.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d9.stripTrailingZeros().toString());
                 } else {
                     result.setText(d9.stripTrailingZeros().toPlainString());
@@ -461,7 +465,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case 10:
                 BigDecimal d10 = Cac2(d, "201.168");
-                if (d10.toString().length() >= 10) {
+                if (d10.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d10.stripTrailingZeros().toString());
                 } else {
                     result.setText(d10.stripTrailingZeros().toPlainString());
@@ -469,7 +473,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case 11:
                 BigDecimal d11 = Cac2(d, "1.8288");
-                if (d11.toString().length() >= 10) {
+                if (d11.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d11.stripTrailingZeros().toString());
                 } else {
                     result.setText(d11.stripTrailingZeros().toPlainString());
@@ -478,7 +482,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             //码 英尺 英寸
             case 12:
                 BigDecimal d12 = Cac2(d, "0.9144");
-                if (d12.toString().length() >= 10) {
+                if (d12.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d12.stripTrailingZeros().toString());
                 } else {
                     result.setText(d12.stripTrailingZeros().toPlainString());
@@ -486,7 +490,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case 13:
                 BigDecimal d13 = Cac2(d, "0.3048");
-                if (d13.toString().length() >= 10) {
+                if (d13.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d13.stripTrailingZeros().toString());
                 } else {
                     result.setText(d13.stripTrailingZeros().toPlainString());
@@ -494,7 +498,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case 14:
                 BigDecimal d14 = Cac2(d, "0.0254");
-                if (d14.toString().length() >= 10) {
+                if (d14.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d14.stripTrailingZeros().toString());
                 } else {
                     result.setText(d14.stripTrailingZeros().toPlainString());
@@ -503,7 +507,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             //公里 里 丈
             case 15:
                 BigDecimal d15 = Cac2(d, "1000");
-                if (d15.toString().length() >= 10) {
+                if (d15.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d15.stripTrailingZeros().toString());
                 } else {
                     result.setText(d15.stripTrailingZeros().toPlainString());
@@ -511,7 +515,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case 16:
                 BigDecimal d16 = Cac2(d, "500");
-                if (d16.toString().length() >= 10) {
+                if (d16.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d16.stripTrailingZeros().toString());
                 } else {
                     result.setText(d16.stripTrailingZeros().toPlainString());
@@ -519,7 +523,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case 17:
                 BigDecimal d17 = Cac2(d, "3.333");
-                if (d17.toString().length() >= 10) {
+                if (d17.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d17.stripTrailingZeros().toString());
                 } else {
                     result.setText(d17.stripTrailingZeros().toPlainString());
@@ -528,7 +532,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             //尺 寸 分
             case 18:
                 BigDecimal d18 = Cac2(d, "0.3333");
-                if (d18.toString().length() >= 10) {
+                if (d18.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d18.stripTrailingZeros().toString());
                 } else {
                     result.setText(d18.stripTrailingZeros().toPlainString());
@@ -536,7 +540,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case 19:
                 BigDecimal d19 = Cac2(d, "0.03333");
-                if (d19.toString().length() >= 10) {
+                if (d19.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d19.stripTrailingZeros().toString());
                 } else {
                     result.setText(d19.stripTrailingZeros().toPlainString());
@@ -544,7 +548,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case 20:
                 BigDecimal d20 = Cac2(d, "0.003333");
-                if (d20.toString().length() >= 10) {
+                if (d20.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d20.stripTrailingZeros().toString());
                 } else {
                     result.setText(d20.stripTrailingZeros().toPlainString());
@@ -553,7 +557,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
             //厘 毫 秒差距
             case 21:
                 BigDecimal d21 = Cac2(d, "0.0003333");
-                if (d21.toString().length() >= 10) {
+                if (d21.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d21.stripTrailingZeros().toString());
                 } else {
                     result.setText(d21.stripTrailingZeros().toPlainString());
@@ -561,7 +565,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case 22:
                 BigDecimal d22 = Cac2(d, "0.0000333");
-                if (d22.toString().length() >= 10) {
+                if (d22.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d22.stripTrailingZeros().toString());
                 } else {
                     result.setText(d22.stripTrailingZeros().toPlainString());
@@ -569,7 +573,7 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case 23:
                 BigDecimal d23 = Cac2(d, "30856775814671915.808");
-                if (d23.toString().length() >= 10) {
+                if (d23.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d23.stripTrailingZeros().toString());
                 } else {
                     result.setText(d23.stripTrailingZeros().toPlainString());
@@ -577,24 +581,27 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             //月球距离 天文单位 光年
             case 24:
-                BigDecimal d24 = Cac2(d, "384000000");
-                if (d24.toString().length() >= 10) {
+//                BigDecimal d24 = Cac2(d, "384000000");
+                BigDecimal d24 = Cac2(d, "384401000");
+                if (d24.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d24.stripTrailingZeros().toString());
                 } else {
                     result.setText(d24.stripTrailingZeros().toPlainString());
                 }
                 break;
             case 25:
-                BigDecimal d25 = Cac2(d, "149597870700");
-                if (d25.toString().length() >= 10) {
+//                BigDecimal d25 = Cac2(d, "149597870700");
+                BigDecimal d25 = Cac2(d, "149597871000");
+                if (d25.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d25.stripTrailingZeros().toString());
                 } else {
                     result.setText(d25.stripTrailingZeros().toPlainString());
                 }
                 break;
             case 26:
-                BigDecimal d26 = Cac2(d, "9460730472580800");
-                if (d26.toString().length() >= 10) {
+//                BigDecimal d26 = Cac2(d, "9460730472580800");
+                BigDecimal d26 = Cac2(d, "9460730470000000");
+                if (d26.stripTrailingZeros().toPlainString().length() >= 10) {
                     result.setText(d26.stripTrailingZeros().toString());
                 } else {
                     result.setText(d26.stripTrailingZeros().toPlainString());

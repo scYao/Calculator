@@ -91,8 +91,8 @@ public class CombinationResultActivity extends Activity {
         double mortgage_business = Double.parseDouble(bean.getMortgage_business())*10000;
         double mortgage_fund = Double.parseDouble(bean.getMortgage_fund())*10000;
 
-        double rate_business = Double.parseDouble(bean.getRate_business()) / 1000;
-        double rate_fund = Double.parseDouble(bean.getRate_fund()) / 1000;
+        double rate_business = Double.parseDouble(bean.getRate_business()) / 100;
+        double rate_fund = Double.parseDouble(bean.getRate_fund()) / 100;
 
         int months = (int) (Double.parseDouble(bean.getTotal_years()) * 12);
 
@@ -183,29 +183,66 @@ public class CombinationResultActivity extends Activity {
         double mortgage_business  = Double.parseDouble(bean.getMortgage_business())*10000;
         double mortgage_fund = Double.parseDouble(bean.getMortgage_fund())*10000;
 
-        double rate_business = Double.parseDouble(bean.getRate_business())/12/1000;
-        double rate_fund = Double.parseDouble(bean.getRate_fund())/12/1000;
+        double rate_business = Double.parseDouble(bean.getRate_business())/12/100;
+        double rate_fund = Double.parseDouble(bean.getRate_fund())/12/100;
         double years = Double.parseDouble(bean.getTotal_years());
         mortgage_total.setText(Util.doubleTrans((mortgage_fund+mortgage_business)/10000)+"万");
         total_years.setText((int) years+"年("+(int) years*12+"个月)");
-
-        double d1 = Math.pow((1+rate_business),years*12);
-        double d2 = Math.pow((1+rate_business),years*12) -1;
-        double month_money1 = (mortgage_business*rate_business*d1)/d2;
-
-        double d3 = Math.pow((1+rate_fund),years*12);
-        double d4 = Math.pow((1+rate_fund),years*12) -1;
-        double month_money2 = (mortgage_fund*rate_fund*d3)/d4;
+        int month = (int) years * 12;
 
 
+        // 每月本息金额  = (本金×月利率×(1＋月利率)＾还款月数)÷ ((1＋月利率)＾还款月数-1)
+        double monthIncome1 = (mortgage_business* rate_business * Math.pow(1+rate_business,month))/(Math.pow(1+rate_business,month)-1);
+        // 每月本金 = 本金×月利率×(1+月利率)^(还款月序号-1)÷((1+月利率)^还款月数-1)
+        double monthCapital1 = 0;
+        for(int i=1;i<month+1;i++){
+            monthCapital1 = (mortgage_business* rate_business * (Math.pow((1+rate_business),i-1)))/(Math.pow(1+rate_business,month)-1);
+            System.out.println("第" + i + "月本金： " + monthCapital1);
+        }
+        System.out.println("---------------------------------------------------");
+        // 每月利息  = 剩余本金 x 贷款月利率
+        double monthInterest1 = 0;
+        double capital1 = mortgage_business;
+        double tmpCapital1 = 0;
+        for(int i=1;i<month+1;i++){
+            capital1 = capital1 - tmpCapital1;
+            monthInterest1 = capital1 * rate_business;
+            tmpCapital1 = (mortgage_business* rate_business * (Math.pow((1+rate_business),i-1)))/(Math.pow(1+rate_business,month)-1);
+            System.out.println("第" + i + "月利息： " + monthInterest1);
+        }
 
-        month_repay.setText(String.format("%.2f", month_money1+month_money2)+"元");
+        // 每月本息金额  = (本金×月利率×(1＋月利率)＾还款月数)÷ ((1＋月利率)＾还款月数-1)
+        double monthIncome2 = (mortgage_fund* rate_fund * Math.pow(1+rate_fund,month))/(Math.pow(1+rate_fund,month)-1);
+        System.out.println("每月本息金额 : " + monthIncome2);
+        System.out.println("---------------------------------------------------");
+        // 每月本金 = 本金×月利率×(1+月利率)^(还款月序号-1)÷((1+月利率)^还款月数-1)
+        double monthCapital2 = 0;
+        for(int i=1;i<month+1;i++){
+            monthCapital2 = (mortgage_fund* rate_fund * (Math.pow((1+rate_fund),i-1)))/(Math.pow(1+rate_fund,month)-1);
+            System.out.println("第" + i + "月本金： " + monthCapital2);
+        }
+        System.out.println("---------------------------------------------------");
+        // 每月利息  = 剩余本金 x 贷款月利率
+        double monthInterest2 = 0;
+        double capital2 = mortgage_fund;
+        double tmpCapital2 = 0;
+        for(int i=1;i<month+1;i++){
+            capital2 = capital2 - tmpCapital2;
+            monthInterest2 = capital2 * rate_fund;
+            tmpCapital2 = (mortgage_fund* rate_fund * (Math.pow((1+rate_fund),i-1)))/(Math.pow(1+rate_fund,month)-1);
+            System.out.println("第" + i + "月利息： " + monthInterest2);
+        }
+
+
+
+
+        month_repay.setText(String.format("%.2f", monthIncome1+monthIncome2)+"元");
 
         double total_mortgage = mortgage_fund+ mortgage_business;
 
-        double d6 =(month_money1+month_money2)*years*12;
-        repay_total.setText(String.format("%.2f", d6)+"元");
-        double d5 = (month_money1+month_money2)*years*12 -total_mortgage;
+        double d6 =(monthIncome1+monthIncome2)*years*12/10000;
+        repay_total.setText(String.format("%.2f", d6)+"万");
+        double d5 = (monthIncome1+monthIncome2)*years*12 -(mortgage_business+mortgage_fund);
         rate_total.setText(String.format("%.2f", d5)+"元");
     }
 

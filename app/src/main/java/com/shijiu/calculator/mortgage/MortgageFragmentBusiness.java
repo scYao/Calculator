@@ -88,7 +88,7 @@ public class MortgageFragmentBusiness extends Fragment {
         bean = new MortgageBean();
         bean.setTotal_years("1");
         bean.setFlag("1");
-        bean.setRate("49");
+        bean.setRate("4.9");
         initView(view);
         initListener();
         initData();
@@ -354,7 +354,6 @@ public class MortgageFragmentBusiness extends Fragment {
                     interest_rate3.setText(result + "%");
                     current_rate.setText("当前年限基准利率：商业" + result + "%");
                     if (result > 0) {
-
                         bean.setRate(result + "");
                         Log.e(TAG, "onTextChanged: " + bean.toString());
                     }

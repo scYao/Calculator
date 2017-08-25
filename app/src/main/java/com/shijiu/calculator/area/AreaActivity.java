@@ -203,7 +203,7 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
                     input.setText(in.substring(0, in.length() - 1));
                     result.setText(in.substring(0, in.length() - 1));
                 }
-                getResult(unit1,unit2);
+                getResult(unit1, unit2);
                 break;
             case R.id.btn_equal:
                 input.setText("");
@@ -255,7 +255,7 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
                 toMeter(i2, re7);
                 break;
             case 8:
-                BigDecimal re8 = Cac1(re, "4046.864798");
+                BigDecimal re8 = Cac1(re, "4046.856");
                 toMeter(i2, re8);
                 break;
             //平方英里 平方码 平方英尺
@@ -282,11 +282,15 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             //顷 亩 平方尺
             case 14:
-                BigDecimal re14 = Cac1(re, "66666.6666667");
+//                BigDecimal re14 = Cac1(re, "66666.6666666666");
+//                double fen1 = 20000/3;
+                BigDecimal re14 = Cac2(Cac1(re,"200000"), "3");
                 toMeter(i2, re14);
                 break;
             case 15:
-                BigDecimal re15 = Cac1(re, "666.6666667");
+//                BigDecimal re15 = Cac1(re, "666.6666666666");
+//                double fen2 = 2000 /3;
+                BigDecimal re15 = Cac2(Cac1(re,"2000"), "3");
                 toMeter(i2, re15);
                 break;
             case 16:
@@ -295,7 +299,7 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             //平方寸 平方公里
             case 17:
-                BigDecimal re17 = Cac1(re, "0.0011111");
+                BigDecimal re17 = Cac2(re, "900");
                 toMeter(i2, re17);
                 break;
             case 18:
@@ -308,96 +312,98 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void toMeter(int i, BigDecimal d) {
-        DecimalFormat decimalFormat = new DecimalFormat();
 
         switch (i) {
             case 0:
-//                double d0 = d / 1000000;
-//                result.setText(decimalFormat.format(d0));
                 BigDecimal d0 = Cac2(d, "1000000");
-                result.setText(d0.stripTrailingZeros().toPlainString());
+                showText(d0);
                 break;
             case 1:
                 BigDecimal d1 = d;
-                result.setText(d1.stripTrailingZeros().toPlainString());
+                showText(d1);
                 break;
             case 2:
-//                double d2 = d * 100;
-//                result.setText(decimalFormat.format(d2));
                 BigDecimal d2 = Cac1(d, "100");
-                result.setText(d2.stripTrailingZeros().toPlainString());
+                showText(d2);
                 break;
             case 3:
-//                double d3 = d * 10000;
-//                result.setText(decimalFormat.format(d3));
                 BigDecimal d3 = Cac1(d, "10000");
-                result.setText(d3.stripTrailingZeros().toPlainString());
+                showText(d3);
                 break;
             case 4:
-//                double d4 = d * 1000000;
-//                result.setText(decimalFormat.format(d4));
                 BigDecimal d4 = Cac1(d, "1000000");
-                result.setText(d4.stripTrailingZeros().toPlainString());
+                showText(d4);
                 break;
             case 5:
                 BigDecimal re5 = Cac1(d, "1000000000000");
-                result.setText(re5.stripTrailingZeros().toPlainString());
+                showText(re5);
                 break;
             case 6:
                 BigDecimal re6 = Cac2(d, "10000");
-                result.setText(re6.stripTrailingZeros().toPlainString());
+                showText(re6);
                 break;
             case 7:
                 BigDecimal re7 = Cac2(d, "100");
-                result.setText(re7.stripTrailingZeros().toPlainString());
+                showText(re7);
                 break;
             case 8:
-                BigDecimal re8 = Cac2(d, "4046.864798");
-                result.setText(re8.stripTrailingZeros().toPlainString());
+                BigDecimal re8 = Cac2(d, "4046.856");
+                showText(re8);
                 break;
             //平方英里 平方码 平方英尺
             case 9:
                 BigDecimal re9 = Cac2(d, "2589988.110336");
-                result.setText(re9.stripTrailingZeros().toPlainString());
+                showText(re9);
                 break;
             case 10:
                 BigDecimal re10 = Cac2(d, "0.8361274");
-                result.setText(re10.stripTrailingZeros().toPlainString());
+                showText(re10);
                 break;
             case 11:
                 BigDecimal re11 = Cac2(d, "0.092903");
-                result.setText(re11.stripTrailingZeros().toPlainString());
+                showText(re11);
                 break;
             //平方英寸 平方竿
             case 12:
                 BigDecimal re12 = Cac2(d, "0.0006452");
-                result.setText(re12.stripTrailingZeros().toPlainString());
+                showText(re12);
                 break;
             case 13:
                 BigDecimal re13 = Cac2(d, "25.2928526");
-                result.setText(re13.stripTrailingZeros().toPlainString());
+                showText(re13);
                 break;
             //顷 亩 平方尺
             case 14:
-                BigDecimal re14 = Cac2(d, "66666.6666667");
-                result.setText(re14.stripTrailingZeros().toPlainString());
+//                double fen1 = 20000/3;
+                BigDecimal re14 = Cac2(Cac1(d,"3"), "200000");
+                showText(re14);
                 break;
             case 15:
-                BigDecimal re15 = Cac2(d, "666.6666667");
-                result.setText(re15.stripTrailingZeros().toPlainString());
+//                double fen2 = 2000/3;
+                BigDecimal re15 = Cac2(Cac1(d,"3"), "2000");
+                showText(re15);
                 break;
             case 16:
                 BigDecimal re16 = Cac2(d, "0.1111111");
-                result.setText(re16.stripTrailingZeros().toPlainString());
+                showText(re16);
                 break;
             //平方寸 平方公里
             case 17:
-                BigDecimal re17 = Cac2(d, "0.0011111");
-                result.setText(re17.stripTrailingZeros().toPlainString());
+                BigDecimal re17 = Cac1(d, "900");
+                showText(re17);
                 break;
             case 18:
                 BigDecimal re18 = Cac2(d, "1000000");
-                result.setText(re18.stripTrailingZeros().toPlainString());
+                showText(re18);
+                break;
+        }
+    }
+
+    private void showText(BigDecimal bigDecimal) {
+        if (bigDecimal.stripTrailingZeros().toPlainString().length() <= 10) {
+            result.setText(bigDecimal.stripTrailingZeros().toPlainString());
+        } else {
+            result.setText(bigDecimal.stripTrailingZeros().toString());
         }
     }
 

@@ -50,13 +50,14 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
     private EditText id_input_edit;
     private EditText id_result_text;
 
-    boolean needclear=false;
+    boolean needclear = false;
 
     private ImageView back;
     private TextView title;
 
     private static final String TAG = "CalculatorActivity";
     private int flag = 0;//0表示正数,1表示负数
+    private int delete =0;//0未使用删除,1使用删除
 
 
     private StringBuffer stringBuffer = new StringBuffer();
@@ -181,8 +182,8 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
             case R.id.btn_multiply:
             case R.id.btn_divide:
             case R.id.btn_equal:
-
                 String content = ((TextView) view).getText().toString();
+                Log.e(TAG, "onClick: content"+content );
 
                 if (!isRuler(content)) {
 
@@ -200,8 +201,15 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
                             stringBuffer.append(content);
                         }
                     } else if (content.matches("[\\+\\-\\×÷]")) {
-                        currentNumber.delete(0, currentNumber.length());
+                        if (delete ==0){
+                            currentNumber.delete(0, currentNumber.length());
+                        }else {
+                            currentNumber.append(content);
+                            delete=0;
+                        }
+
                         stringBuffer.append(content);
+                        Log.e(TAG, "onClick: ssssssssssssssssssssssss" );
                     }
 
                     id_input_edit.setText(stringBuffer);
@@ -217,19 +225,22 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
 
             case R.id.btn_del:
                 String c = id_input_edit.getText().toString();
-                if (stringBuffer != null && !stringBuffer.equals("") && stringBuffer.length() > 0) {
-                    Log.e(TAG, "onClick: " + stringBuffer);
-                    stringBuffer = new StringBuffer(stringBuffer.substring(0, stringBuffer.length() - 1));
-                    id_input_edit.setText(stringBuffer);
+                if (c != null && !c.equals("") && c.length() > 0) {
+
+                    c = c.substring(0, c.length() - 1);
+                    id_input_edit.setText(c);
+                    stringBuffer = new StringBuffer(c);
+                    delete = 1;
+                    Log.e(TAG, "onClick: c" + c+"stringBuffer"+stringBuffer.toString());
+                }else {
+                   clear();
                 }
+
                 break;
 
             case R.id.btn_complementation:
                 Log.e(TAG, "onClick: " + needclear);
                 if (needclear) {
-//                    stringBuffer = new StringBuffer("");
-//                    id_input_edit.setText("");
-//                    id_result_text.setText("");
                     clear();
                 } else {
 
@@ -258,6 +269,7 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
                 Log.e(TAG, "onClick: " + stringBuffer);
                 if (stringBuffer.toString().equals("")) {
                     stringBuffer.append("-");
+                    currentNumber.append("-");
                     id_input_edit.setText(stringBuffer);
                     flag = 1;
                 }
@@ -276,9 +288,15 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
             String fuhao = matcher.group();
             int index = matcher.end();
             ArrayList<Integer> arrayList = getyunfuNumber(index);
+            if (arrayList.size() <3){
+                return;
+            }
             BigDecimal bigDecimal = getResult(arrayList);
+            Log.e(TAG, "calculateProcess: index" + index + "arrayList" + arrayList + "bigDecimal" + bigDecimal + "stringBuffer" + stringBuffer);
+
             stringBuffer.replace(arrayList.get(0), arrayList.get(3),
                     bigDecimal.toString());
+
             matcher = pattern.matcher(stringBuffer);
         }
 
@@ -299,53 +317,29 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
 
         Log.e(TAG, "getResult:" + stringBuffer);
         String first = stringBuffer.substring(array.get(0), array.get(1));
-//        String first = stringBuffer.substring(0, 1);
         Log.e(TAG, "getResult: " + first);
-        if (first.equals("-")) {
-            first = stringBuffer.substring(array.get(1), array.get(2));
-            String second = stringBuffer.substring(array.get(3), array.get(4));
-            String fuhao = stringBuffer.substring(array.get(2), array.get(3));
-            BigDecimal number1 = new BigDecimal("-" + first);
-            BigDecimal number2 = new BigDecimal(second);
-            if ("+".equals(fuhao)) {
-                decimal = number1.add(number2);
-            } else if ("-".equals(fuhao)) {
-                decimal = number1.subtract(number2);
-            } else if ("×".equals(fuhao)) {
-                decimal = number1.multiply(number2);
-                // decimal.setScale(2, BigDecimal.ROUND_HALF_UP);
-            } else if ("÷".equals(fuhao)) {
-                try {
-                    decimal = number1.divide(number2);
-                } catch (ArithmeticException e) {
-                    // TODO: handle exception
-                    decimal = number1.divide(number2, 2, BigDecimal.ROUND_HALF_UP);
-                }
 
-            }
-        } else {
-            String second = stringBuffer.substring(array.get(2), array.get(3));
-            String fuhao = stringBuffer.substring(array.get(1), array.get(2));
-            BigDecimal number1 = new BigDecimal(first);
-            BigDecimal number2 = new BigDecimal(second);
-            if ("+".equals(fuhao)) {
-                decimal = number1.add(number2);
-            } else if ("-".equals(fuhao)) {
-                decimal = number1.subtract(number2);
-            } else if ("×".equals(fuhao)) {
-                decimal = number1.multiply(number2);
-                // decimal.setScale(2, BigDecimal.ROUND_HALF_UP);
-            } else if ("÷".equals(fuhao)) {
-                try {
-                    decimal = number1.divide(number2);
-                } catch (ArithmeticException e) {
-                    // TODO: handle exception
-                    decimal = number1.divide(number2, 2, BigDecimal.ROUND_HALF_UP);
-                }
-
+        String second = stringBuffer.substring(array.get(2), array.get(3));
+        String fuhao = stringBuffer.substring(array.get(1), array.get(2));
+        BigDecimal number1 = new BigDecimal(first);
+        BigDecimal number2 = new BigDecimal(second);
+        if ("+".equals(fuhao)) {
+            decimal = number1.add(number2);
+        } else if ("-".equals(fuhao)) {
+            decimal = number1.subtract(number2);
+        } else if ("×".equals(fuhao)) {
+            decimal = number1.multiply(number2);
+            // decimal.setScale(2, BigDecimal.ROUND_HALF_UP);
+        } else if ("÷".equals(fuhao)) {
+            try {
+                decimal = number1.divide(number2);
+            } catch (ArithmeticException e) {
+                // TODO: handle exception
+                decimal = number1.divide(number2, 2, BigDecimal.ROUND_HALF_UP);
             }
 
         }
+
 
         return decimal;
     }
@@ -355,8 +349,15 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
         ArrayList<Integer> postion = new ArrayList<Integer>();
         int start = 0;
         int end = 0;
-        String pre_content = stringBuffer.toString().substring(0, index - 1);
-        Pattern pattern = Pattern.compile("\\d+(\\.\\d+)?");
+
+        String pre_content = "";
+        if (index == 1) {
+            pre_content = stringBuffer.toString().substring(0, index + 1);
+        } else {
+            pre_content = stringBuffer.toString().substring(0, index - 1);
+        }
+
+        Pattern pattern = Pattern.compile("\\-?\\d+(\\.\\d+)?");
         Matcher matcher = pattern.matcher(pre_content);
         while (matcher.find()) {
             String fuhao = matcher.group();
@@ -365,16 +366,35 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
         }
         postion.add(start);
         postion.add(end);
-        String after_content = stringBuffer.toString().substring(index,
-                stringBuffer.length());
+        String after_content = "";
+        Log.e(TAG, "getyunfuNumber: "+stringBuffer );
+        if (index == 1) {
+            if (stringBuffer.length()< 3){
+                id_result_text.setText(stringBuffer.toString());
+                return postion;
+            }else {
+                after_content = stringBuffer.toString().substring(index + 2, stringBuffer.length());
+            }
+
+        } else {
+            after_content = stringBuffer.toString().substring(index, stringBuffer.length());
+        }
+        Log.e(TAG, "getyunfuNumber: index " + index + "pre_content: " + pre_content + "after_content:" + after_content);
         matcher = pattern.matcher(after_content);
         if (matcher.find()) {
             String fuhao = matcher.group();
             end = matcher.end();
             start = matcher.start();
-            postion.add(start + index);
-            postion.add(end + index);
+            if (index == 1) {
+                postion.add(start + index + 2);
+                postion.add(end + index + 2);
+            } else {
+                postion.add(start + index);
+                postion.add(end + index);
+            }
+
         }
+        Log.e(TAG, "getyunfuNumber: " + postion);
         return postion;
 
     }

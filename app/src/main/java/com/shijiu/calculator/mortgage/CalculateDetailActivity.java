@@ -63,7 +63,7 @@ public class CalculateDetailActivity extends AppCompatActivity {
 
     private void initData1(MortgageBean bean) {
         double total_mortgage = Double.parseDouble(bean.getTotal_mortgage());
-        double rate = Double.parseDouble(bean.getRate()) / 1000;
+        double rate = Double.parseDouble(bean.getRate()) / 100;
         int months = (int) (Double.parseDouble(bean.getTotal_years()) * 12);
         double years = Double.parseDouble(bean.getTotal_years());
         double monthRate = rate/12;
@@ -109,7 +109,7 @@ public class CalculateDetailActivity extends AppCompatActivity {
 
     private void initData(MortgageBean bean) {
         double total_mortgage = Double.parseDouble(bean.getTotal_mortgage());
-        double rate = Double.parseDouble(bean.getRate()) / 1000;
+        double rate = Double.parseDouble(bean.getRate()) / 100;
         int months = (int) (Double.parseDouble(bean.getTotal_years()) * 12);
 
 

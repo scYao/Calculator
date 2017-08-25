@@ -85,7 +85,7 @@ public class MortgageFragmentFund extends Fragment {
         bean = new MortgageBean();
         bean.setFlag("1");
         bean.setTotal_years("1");
-        bean.setRate("32.5");
+        bean.setRate("3.25");
         initView(view);
         initListener();
         initData();

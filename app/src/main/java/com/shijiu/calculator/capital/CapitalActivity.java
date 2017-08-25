@@ -58,6 +58,7 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
         title.setText("大写转换");
         detail.setText("罗马数字");
         btn_point.setClickable(true);
+        content ="零元整";
         detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -281,6 +282,7 @@ public class CapitalActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.btn_equal:
                 number.setText("");
+                Log.e(TAG, "onClick: "+content);
                 capital.setText(content);
                 break;
 

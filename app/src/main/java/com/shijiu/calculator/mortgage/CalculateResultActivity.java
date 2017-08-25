@@ -87,7 +87,7 @@ public class CalculateResultActivity extends Activity {
 
     private void initData1(MortgageBean bean) {
         double total_mortgage = Double.parseDouble(bean.getTotal_mortgage());
-        double rate = Double.parseDouble(bean.getRate()) / 1000;
+        double rate = Double.parseDouble(bean.getRate()) / 100;
         int months = (int) (Double.parseDouble(bean.getTotal_years()) * 12);
         double years = Double.parseDouble(bean.getTotal_years());
 
@@ -145,7 +145,7 @@ public class CalculateResultActivity extends Activity {
 
     private void initData(MortgageBean bean) {
         double total_mortgage = Double.parseDouble(bean.getTotal_mortgage());
-        double rate = Double.parseDouble(bean.getRate())  / 1000;
+        double rate = Double.parseDouble(bean.getRate())  / 100;
         Log.e(TAG, "initData: "+bean.getRate() );
         double years = Double.parseDouble(bean.getTotal_years());
         double monthRate = rate/12;

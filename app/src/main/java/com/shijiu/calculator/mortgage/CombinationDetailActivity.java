@@ -70,8 +70,8 @@ public class CombinationDetailActivity extends AppCompatActivity {
         double mortgage_fund = Double.parseDouble(bean.getMortgage_fund())*10000;
 
 
-        double rate_business = Double.parseDouble(bean.getRate_business()) / 1000/12;
-        double rate_fund = Double.parseDouble(bean.getRate_fund()) / 1000/12;
+        double rate_business = Double.parseDouble(bean.getRate_business()) / 100/12;
+        double rate_fund = Double.parseDouble(bean.getRate_fund()) / 100/12;
 
 
         int month = (int) (Double.parseDouble(bean.getTotal_years()) * 12);
@@ -170,8 +170,8 @@ public class CombinationDetailActivity extends AppCompatActivity {
         double mortgage_business = Double.parseDouble(bean.getMortgage_business())*10000;
         double mortgage_fund = Double.parseDouble(bean.getMortgage_fund())*10000;
 
-        double rate_business = Double.parseDouble(bean.getRate_business()) / 1000;
-        double rate_fund = Double.parseDouble(bean.getRate_fund()) / 1000;
+        double rate_business = Double.parseDouble(bean.getRate_business()) / 100;
+        double rate_fund = Double.parseDouble(bean.getRate_fund()) / 100;
 
         int months = (int) (Double.parseDouble(bean.getTotal_years()) * 12);
 
