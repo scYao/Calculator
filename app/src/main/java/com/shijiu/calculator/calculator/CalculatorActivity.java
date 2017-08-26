@@ -182,6 +182,10 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
             case R.id.btn_multiply:
             case R.id.btn_divide:
             case R.id.btn_equal:
+                if (needclear){
+                    clear();
+                    needclear = false;
+                }
                 String content = ((TextView) view).getText().toString();
                 Log.e(TAG, "onClick: content" + content);
 
@@ -240,13 +244,12 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
 
             case R.id.btn_complementation:
                 Log.e(TAG, "onClick: " + needclear);
-                if (needclear) {
-                    clear();
-                } else {
-
-                    if (!stringBuffer.equals("")) {
-                        stringBuffer.append(" " + ((TextView) view).getText());
-                        id_input_edit.setText(stringBuffer);
+                String sc = id_input_edit.getText().toString();
+                if (!sc.equals("")){
+                    Pattern pattern = Pattern.compile("^[0-9]+([.][0-9]+){0,1}$");
+                    Matcher matcher = pattern.matcher(sc);
+                    if (matcher.matches()){
+                        id_input_edit.setText(sc+" " + ((TextView) view).getText());
                         String exp = id_input_edit.getText().toString();
                         int space = exp.indexOf(' ');//用于搜索空格位置
                         String s1 = exp.substring(0, space);//s1用于保存第一个运算数
@@ -258,11 +261,9 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
                         } else {
                             id_result_text.setText(r + "");
                         }
-                        needclear = true;
-
+                        needclear =true;
                     }
                 }
-
 
                 break;
             case R.id.btn_pluse_minus:
@@ -271,8 +272,27 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
                     stringBuffer.append("-");
                     currentNumber.append("-");
                     id_input_edit.setText(stringBuffer);
-                    flag = 1;
                 }
+                //正数添加负号
+                String regex = "^[0-9]+([.][0-9]+){0,1}$";
+//                String regex = "^\\d+(\\.\\d+)?";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(stringBuffer.toString());
+                if (matcher.matches()){
+                    stringBuffer.insert(0,"-");
+                    currentNumber.insert(0,"-");
+                    id_input_edit.setText(stringBuffer);
+                }
+
+                //负数移除负号变正数
+                String regexRemove = "^[-][0-9]+([.][0-9]+){0,1}$";
+                Pattern pattern1 = Pattern.compile(regexRemove);
+                Matcher matcher1 = pattern1.matcher(stringBuffer.toString());
+                if (matcher1.matches()){
+                    stringBuffer.deleteCharAt(0);
+                    id_input_edit.setText(stringBuffer);
+                }
+
                 break;
         }
 
