@@ -267,7 +267,7 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
 
                 break;
             case R.id.btn_pluse_minus:
-                Log.e(TAG, "onClick: " + stringBuffer);
+
                 if (stringBuffer.toString().equals("")) {
                     stringBuffer.append("-");
                     currentNumber.append("-");
@@ -282,6 +282,9 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
                     stringBuffer.insert(0,"-");
                     currentNumber.insert(0,"-");
                     id_input_edit.setText(stringBuffer);
+//                    String s =stringBuffer.toString();
+//                    id_input_edit.setText(s);
+                    Log.e(TAG, "onClick: " + stringBuffer);
                 }
 
                 //负数移除负号变正数
