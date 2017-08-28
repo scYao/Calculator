@@ -30,6 +30,7 @@
                 android:layout_width="160dp"
                 android:layout_height="30dp"
                 android:layout_centerVertical="true"
+                android:maxLength="5"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@id/id_loan_amount"
                 android:background="@drawable/edit_shape"

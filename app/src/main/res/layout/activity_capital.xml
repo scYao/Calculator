@@ -21,7 +21,9 @@
 
         <EditText
             android:cursorVisible="false"
-            android:editable="false"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:layout_marginLeft="20dp"
             android:id="@+id/id_number"
             android:layout_marginRight="20dp"

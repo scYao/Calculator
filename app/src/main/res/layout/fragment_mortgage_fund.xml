@@ -25,6 +25,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:maxLength="5"
                 android:hint="请输入贷款总金额"
                 android:id="@+id/id_loan_edit"
                 android:layout_width="160dp"
