@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:gravity="center"
-    android:background="@color/colorWhite"
+    android:background="@drawable/grid_item_shape"
     android:orientation="horizontal">
 
     <ImageView

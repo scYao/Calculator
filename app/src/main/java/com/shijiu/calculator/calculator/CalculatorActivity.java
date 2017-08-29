@@ -267,7 +267,7 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
 
                 break;
             case R.id.btn_pluse_minus:
-
+                Log.e(TAG, "onClick: before " + stringBuffer);
                 if (stringBuffer.toString().equals("")) {
                     stringBuffer.append("-");
                     currentNumber.append("-");
@@ -281,20 +281,22 @@ public class CalculatorActivity extends AppCompatActivity implements OnClickList
                 if (matcher.matches()){
                     stringBuffer.insert(0,"-");
                     currentNumber.insert(0,"-");
+                    Log.e(TAG, "onClick: after"+stringBuffer );
                     id_input_edit.setText(stringBuffer);
-//                    String s =stringBuffer.toString();
-//                    id_input_edit.setText(s);
-                    Log.e(TAG, "onClick: " + stringBuffer);
+                }else {
+                    //负数移除负号变正数
+                    String regexRemove = "^[-][0-9]+([.][0-9]+){0,1}$";
+                    Pattern pattern1 = Pattern.compile(regexRemove);
+                    Matcher matcher1 = pattern1.matcher(stringBuffer.toString());
+                    if (matcher1.matches()){
+                        Log.e(TAG, "onClick: after1"+stringBuffer );
+
+                        stringBuffer.deleteCharAt(0);
+                        id_input_edit.setText(stringBuffer);
+                    }
                 }
 
-                //负数移除负号变正数
-                String regexRemove = "^[-][0-9]+([.][0-9]+){0,1}$";
-                Pattern pattern1 = Pattern.compile(regexRemove);
-                Matcher matcher1 = pattern1.matcher(stringBuffer.toString());
-                if (matcher1.matches()){
-                    stringBuffer.deleteCharAt(0);
-                    id_input_edit.setText(stringBuffer);
-                }
+
 
                 break;
         }

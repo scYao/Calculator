@@ -92,7 +92,8 @@ public class MortgageFragmentBusiness extends Fragment {
         initView(view);
         initListener();
         initData();
-        down_payments.setFilters(new InputFilter[]{new InputFilterMinMax("0", "100")});
+
+//        down_payments.setFilters(new InputFilter[]{new InputFilterMinMax("0", "100")});
         return view;
     }
 
@@ -223,9 +224,12 @@ public class MortgageFragmentBusiness extends Fragment {
             public void onFocusChange(View view, boolean b) {
                 if (b) {
                     if (Util.isNull(total_price)) {
+                        down_payments.setFilters(new InputFilter[]{new InputFilterMinMax("0", "100")});
                         double price = Double.parseDouble(total_price.getText().toString().trim());
-                        need_loan.setText(price + "元");
-                        loan_edit.setText(price / 10000 + "");
+                        need_loan.setText((long) price + "元");
+                        loan_edit.setText((long) price / 10000 + "");
+                    }else {
+                        down_payments.setFilters(new InputFilter[]{new InputFilter.LengthFilter(0)});
                     }
                 }
             }
@@ -239,14 +243,16 @@ public class MortgageFragmentBusiness extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Log.e(TAG, "onTextChanged: " + charSequence.toString());
+
                 if (Util.isNull(total_price)) {
+                    Log.e(TAG, "onTextChanged: " + total_price);
+//                    down_payments.setFilters(new InputFilter[]{new InputFilterMinMax("0", "100")});
                     double price = Double.parseDouble(total_price.getText().toString().trim());
 
                     if (!charSequence.toString().equals("")) {
                         double result = Double.parseDouble(charSequence.toString()) * price / 100;
-                        down_payments_value.setText((int) result + "");
-                        double rs = price - result;
+                        down_payments_value.setText((long) result + "");
+                        long rs = (long) (price - result);
                         need_loan.setText(rs + "元");
                         loan_edit.setText(rs / 10000 + "");
                         if (rs > 0) {
@@ -254,8 +260,11 @@ public class MortgageFragmentBusiness extends Fragment {
                         }
                     } else {
                         Log.e(TAG, "onTextChanged: " + price);
+
+                        price = (long) price;
                         need_loan.setText(price + "元");
                         down_payments_value.setText("");
+                        loan_edit.setText(price / 10000 + "");
 
 //                        loan_edit.setText("");
                     }
@@ -263,6 +272,10 @@ public class MortgageFragmentBusiness extends Fragment {
 
                 } else {
                     Log.e(TAG, "onTextChanged: sssssssssssssssss");
+//                    if (Util.isNull(loan_edit) && !charSequence.toString().equals("")){
+//                        double result = Double.parseDouble(charSequence.toString()) * Double.parseDouble(Util.getValue(loan_edit)) / 100;
+//                        down_payments_value.setText((long) result + "");
+//                    }
                 }
 
             }

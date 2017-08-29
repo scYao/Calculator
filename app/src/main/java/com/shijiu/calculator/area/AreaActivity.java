@@ -285,12 +285,18 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
 //                BigDecimal re14 = Cac1(re, "66666.6666666666");
 //                double fen1 = 20000/3;
                 BigDecimal re14 = Cac2(Cac1(re,"200000"), "3");
+                if (unit2 ==15){
+                    re14 = Cac1(re,"100");
+                }
                 toMeter(i2, re14);
                 break;
             case 15:
 //                BigDecimal re15 = Cac1(re, "666.6666666666");
 //                double fen2 = 2000 /3;
                 BigDecimal re15 = Cac2(Cac1(re,"2000"), "3");
+                if (unit2==14){
+                    re15 = re;
+                }
                 toMeter(i2, re15);
                 break;
             case 16:
@@ -376,11 +382,17 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
             case 14:
 //                double fen1 = 20000/3;
                 BigDecimal re14 = Cac2(Cac1(d,"3"), "200000");
+                if (unit1 == 15){
+                    re14 = Cac2(d,"100");
+                }
                 showText(re14);
                 break;
             case 15:
 //                double fen2 = 2000/3;
                 BigDecimal re15 = Cac2(Cac1(d,"3"), "2000");
+                if (unit1 == 14){
+                    re15 = d;
+                }
                 showText(re15);
                 break;
             case 16:
@@ -400,7 +412,7 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showText(BigDecimal bigDecimal) {
-        if (bigDecimal.stripTrailingZeros().toPlainString().length() <= 10) {
+        if (bigDecimal.stripTrailingZeros().toPlainString().length() < 10) {
             result.setText(bigDecimal.stripTrailingZeros().toPlainString());
         } else {
             result.setText(bigDecimal.stripTrailingZeros().toString());
@@ -434,7 +446,7 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
         BigDecimal bigDecimal1 = d;
         BigDecimal bigDecimal2 = new BigDecimal(s);
 
-        return bigDecimal1.divide(bigDecimal2, 10, BigDecimal.ROUND_HALF_UP);
+        return bigDecimal1.divide(bigDecimal2, 12, BigDecimal.ROUND_HALF_UP);
     }
 
     public class TakePhotoPopWin extends PopupWindow {

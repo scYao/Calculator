@@ -30,6 +30,7 @@
                 android:layout_width="160dp"
                 android:layout_height="30dp"
                 android:layout_centerVertical="true"
+                android:maxLength="5"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@id/id_loan_amount"
                 android:background="@drawable/edit_shape"
@@ -128,7 +129,7 @@
                 <TextView
                     android:id="@+id/id_total_price"
                     style="@style/keyTextStyle"
-                    android:layout_width="100dp"
+                    android:layout_width="120dp"
                     android:layout_marginLeft="20dp" />
 
                 <TextView
@@ -182,7 +183,7 @@
                 <TextView
                     android:id="@+id/_need_loan"
                     style="@style/keyTextStyle"
-                    android:layout_width="100dp" />
+                    android:layout_width="120dp" />
             </LinearLayout>
         </LinearLayout>
 
