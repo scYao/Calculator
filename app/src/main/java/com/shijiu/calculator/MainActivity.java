@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.ppdai.loan.PPDLoanAgent;
 import com.shijiu.calculator.adapter.GridAdapter;
 import com.shijiu.calculator.appellation.AppellationActivity;
 import com.shijiu.calculator.area.AreaActivity;
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        PPDLoanAgent.getInstance().onLaunchCreate(this);
+
         initData();
         initView();
 
@@ -64,6 +67,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(this);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        PPDLoanAgent.getInstance().onLaunchResume(this);
+    }
+
+    private void onEnterSDK(){
+        //启动SDK
+        // 注意：在调用该方法之前，请先正确设置 initConfig 方法。
+        PPDLoanAgent.getInstance().initLaunch(this);
     }
 
     private void initData() {

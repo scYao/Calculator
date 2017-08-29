@@ -2,6 +2,38 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.shijiu.calculator">
 
+    <!--借贷start-->
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <!--借贷end-->
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo"
@@ -52,7 +84,232 @@
         <activity
             android:name=".calculator.NewCalculatorActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".ppdai.PpDaiActivity"></activity>
+        <activity android:name=".ppdai.PpDaiActivity"/>
+
+        <!--借贷start-->
+        <activity
+            android:name="com.ppdai.loan.ui.PersonalInfoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity
+            android:name="com.ppdai.loan.ui.LoginActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity
+            android:name="com.ppdai.loan.v2.ui.BindBankCardActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity
+            android:name="com.ppdai.loan.ui.UserInfoActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity
+            android:name="com.ppdai.loan.ui.ContactPickerActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name="com.ppdai.loan.v2.ui.SelectCityActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name="com.ppdai.loan.v2.ui.MarriageActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name="com.ppdai.loan.v2.ui.RealNameAuthenticationActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name="com.ppdai.loan.ui.AreaChoiceActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name="com.ppdai.loan.ui.SchoolChoiceActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name="com.ppdai.loan.v2.ui.UploadIDCardActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name="com.ppdai.loan.v3.ui.V3WithdrawalsActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name="com.ppdai.loan.v2.ui.WithdrawalsSuccesActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name="com.ppdai.loan.v3.ui.MainActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name="com.ppdai.loan.v3.ui.RepaymentActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name="com.ppdai.loan.v3.ui.ProgressActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name="com.ppdai.loan.v3.ui.NewsMainActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name="com.ppdai.loan.v3.ui.NewsUserInfoActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name="com.ppdai.loan.v3.ui.QQNumberInputActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_ppdai_dialog"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name="com.ppdai.loan.v3.ui.QueryUserStatusActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity
+            android:name="com.ppdai.loan.v3.ui.InitActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_frame_loading_dialog"/>
+        <activity
+            android:name="com.ppdai.loan.v3.ui.HybridWebClientActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity
+            android:name="com.ppdai.loan.v3.ui.HybridWebClientTitleActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity
+            android:name="com.ppdai.loan.v3.ui.ImageCaptureActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name="com.ppdai.loan.v3.ui.CouponActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@style/ppd_AppTheme"
+            android:windowSoftInputMode="adjustPan"/>
+        <service
+            android:name="com.ppdai.loan.v3.service.EntranceProxyService"
+            android:exported="false"
+            android:process="${processName}"/>
+        <activity
+            android:name="com.ppdai.loan.polling.FakeInitActivity"
+            android:exported="false"
+            android:process="${processName}"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="${applicationId}.action.NotificationClick"/>
+            </intent-filter>
+        </activity>
+        <!-- 获取用户借款状态 -->
+        <service
+            android:name="com.ppdai.loan.v3.service.FetchLoanStatusService"
+            android:exported="false"
+            android:process="${processName}"/>
+        <service
+            android:name="com.ppdai.loan.polling.PollingCoreService"
+            android:exported="false"
+            android:process="${processName}">
+            <intent-filter>
+                <action android:name="${applicationId}.action.ScheduleCoreService"/>
+            </intent-filter>
+        </service>
+        <receiver
+            android:name="com.ppdai.module.watchdog.ScheduleWakefulReceiver"
+            android:exported="false"
+            android:process="${processName}"/>
+        <service
+            android:name="com.ppdai.module.watchdog.ScheduleDaemonService"
+            android:exported="false"
+            android:process="${processName}"/>
+        <receiver
+            android:name="com.ppdai.module.watchdog.ScheduleDaemonReceiver"
+            android:process="${processName}">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.MEDIA_MOUNTED"/>
+                <action android:name="android.intent.action.USER_PRESENT"/>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+                <action android:name="android.intent.action.BATTERY_CHANGED"/>
+                <action android:name="android.intent.action.SCREEN_OFF"/>
+                <action android:name="android.intent.action.SCREEN_ON"/>
+            </intent-filter>
+        </receiver>
+        <!--借贷end-->
     </application>
 
 </manifest>

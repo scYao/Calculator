@@ -1,5 +1,10 @@
 apply plugin: 'com.android.application'
 
+ext {
+    // 将 sdk 放到单独的进程
+    processName = ":ppd_sdk"
+}
+
 android {
     signingConfigs {
         config {
@@ -18,7 +23,22 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [
+                processName: processName
+        ]
     }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/notice.txt'
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -27,7 +47,11 @@ android {
         }
     }
 }
-
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -37,4 +61,14 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
     testCompile 'junit:junit:4.12'
+
+    // aar 的依赖库
+    compile 'com.alibaba:fastjson:1.2.8'
+    compile('org.apache.httpcomponents:httpmime:4.3.5') {
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+    }
+    compile 'org.apache.httpcomponents:httpclient-android:4.3.5'
+    compile 'com.mcxiaoke.volley:library:1.0.19' // 注意这里，需要将官方Volley 改为这个，避免因Volley 引起的内存泄漏。
+    compile 'com.github.hotchemi:permissionsdispatcher:2.1.3'
+    compile(name:'ppd-loan-sdk-1.6_9', ext:'aar')
 }
