@@ -227,8 +227,12 @@ public class MortgageFragmentCombination extends Fragment {
             public void onFocusChange(View view, boolean b) {
                 if (b) {
                     if (Util.isNull(total_price)) {
+                        down_payments.setFilters(new InputFilter[]{new InputFilterMinMax("0", "100")});
                         double price = Double.parseDouble(total_price.getText().toString().trim());
+                        price = (long) price;
                         need_loan.setText(price + "元");
+                    }else {
+                        down_payments.setFilters(new InputFilter[]{new InputFilter.LengthFilter(0)});
                     }
                 }
             }
@@ -247,8 +251,8 @@ public class MortgageFragmentCombination extends Fragment {
                     Log.e(TAG, "onTextChanged: " + price);
                     if (!charSequence.toString().equals("")) {
                         double result = Double.parseDouble(charSequence.toString()) * price / 100;
-                        down_payments_value.setText(result + "");
-                        double rs = price - result;
+                        down_payments_value.setText((long) result + "");
+                        long rs = (long) (price - result);
                         need_loan.setText(rs + "元");
 //                        loan_edit.setText(rs/10000+"");
                         if (rs > 0) {

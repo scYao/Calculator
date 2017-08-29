@@ -1,26 +1,23 @@
 package com.shijiu.calculator;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.SimpleAdapter;
 
 import com.shijiu.calculator.adapter.GridAdapter;
 import com.shijiu.calculator.appellation.AppellationActivity;
 import com.shijiu.calculator.area.AreaActivity;
 import com.shijiu.calculator.bean.GridBean;
 import com.shijiu.calculator.calculator.CalculatorActivity;
-import com.shijiu.calculator.calculator.NewCalculatorActivity;
 import com.shijiu.calculator.capital.CapitalActivity;
 import com.shijiu.calculator.length.LengthActivity;
 import com.shijiu.calculator.mortgage.MortgageActivity;
+import com.shijiu.calculator.ppdai.PpDaiActivity;
 import com.shijiu.calculator.utils.Util;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,19 +30,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private Integer[] imageList = {
             R.mipmap.mortgage, R.mipmap.appellation,
             R.mipmap.capital, R.mipmap.length,
-            R.mipmap.calculator, R.mipmap.area
+            R.mipmap.calculator, R.mipmap.area, R.mipmap.ic_launcher
     };
 
     private String[] nameList = {
             "算房贷", "称谓计算器", "大写转换",
-            "长度转换", "计算器", "面积转换"
+            "长度转换", "计算器", "面积转换", "拍拍贷"
     };
 
 
     private String[] contentList = {
             "合理分配购房资金", "三姑六婆不再搞错",
-            "各种长度互相转换", "大写数字无需百度",
-            "快捷计算器", "各种面积互相转换"
+            "大写数字无需百度", "各种长度互相转换",
+            "快捷计算器", "各种面积互相转换", "拍拍贷"
     };
 
     private List<GridBean> beanList = new ArrayList<>();
@@ -112,6 +109,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case 5:
                 Util.forwardActivity(MainActivity.this, AreaActivity.class);
+                break;
+            case 6:
+                Util.forwardActivity(MainActivity.this, PpDaiActivity.class);
                 break;
 
         }

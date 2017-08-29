@@ -16,30 +16,43 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mortgage.MortgageActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".appellation.AppellationActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".area.AreaActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".calculator.CalculatorActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".capital.CapitalActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".length.LengthActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".mortgage.CalculateResultActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".mortgage.HelpActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".mortgage.CalculateDetailActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".mortgage.CombinationResultActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".mortgage.CombinationDetailActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".calculator.NewCalculatorActivity"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name=".mortgage.MortgageActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".appellation.AppellationActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".area.AreaActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".calculator.CalculatorActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".capital.CapitalActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".length.LengthActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".mortgage.CalculateResultActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".mortgage.HelpActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".mortgage.CalculateDetailActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".mortgage.CombinationResultActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".mortgage.CombinationDetailActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".calculator.NewCalculatorActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".ppdai.PpDaiActivity"></activity>
     </application>
 
 </manifest>

@@ -446,7 +446,7 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
         BigDecimal bigDecimal1 = d;
         BigDecimal bigDecimal2 = new BigDecimal(s);
 
-        return bigDecimal1.divide(bigDecimal2, 10, BigDecimal.ROUND_HALF_UP);
+        return bigDecimal1.divide(bigDecimal2, 12, BigDecimal.ROUND_HALF_UP);
     }
 
     public class TakePhotoPopWin extends PopupWindow {
