@@ -2,22 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="40dp"
+    android:background="@color/colorWhite"
     android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical">
         <ImageView
+            android:layout_centerVertical="true"
             android:id="@+id/id_loan_image"
             android:layout_width="30dp"
             android:layout_height="30dp" />
         <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/id_loan_name"
             android:layout_toRightOf="@id/id_loan_image"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:layout_marginLeft="20dp"/>
         <ImageView
+            android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:layout_alignParentRight="true"
             android:layout_width="10dp"
