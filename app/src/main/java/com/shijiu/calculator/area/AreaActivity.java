@@ -415,7 +415,7 @@ public class AreaActivity extends AppCompatActivity implements View.OnClickListe
         if (bigDecimal.stripTrailingZeros().toPlainString().length() < 10) {
             result.setText(bigDecimal.stripTrailingZeros().toPlainString());
         } else {
-            result.setText(bigDecimal.stripTrailingZeros().toString());
+            result.setText(bigDecimal.stripTrailingZeros().toString().replace("E","e"));
         }
     }
 

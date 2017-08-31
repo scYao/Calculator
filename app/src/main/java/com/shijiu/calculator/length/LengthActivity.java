@@ -497,7 +497,8 @@ public class LengthActivity extends AppCompatActivity implements View.OnClickLis
 
     private void showText(BigDecimal bigDecimal) {
         if (bigDecimal.stripTrailingZeros().toPlainString().length() >= 10) {
-            result.setText(bigDecimal.toEngineeringString());
+
+            result.setText(bigDecimal.toEngineeringString().replace("E","e"));
         } else {
             result.setText(bigDecimal.stripTrailingZeros().toPlainString());
         }
