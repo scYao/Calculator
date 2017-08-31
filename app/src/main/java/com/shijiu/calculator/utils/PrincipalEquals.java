@@ -13,7 +13,7 @@ public class PrincipalEquals {
      * @param args
      */
     public static void main(String[] args) {
-        double invest = 1000000;
+        double invest = 106679317;
         double yearRate = 0.049;
         double monthRate = yearRate/12;
         int year = 1;

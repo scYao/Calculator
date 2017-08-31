@@ -6,15 +6,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.shijiu.calculator.MainActivity">
-
-    <TextView
+    
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp"
-        android:background="@color/colorWhite"
-        android:text="多图计算器"/>
+        android:layout_height="40dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            android:background="@color/colorWhite"
+            android:text="多图计算器"/>
+        
+        <ImageView
+            android:id="@+id/share"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/share"/>
+    </RelativeLayout>
+
+  
 
 
     <View

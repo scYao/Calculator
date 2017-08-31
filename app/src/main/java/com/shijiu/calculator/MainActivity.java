@@ -1,10 +1,16 @@
 package com.shijiu.calculator;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.ppdai.loan.PPDLoanAgent;
 import com.shijiu.calculator.adapter.GridAdapter;
@@ -26,12 +32,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private GridView gridView;
     private List<Map<String, Object>> dataList = new ArrayList<>();
 //    private SimpleAdapter simpleAdapter;
+    private ImageView share;
 
     //图片数组
     private Integer[] imageList = {
             R.mipmap.mortgage, R.mipmap.appellation,
             R.mipmap.capital, R.mipmap.length,
-            R.mipmap.calculator, R.mipmap.area, R.mipmap.ic_launcher
+            R.mipmap.calculator, R.mipmap.area, R.mipmap.loan
     };
 
     private String[] nameList = {
@@ -55,6 +62,27 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
 
         PPDLoanAgent.getInstance().onLaunchCreate(this);
+        share = (ImageView) findViewById(R.id.share);
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // intent.setType("text/plain"); //纯文本
+            /*
+             * 图片分享 it.setType("image/png"); 　//添加图片 File f = new
+             * File(Environment.getExternalStorageDirectory()+"/name.png");
+             *
+             * Uri uri = Uri.fromFile(f); intent.putExtra(Intent.EXTRA_STREAM,
+             * uri); 　
+             */
+                Intent intent=new Intent(Intent.ACTION_SEND);
+//                intent.setType("image/*");
+                intent.setType("text/plain"); //纯文本
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Share");
+                intent.putExtra(Intent.EXTRA_TEXT, "I have successfully share my message through my app");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(Intent.createChooser(intent, getTitle()));
+            }
+        });
 
         initData();
         initView();
@@ -78,7 +106,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private void onEnterSDK(){
         //启动SDK
         // 注意：在调用该方法之前，请先正确设置 initConfig 方法。
-        PPDLoanAgent.getInstance().initLaunch(this);
+//        PPDLoanAgent.getInstance().initLaunch(this);
+        String mobile = ""; // user mobile
+        PPDLoanAgent.getInstance().initLaunch(this, mobile);
     }
 
     private void initData() {
@@ -126,9 +156,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Util.forwardActivity(MainActivity.this, AreaActivity.class);
                 break;
             case 6:
-                Util.forwardActivity(MainActivity.this, PpDaiActivity.class);
+//                Util.forwardActivity(MainActivity.this, PpDaiActivity.class);
+                onEnterSDK();
                 break;
 
         }
     }
+
 }

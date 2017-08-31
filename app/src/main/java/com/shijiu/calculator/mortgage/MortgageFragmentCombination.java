@@ -336,7 +336,8 @@ public class MortgageFragmentCombination extends Fragment {
                 }
 
                 if (bean.getMortgage_business() == null || bean.getMortgage_fund() == null
-                        || bean.getRate_business() == null || bean.getRate_fund() == null) {
+                        || bean.getRate_business() == null || bean.getRate_fund() == null
+                        || Double.parseDouble(bean.getMortgage_business()) <=0 || Double.parseDouble(bean.getMortgage_fund()) <=0) {
                     start_calculate.setBackgroundResource(R.drawable.text_shape_un);
                 } else {
                     start_calculate.setBackgroundResource(R.drawable.text_shape);
@@ -375,7 +376,8 @@ public class MortgageFragmentCombination extends Fragment {
                 }
 
                 if (bean.getMortgage_business() == null || bean.getMortgage_fund() == null
-                        || bean.getRate_business() == null || bean.getRate_fund() == null) {
+                        || bean.getRate_business() == null || bean.getRate_fund() == null
+                        || Double.parseDouble(bean.getMortgage_business()) <=0 || Double.parseDouble(bean.getMortgage_fund()) <=0) {
                     start_calculate.setBackgroundResource(R.drawable.text_shape_un);
                 } else {
                     start_calculate.setBackgroundResource(R.drawable.text_shape);
@@ -414,7 +416,8 @@ public class MortgageFragmentCombination extends Fragment {
                 }
 
                 if (bean.getMortgage_business() == null || bean.getMortgage_fund() == null
-                        || bean.getRate_business() == null || bean.getRate_fund() == null) {
+                        || bean.getRate_business() == null || bean.getRate_fund() == null
+                        || Double.parseDouble(bean.getMortgage_business()) <=0 || Double.parseDouble(bean.getMortgage_fund()) <=0) {
                     start_calculate.setBackgroundResource(R.drawable.text_shape_un);
                 } else {
                     start_calculate.setBackgroundResource(R.drawable.text_shape);
@@ -453,7 +456,8 @@ public class MortgageFragmentCombination extends Fragment {
                 }
 
                 if (bean.getMortgage_business() == null || bean.getMortgage_fund() == null
-                        || bean.getRate_business() == null || bean.getRate_fund() == null) {
+                        || bean.getRate_business() == null || bean.getRate_fund() == null
+                        || Double.parseDouble(bean.getMortgage_business()) <=0 || Double.parseDouble(bean.getMortgage_fund()) <=0) {
                     start_calculate.setBackgroundResource(R.drawable.text_shape_un);
                 } else {
                     start_calculate.setBackgroundResource(R.drawable.text_shape);
@@ -516,7 +520,8 @@ public class MortgageFragmentCombination extends Fragment {
                 }
 
                 if (bean.getMortgage_business() == null || bean.getMortgage_fund() == null
-                        || bean.getRate_business() == null || bean.getRate_fund() == null) {
+                        || bean.getRate_business() == null || bean.getRate_fund() == null
+                        || Double.parseDouble(bean.getMortgage_business()) <=0 || Double.parseDouble(bean.getMortgage_fund()) <=0) {
                     start_calculate.setBackgroundResource(R.drawable.text_shape_un);
                 } else {
                     start_calculate.setBackgroundResource(R.drawable.text_shape);
@@ -543,7 +548,8 @@ public class MortgageFragmentCombination extends Fragment {
                 }
 
                 if (bean.getMortgage_business() == null || bean.getMortgage_fund() == null
-                        || bean.getRate_business() == null || bean.getRate_fund() == null) {
+                        || bean.getRate_business() == null || bean.getRate_fund() == null
+                        || Double.parseDouble(bean.getMortgage_business()) <=0 || Double.parseDouble(bean.getMortgage_fund()) <=0) {
                     start_calculate.setBackgroundResource(R.drawable.text_shape_un);
                 } else {
                     start_calculate.setBackgroundResource(R.drawable.text_shape);

@@ -79,7 +79,7 @@
 
                 <TextView
                     style="@style/keyTextStyle"
-                    android:layout_width="80dp"
+                    android:layout_width="60dp"
                     android:text="房屋单价" />
 
                 <EditText
@@ -101,7 +101,7 @@
 
                 <TextView
                     style="@style/keyTextStyle"
-                    android:layout_width="80dp"
+                    android:layout_width="60dp"
                     android:text="房屋面积" />
 
                 <EditText
@@ -122,7 +122,7 @@
 
                 <TextView
                     style="@style/keyTextStyle"
-                    android:layout_width="80dp"
+                    android:layout_width="60dp"
                     android:text="房屋总价" />
 
                 <TextView
@@ -143,7 +143,7 @@
 
                 <TextView
                     style="@style/keyTextStyle"
-                    android:layout_width="80dp"
+                    android:layout_width="60dp"
                     android:text="首付" />
 
                 <EditText
@@ -151,6 +151,7 @@
                     android:id="@+id/id_down_payments"
                     style="@style/valueEditStyle"
                     android:layout_width="60dp"
+                    android:layout_marginRight="10dp"
                     android:inputType="numberDecimal" />
 
                 <TextView
@@ -161,8 +162,8 @@
                 <TextView
                     android:id="@+id/id_down_payments_value"
                     style="@style/valueEditStyle"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="60dp" />
+                    android:layout_marginLeft="0dp"
+                    android:layout_width="100dp" />
 
                 <TextView
                     style="@style/keyTextStyle"
@@ -175,7 +176,7 @@
 
                 <TextView
                     style="@style/keyTextStyle"
-                    android:layout_width="80dp"
+                    android:layout_width="60dp"
                     android:text="需贷款" />
 
                 <TextView

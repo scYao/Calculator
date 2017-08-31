@@ -52,7 +52,7 @@ public class PpDaiActivity extends AppCompatActivity {
         //启动SDK
         // 注意：在调用该方法之前，请先正确设置 initConfig 方法。
 //        PPDLoanAgent.getInstance().initLaunch(this);
-        String mobile = "15056014715"; // user mobile
+        String mobile = ""; // user mobile
         PPDLoanAgent.getInstance().initLaunch(this, mobile);
         Log.e(TAG, "onEnterSDK: " );
 
