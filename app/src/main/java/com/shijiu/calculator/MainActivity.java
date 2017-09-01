@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private String[] contentList = {
             "合理分配购房资金", "三姑六婆不再搞错",
             "大写数字无需百度", "各种长度互相转换",
-            "快捷计算器", "各种面积互相转换", "拍拍贷"
+            "快捷计算器", "各种面积互相转换", "方便快捷的贷款渠道"
     };
 
     private List<GridBean> beanList = new ArrayList<>();

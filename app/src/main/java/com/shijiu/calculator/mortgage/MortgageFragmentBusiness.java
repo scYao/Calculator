@@ -218,6 +218,21 @@ public class MortgageFragmentBusiness extends Fragment {
             }
         });
 
+        //贷款金额获取焦点时清空其他输入框
+        loan_edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b){
+                    unit_price.setText("");
+                    area.setText("");
+                    total_price.setText("");
+                    down_payments.setText("");
+                    down_payments_value.setText("");
+                    need_loan.setText("");
+                }
+            }
+        });
+
         //判断是否获取焦点
         down_payments.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override

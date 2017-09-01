@@ -214,6 +214,60 @@ public class MortgageFragmentFund extends Fragment {
             }
         });
 
+        area.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                double d1;
+                double d2;
+
+                if (Util.isEmpty(unit_price) && Util.isEmpty(area)) {
+                    d2 = Double.parseDouble(unit_price.getText().toString().trim());
+
+
+                    if (!area.getText().toString().trim().equals("")) {
+                        d1 = Double.parseDouble(area.getText().toString().trim());
+
+                        if (d1 > 0 && d2 > 0) {
+                            double result = d1 * d2;
+                            BigDecimal bigDecimal = new BigDecimal(result);
+                            String str = bigDecimal.toString();
+                            total_price.setText(str);
+                        }
+                    }
+                } else {
+                    total_price.setText("");
+                    need_loan.setText("");
+                    loan_edit.setText("");
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        //贷款金额获取焦点时清空其他输入框
+        loan_edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b){
+                    unit_price.setText("");
+                    area.setText("");
+                    total_price.setText("");
+                    down_payments.setText("");
+                    down_payments_value.setText("");
+                    need_loan.setText("");
+                }
+            }
+        });
+
         //判断是否获取焦点
         down_payments.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
