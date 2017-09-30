@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 //                intent.setType("image/*");
                 intent.setType("text/plain"); //纯文本
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Share");
-                intent.putExtra(Intent.EXTRA_TEXT, "I have successfully share my message through my app");
+                intent.putExtra(Intent.EXTRA_TEXT, "https://www.dreamgotech.com/app/calculator/");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(Intent.createChooser(intent, getTitle()));
             }
